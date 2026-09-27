@@ -1,0 +1,9 @@
+.idea/
+.vscode/settings.json
+.vscode/launch.json
+.DS_Store
+frontend/node_modules/
+frontend/dist/
+backend/target/
+.env
+.env.*
