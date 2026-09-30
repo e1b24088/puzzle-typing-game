@@ -1,5 +1,6 @@
 <script setup>
 import { onMounted, ref } from 'vue'
+import TitleView from './views/TitleView.vue'
 
 // 共通の画面遷移だけを用意した開発用の土台。ゲームの採点処理はこれから実装する。
 const screen = ref('title')
@@ -40,13 +41,10 @@ function advance() {
       <small>開発用画面 / Java API: {{ backendStatus }}</small>
     </header>
 
-    <section v-if="screen === 'title'">
-      <h2>タイトル</h2>
-      <p>展示用の画面遷移を確認できます。各ゲームのルールは今後実装します。</p>
-      <button @click="begin('sequential', 'puzzle')">一方向制で開始</button>
-      <button @click="begin('select', 'puzzle')">単位ゲームだけ試す</button>
-      <button @click="begin('select', 'typing')">タイピングだけ試す</button>
-    </section>
+    <TitleView
+      v-if="screen === 'title'"
+      @start="begin"
+    />
 
     <section v-else-if="screen === 'puzzle'">
       <h2>単位ゲーム</h2>
