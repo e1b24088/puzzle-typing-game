@@ -1,13 +1,17 @@
-export function makeSlots(subjects) {
-  if (subjects.length < 2) throw new Error('2科目以上必要です')
+export function makeSlots(subjects, configuredSlots) {
+  const ids = new Set(subjects.map(item => item.id))
+  if (!Array.isArray(configuredSlots) || configuredSlots.length !== 18) throw new Error('18コマの設定が必要です')
   const days = ['月', '火', '水', '木', '金']
-  return days.flatMap((day, dayIndex) =>
-    Array.from({ length: day === '水' ? 2 : 4 }, (_, index) => {
-      const fixed = index === 0 && (dayIndex === 0 || dayIndex === 2)
-      const candidates = fixed ? [subjects[dayIndex === 0 ? 0 : 1].id] : subjects.map(item => item.id)
-      return { id: `${dayIndex}-${index + 1}`, day, period: index + 1,
-        fixed, candidates }
-    }))
+  const expected = new Set(days.flatMap((day, index) => Array.from({ length: day === '水' ? 2 : 4 }, (_, i) => `${index}-${i + 1}`)))
+  return configuredSlots.map(slot => {
+    const dayIndex = days.indexOf(slot.day)
+    if (!expected.delete(slot.id) || slot.id !== `${dayIndex}-${slot.period}` ||
+      !Array.isArray(slot.candidates) || slot.candidates.length !== (slot.fixed ? 1 : 3) ||
+      new Set(slot.candidates).size !== slot.candidates.length || slot.candidates.some(id => !ids.has(id))) {
+      throw new Error('コマ・候補科目の設定が不正です')
+    }
+    return { ...slot, candidates: [...slot.candidates] }
+  })
 }
 
 export function normalizeSelections(slots, selections) {
