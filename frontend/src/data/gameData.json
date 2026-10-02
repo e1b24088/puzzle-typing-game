@@ -1,0 +1,711 @@
+{
+  "settings": {
+    "puzzleSeconds": 90,
+    "typingSeconds": 60,
+    "allAttributesBonus": 10,
+    "sentenceChallenge": {
+      "minimumSeconds": 10,
+      "minimumStreak": 3,
+      "minimumAccuracy": 90,
+      "minimumCpm": 90,
+      "sentenceEvery": 4
+    }
+  },
+  "attributes": [
+    {
+      "id": "technology",
+      "name": "技術（仮）",
+      "color": "#2258a8",
+      "clearScore": 12
+    },
+    {
+      "id": "management",
+      "name": "管理（仮）",
+      "color": "#8053a5",
+      "clearScore": 10
+    },
+    {
+      "id": "strategy",
+      "name": "戦略（仮）",
+      "color": "#a45b10",
+      "clearScore": 10
+    }
+  ],
+  "subjects": [
+    {
+      "id": "database",
+      "name": "データベース",
+      "attributeId": "technology",
+      "points": 2,
+      "description": "情報を整理して保存し、必要なデータを取り出す。",
+      "gameConnection": "問題データは現在JSONで管理。DBで管理する方法を学べる。",
+      "learningTips": [
+        "情報を整理して保存し、必要なデータを取り出す。",
+        "問題データは現在JSONで管理。DBで管理する方法を学べる。"
+      ]
+    },
+    {
+      "id": "programming",
+      "name": "プログラミング",
+      "attributeId": "technology",
+      "points": 2,
+      "description": "変数・条件分岐・繰り返しを使って処理を作る。",
+      "gameConnection": "このゲームの入力判定と画面切り替えに使っている。",
+      "learningTips": [
+        "変数・条件分岐・繰り返しを使って処理を作る。",
+        "このゲームの入力判定と画面切り替えに使っている。"
+      ]
+    },
+    {
+      "id": "network",
+      "name": "ネットワーク",
+      "attributeId": "technology",
+      "points": 2,
+      "description": "コンピュータ同士がデータをやり取りする仕組み。",
+      "gameConnection": "ブラウザからJava APIへのHTTP通信に関係する。",
+      "learningTips": [
+        "コンピュータ同士がデータをやり取りする仕組み。",
+        "ブラウザからJava APIへのHTTP通信に関係する。"
+      ]
+    },
+    {
+      "id": "algorithm",
+      "name": "アルゴリズム",
+      "attributeId": "technology",
+      "points": 2,
+      "description": "問題を解くための手順を考える。",
+      "gameConnection": "科目の重複チェックや採点の手順に使っている。",
+      "learningTips": [
+        "問題を解くための手順を考える。",
+        "科目の重複チェックや採点の手順に使っている。"
+      ]
+    },
+    {
+      "id": "web",
+      "name": "Web技術",
+      "attributeId": "technology",
+      "points": 2,
+      "description": "HTML・CSS・JavaScriptでWeb画面を作る。",
+      "gameConnection": "Vueの画面構造、装飾、操作処理に関係する。",
+      "learningTips": [
+        "HTML・CSS・JavaScriptでWeb画面を作る。",
+        "Vueの画面構造、装飾、操作処理に関係する。"
+      ]
+    },
+    {
+      "id": "security",
+      "name": "情報セキュリティ",
+      "attributeId": "technology",
+      "points": 2,
+      "description": "情報を安全に扱うための仕組みと対策。",
+      "gameConnection": "GitHubの認証やアクセス権の理解に関係する。",
+      "learningTips": [
+        "情報を安全に扱うための仕組みと対策。",
+        "GitHubの認証やアクセス権の理解に関係する。"
+      ]
+    },
+    {
+      "id": "os",
+      "name": "オペレーティングシステム",
+      "attributeId": "technology",
+      "points": 2,
+      "description": "CPUやメモリなどの資源を管理する。",
+      "gameConnection": "Docker Desktopが利用するLinux環境に関係する。",
+      "learningTips": [
+        "CPUやメモリなどの資源を管理する。",
+        "Docker Desktopが利用するLinux環境に関係する。"
+      ]
+    },
+    {
+      "id": "java",
+      "name": "Java演習",
+      "attributeId": "technology",
+      "points": 2,
+      "description": "Javaの構文とクラスを使ってプログラムを作る。",
+      "gameConnection": "現在の接続確認APIはJavaで書いている。",
+      "learningTips": [
+        "Javaの構文とクラスを使ってプログラムを作る。",
+        "現在の接続確認APIはJavaで書いている。"
+      ]
+    },
+    {
+      "id": "project",
+      "name": "プロジェクト管理",
+      "attributeId": "management",
+      "points": 2,
+      "description": "作業・担当・期限を整理して進める。",
+      "gameConnection": "展示日から逆算した担当分担と進捗管理に関係する。",
+      "learningTips": [
+        "作業・担当・期限を整理して進める。",
+        "展示日から逆算した担当分担と進捗管理に関係する。"
+      ]
+    },
+    {
+      "id": "quality",
+      "name": "品質管理",
+      "attributeId": "management",
+      "points": 2,
+      "description": "品質を確かめ、問題を改善する。",
+      "gameConnection": "入力判定や採点のテストに関係する。",
+      "learningTips": [
+        "品質を確かめ、問題を改善する。",
+        "入力判定や採点のテストに関係する。"
+      ]
+    },
+    {
+      "id": "design",
+      "name": "ソフトウェア設計",
+      "attributeId": "management",
+      "points": 2,
+      "description": "役割とつながりを整理してソフトウェアを作る。",
+      "gameConnection": "画面・採点・問題データを別ファイルに分けている。",
+      "learningTips": [
+        "役割とつながりを整理してソフトウェアを作る。",
+        "画面・採点・問題データを別ファイルに分けている。"
+      ]
+    },
+    {
+      "id": "testing",
+      "name": "ソフトウェアテスト",
+      "attributeId": "management",
+      "points": 2,
+      "description": "正常な操作と誤った操作の両方を確かめる。",
+      "gameConnection": "誤入力や二重履修が得点に影響しないか確認する。",
+      "learningTips": [
+        "正常な操作と誤った操作の両方を確かめる。",
+        "誤入力や二重履修が得点に影響しないか確認する。"
+      ]
+    },
+    {
+      "id": "team",
+      "name": "チーム開発",
+      "attributeId": "management",
+      "points": 2,
+      "description": "変更を共有し、他の人の作業と統合する。",
+      "gameConnection": "GitのブランチとGitHubのPRで変更をまとめる。",
+      "learningTips": [
+        "変更を共有し、他の人の作業と統合する。",
+        "GitのブランチとGitHubのPRで変更をまとめる。"
+      ]
+    },
+    {
+      "id": "requirements",
+      "name": "要求分析",
+      "attributeId": "management",
+      "points": 2,
+      "description": "利用者が必要としていることを整理する。",
+      "gameConnection": "約3分で学べる展示体験という条件を整理する。",
+      "learningTips": [
+        "利用者が必要としていることを整理する。",
+        "約3分で学べる展示体験という条件を整理する。"
+      ]
+    },
+    {
+      "id": "refactoring",
+      "name": "リファクタリング",
+      "attributeId": "management",
+      "points": 2,
+      "description": "振る舞いを保ちながら内部構造を改善する。",
+      "gameConnection": "タイトルを別コンポーネントに分けた変更に関係する。",
+      "learningTips": [
+        "振る舞いを保ちながら内部構造を改善する。",
+        "タイトルを別コンポーネントに分けた変更に関係する。"
+      ]
+    },
+    {
+      "id": "operations",
+      "name": "システム運用",
+      "attributeId": "management",
+      "points": 2,
+      "description": "システムを起動し、状態を確認する。",
+      "gameConnection": "展示PCでのDocker起動やログ確認に関係する。",
+      "learningTips": [
+        "システムを起動し、状態を確認する。",
+        "展示PCでのDocker起動やログ確認に関係する。"
+      ]
+    },
+    {
+      "id": "business",
+      "name": "経営戦略",
+      "attributeId": "strategy",
+      "points": 2,
+      "description": "目的や強みを踏まえて方針を考える。",
+      "gameConnection": "誰に何を伝える展示かを考えることに関係する。",
+      "learningTips": [
+        "目的や強みを踏まえて方針を考える。",
+        "誰に何を伝える展示かを考えることに関係する。"
+      ]
+    },
+    {
+      "id": "marketing",
+      "name": "マーケティング",
+      "attributeId": "strategy",
+      "points": 2,
+      "description": "相手の必要としている価値を考える。",
+      "gameConnection": "来場者に伝わる説明や紹介文を考える。",
+      "learningTips": [
+        "相手の必要としている価値を考える。",
+        "来場者に伝わる説明や紹介文を考える。"
+      ]
+    },
+    {
+      "id": "ux",
+      "name": "ユーザー体験",
+      "attributeId": "strategy",
+      "points": 2,
+      "description": "利用者が使う流れや分かりやすさを考える。",
+      "gameConnection": "選択肢を見やすいパネルにする改善に関係する。",
+      "learningTips": [
+        "利用者が使う流れや分かりやすさを考える。",
+        "選択肢を見やすいパネルにする改善に関係する。"
+      ]
+    },
+    {
+      "id": "information",
+      "name": "情報社会",
+      "attributeId": "strategy",
+      "points": 2,
+      "description": "情報技術と社会の関わりを考える。",
+      "gameConnection": "ゲームを通じて学部の学びを紹介する目的に関係する。",
+      "learningTips": [
+        "情報技術と社会の関わりを考える。",
+        "ゲームを通じて学部の学びを紹介する目的に関係する。"
+      ]
+    },
+    {
+      "id": "statistics",
+      "name": "統計入門",
+      "attributeId": "strategy",
+      "points": 2,
+      "description": "データから傾向を読み取る。",
+      "gameConnection": "正確率や1分当たりの入力数を算出している。",
+      "learningTips": [
+        "データから傾向を読み取る。",
+        "正確率や1分当たりの入力数を算出している。"
+      ]
+    },
+    {
+      "id": "ethics",
+      "name": "情報倫理",
+      "attributeId": "strategy",
+      "points": 2,
+      "description": "情報技術の利用で守るべきことを考える。",
+      "gameConnection": "UI素材の出典とライセンスを扱うことに関係する。",
+      "learningTips": [
+        "情報技術の利用で守るべきことを考える。",
+        "UI素材の出典とライセンスを扱うことに関係する。"
+      ]
+    },
+    {
+      "id": "research",
+      "name": "研究方法",
+      "attributeId": "strategy",
+      "points": 2,
+      "description": "問いを立てて調査と検証を進める。",
+      "gameConnection": "来場者の操作を観察し、改善点を探すことに関係する。",
+      "learningTips": [
+        "問いを立てて調査と検証を進める。",
+        "来場者の操作を観察し、改善点を探すことに関係する。"
+      ]
+    },
+    {
+      "id": "presentation",
+      "name": "プレゼンテーション",
+      "attributeId": "strategy",
+      "points": 2,
+      "description": "相手に合わせて内容を伝える。",
+      "gameConnection": "展示で開発の裏側を説明することに関係する。",
+      "learningTips": [
+        "相手に合わせて内容を伝える。",
+        "展示で開発の裏側を説明することに関係する。"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "database-word",
+      "subjectId": "database",
+      "text": "主キー",
+      "romaji": "syuki-",
+      "kind": "word",
+      "explanation": "行を一意に識別するキー。"
+    },
+    {
+      "id": "database-sentence",
+      "subjectId": "database",
+      "text": "主キーは行を区別する",
+      "romaji": "syuki-ha gyouwo kubetusuru",
+      "kind": "sentence",
+      "explanation": "情報を整理して保存し、必要なデータを取り出す。"
+    },
+    {
+      "id": "programming-word",
+      "subjectId": "programming",
+      "text": "変数",
+      "romaji": "hensuu",
+      "kind": "word",
+      "explanation": "値を保持し、処理中に参照する。"
+    },
+    {
+      "id": "programming-sentence",
+      "subjectId": "programming",
+      "text": "変数に得点を保存する",
+      "romaji": "hensuuni tokutenwo hozonsuru",
+      "kind": "sentence",
+      "explanation": "変数・条件分岐・繰り返しを使って処理を作る。"
+    },
+    {
+      "id": "network-word",
+      "subjectId": "network",
+      "text": "通信",
+      "romaji": "tuusin",
+      "kind": "word",
+      "explanation": "相手へ情報を送り、受け取ること。"
+    },
+    {
+      "id": "network-sentence",
+      "subjectId": "network",
+      "text": "HTTPで情報を送る",
+      "romaji": "httpde jouhouwo okuru",
+      "kind": "sentence",
+      "explanation": "コンピュータ同士がデータをやり取りする仕組み。"
+    },
+    {
+      "id": "algorithm-word",
+      "subjectId": "algorithm",
+      "text": "探索",
+      "romaji": "tansaku",
+      "kind": "word",
+      "explanation": "条件に合うデータを探す処理。"
+    },
+    {
+      "id": "algorithm-sentence",
+      "subjectId": "algorithm",
+      "text": "条件に合う科目を探す",
+      "romaji": "joukenni au kamokuwo sagasu",
+      "kind": "sentence",
+      "explanation": "問題を解くための手順を考える。"
+    },
+    {
+      "id": "web-word",
+      "subjectId": "web",
+      "text": "ブラウザ",
+      "romaji": "burauza",
+      "kind": "word",
+      "explanation": "Webページを表示し、JavaScriptを実行する。"
+    },
+    {
+      "id": "web-sentence",
+      "subjectId": "web",
+      "text": "ブラウザでゲームが動く",
+      "romaji": "burauzade ge-muga ugoku",
+      "kind": "sentence",
+      "explanation": "HTML・CSS・JavaScriptでWeb画面を作る。"
+    },
+    {
+      "id": "security-word",
+      "subjectId": "security",
+      "text": "認証",
+      "romaji": "ninsyou",
+      "kind": "word",
+      "explanation": "利用者が誰であるかを確認すること。"
+    },
+    {
+      "id": "security-sentence",
+      "subjectId": "security",
+      "text": "認証で利用者を確認する",
+      "romaji": "ninsyoude riyousyawo kakuninsuru",
+      "kind": "sentence",
+      "explanation": "情報を安全に扱うための仕組みと対策。"
+    },
+    {
+      "id": "os-word",
+      "subjectId": "os",
+      "text": "メモリ",
+      "romaji": "memori",
+      "kind": "word",
+      "explanation": "実行中のプログラムが使うデータを保持する。"
+    },
+    {
+      "id": "os-sentence",
+      "subjectId": "os",
+      "text": "メモリにデータを置く",
+      "romaji": "memorini de-tawo oku",
+      "kind": "sentence",
+      "explanation": "CPUやメモリなどの資源を管理する。"
+    },
+    {
+      "id": "java-word",
+      "subjectId": "java",
+      "text": "クラス",
+      "romaji": "kurasu",
+      "kind": "word",
+      "explanation": "オブジェクトの構造や振る舞いを定義する。"
+    },
+    {
+      "id": "java-sentence",
+      "subjectId": "java",
+      "text": "JavaでAPIを作る",
+      "romaji": "javade apiwo tukuru",
+      "kind": "sentence",
+      "explanation": "Javaの構文とクラスを使ってプログラムを作る。"
+    },
+    {
+      "id": "project-word",
+      "subjectId": "project",
+      "text": "計画",
+      "romaji": "keikaku",
+      "kind": "word",
+      "explanation": "目標に向けて作業と順序を決める。"
+    },
+    {
+      "id": "project-sentence",
+      "subjectId": "project",
+      "text": "作業の順番を決める",
+      "romaji": "sagyouno junbanwo kimeru",
+      "kind": "sentence",
+      "explanation": "作業・担当・期限を整理して進める。"
+    },
+    {
+      "id": "quality-word",
+      "subjectId": "quality",
+      "text": "検証",
+      "romaji": "kensyou",
+      "kind": "word",
+      "explanation": "期待する結果と実際の結果を比較する。"
+    },
+    {
+      "id": "quality-sentence",
+      "subjectId": "quality",
+      "text": "テストで結果を確かめる",
+      "romaji": "tesutode kekkawo tasikameru",
+      "kind": "sentence",
+      "explanation": "品質を確かめ、問題を改善する。"
+    },
+    {
+      "id": "design-word",
+      "subjectId": "design",
+      "text": "設計",
+      "romaji": "sekkei",
+      "kind": "word",
+      "explanation": "実装する前に構造や役割を決める。"
+    },
+    {
+      "id": "design-sentence",
+      "subjectId": "design",
+      "text": "画面と採点を分ける",
+      "romaji": "gamento saitenwo wakeru",
+      "kind": "sentence",
+      "explanation": "役割とつながりを整理してソフトウェアを作る。"
+    },
+    {
+      "id": "testing-word",
+      "subjectId": "testing",
+      "text": "境界値",
+      "romaji": "kyoukaiti",
+      "kind": "word",
+      "explanation": "条件が切り替わる境目の値。"
+    },
+    {
+      "id": "testing-sentence",
+      "subjectId": "testing",
+      "text": "境界の値を確かめる",
+      "romaji": "kyoukaino ataiwo tasikameru",
+      "kind": "sentence",
+      "explanation": "正常な操作と誤った操作の両方を確かめる。"
+    },
+    {
+      "id": "team-word",
+      "subjectId": "team",
+      "text": "ブランチ",
+      "romaji": "buranti",
+      "kind": "word",
+      "explanation": "作業の履歴を分岐して管理する仕組み。"
+    },
+    {
+      "id": "team-sentence",
+      "subjectId": "team",
+      "text": "変更をレビューする",
+      "romaji": "henkouwo rebyu-suru",
+      "kind": "sentence",
+      "explanation": "変更を共有し、他の人の作業と統合する。"
+    },
+    {
+      "id": "requirements-word",
+      "subjectId": "requirements",
+      "text": "要件",
+      "romaji": "youken",
+      "kind": "word",
+      "explanation": "システムに必要な機能や条件。"
+    },
+    {
+      "id": "requirements-sentence",
+      "subjectId": "requirements",
+      "text": "利用者の目的を知る",
+      "romaji": "riyousyano mokutekiwo siru",
+      "kind": "sentence",
+      "explanation": "利用者が必要としていることを整理する。"
+    },
+    {
+      "id": "refactoring-word",
+      "subjectId": "refactoring",
+      "text": "改善",
+      "romaji": "kaizen",
+      "kind": "word",
+      "explanation": "より扱いやすい状態にすること。"
+    },
+    {
+      "id": "refactoring-sentence",
+      "subjectId": "refactoring",
+      "text": "動きを保ち構造を直す",
+      "romaji": "ugokiwo tamoti kouzouwo naosu",
+      "kind": "sentence",
+      "explanation": "振る舞いを保ちながら内部構造を改善する。"
+    },
+    {
+      "id": "operations-word",
+      "subjectId": "operations",
+      "text": "ログ",
+      "romaji": "rogu",
+      "kind": "word",
+      "explanation": "実行中に起きたことを記録した情報。"
+    },
+    {
+      "id": "operations-sentence",
+      "subjectId": "operations",
+      "text": "ログで原因を調べる",
+      "romaji": "rogude geninwo siraberu",
+      "kind": "sentence",
+      "explanation": "システムを起動し、状態を確認する。"
+    },
+    {
+      "id": "business-word",
+      "subjectId": "business",
+      "text": "戦略",
+      "romaji": "senryaku",
+      "kind": "word",
+      "explanation": "目標を達成するための方針。"
+    },
+    {
+      "id": "business-sentence",
+      "subjectId": "business",
+      "text": "目的から方針を決める",
+      "romaji": "mokutekikara housinwo kimeru",
+      "kind": "sentence",
+      "explanation": "目的や強みを踏まえて方針を考える。"
+    },
+    {
+      "id": "marketing-word",
+      "subjectId": "marketing",
+      "text": "市場",
+      "romaji": "sijou",
+      "kind": "word",
+      "explanation": "商品やサービスの提供者と利用者が関わる場。"
+    },
+    {
+      "id": "marketing-sentence",
+      "subjectId": "marketing",
+      "text": "相手が求める価値を知る",
+      "romaji": "aitega motomeru katiwo siru",
+      "kind": "sentence",
+      "explanation": "相手の必要としている価値を考える。"
+    },
+    {
+      "id": "ux-word",
+      "subjectId": "ux",
+      "text": "操作",
+      "romaji": "sousa",
+      "kind": "word",
+      "explanation": "利用者がシステムに働きかけること。"
+    },
+    {
+      "id": "ux-sentence",
+      "subjectId": "ux",
+      "text": "迷わず操作できる画面",
+      "romaji": "mayowazu sousadekiru gamen",
+      "kind": "sentence",
+      "explanation": "利用者が使う流れや分かりやすさを考える。"
+    },
+    {
+      "id": "information-word",
+      "subjectId": "information",
+      "text": "情報",
+      "romaji": "jouhou",
+      "kind": "word",
+      "explanation": "判断や理解に役立つ内容。"
+    },
+    {
+      "id": "information-sentence",
+      "subjectId": "information",
+      "text": "技術と社会の関係を学ぶ",
+      "romaji": "gijututo syakaino kankeiwo manabu",
+      "kind": "sentence",
+      "explanation": "情報技術と社会の関わりを考える。"
+    },
+    {
+      "id": "statistics-word",
+      "subjectId": "statistics",
+      "text": "平均",
+      "romaji": "heikin",
+      "kind": "word",
+      "explanation": "値の合計を個数で割った値。"
+    },
+    {
+      "id": "statistics-sentence",
+      "subjectId": "statistics",
+      "text": "データから傾向を読む",
+      "romaji": "de-takara keikouwo yomu",
+      "kind": "sentence",
+      "explanation": "データから傾向を読み取る。"
+    },
+    {
+      "id": "ethics-word",
+      "subjectId": "ethics",
+      "text": "著作権",
+      "romaji": "tyosakuken",
+      "kind": "word",
+      "explanation": "創作物に関する権利。"
+    },
+    {
+      "id": "ethics-sentence",
+      "subjectId": "ethics",
+      "text": "素材の利用条件を確認する",
+      "romaji": "sozaino riyoujoukenwo kakuninsuru",
+      "kind": "sentence",
+      "explanation": "情報技術の利用で守るべきことを考える。"
+    },
+    {
+      "id": "research-word",
+      "subjectId": "research",
+      "text": "仮説",
+      "romaji": "kasetu",
+      "kind": "word",
+      "explanation": "検証するために立てる説明や予想。"
+    },
+    {
+      "id": "research-sentence",
+      "subjectId": "research",
+      "text": "仮説を立てて検証する",
+      "romaji": "kasetuwo tatete kensyousuru",
+      "kind": "sentence",
+      "explanation": "問いを立てて調査と検証を進める。"
+    },
+    {
+      "id": "presentation-word",
+      "subjectId": "presentation",
+      "text": "説明",
+      "romaji": "setumei",
+      "kind": "word",
+      "explanation": "相手が理解できるように内容を伝えること。"
+    },
+    {
+      "id": "presentation-sentence",
+      "subjectId": "presentation",
+      "text": "仕組みを分かりやすく伝える",
+      "romaji": "sikumiwo wakariyasuku tutaeru",
+      "kind": "sentence",
+      "explanation": "相手に合わせて内容を伝える。"
+    }
+  ],
+  "curriculumNote": "科目名と分類は説明用の仮案です。実際の学部の授業名・シラバスと照合してください。"
+}
