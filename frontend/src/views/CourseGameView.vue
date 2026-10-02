@@ -3,29 +3,23 @@ import { computed, nextTick, onUnmounted, ref } from 'vue'
 import data from '../data/gameData.json'
 import { canSelectSubject, makeSlots, scorePuzzle } from '../utils/gameLogic.js'
 const emit = defineEmits(['finish', 'cancel'])
-const slots = makeSlots(data.subjects)
+const slots = makeSlots(data.subjects, data.slots)
 const selections = ref({})
 const activeSlot = ref(null)
-const attributeFilter = ref('all')
-const search = ref('')
 const started = ref(false)
 const remaining = ref(data.settings.puzzleSeconds)
-const lastSelected = ref(null)
 const panel = ref(null)
 let deadline = 0
 let timer
 let finished = false
 const result = computed(() => scorePuzzle(slots, selections.value, data.subjects, data.attributes, data.settings.allAttributesBonus))
-const choices = computed(() => data.subjects.filter(item => activeSlot.value?.candidates.includes(item.id) &&
-  (attributeFilter.value === 'all' || item.attributeId === attributeFilter.value) &&
-  `${item.name} ${item.description}`.includes(search.value)))
+const choices = computed(() => data.subjects.filter(item => activeSlot.value?.candidates.includes(item.id)))
 const days = ['月', '火', '水', '木', '金']
 const subject = id => data.subjects.find(item => item.id === id)
 const attribute = id => data.attributes.find(item => item.id === id)
 const selectedId = slot => slot.fixed ? slot.candidates[0] : selections.value[slot.id]
 const available = id => canSelectSubject(slots, selections.value, activeSlot.value?.id, id)
 async function openSlot(slot) {
-  if (slot.fixed) { lastSelected.value = subject(slot.candidates[0]); return }
   activeSlot.value = slot
   await nextTick()
   panel.value?.focus()
@@ -34,7 +28,6 @@ function choose(item) {
   if (!activeSlot.value || !available(item.id)) return
   if (Date.now() >= deadline) { finish(); return }
   selections.value[activeSlot.value.id] = item.id
-  lastSelected.value = item
 }
 function clearSlot() {
   if (Date.now() >= deadline) { finish(); return }
@@ -58,96 +51,84 @@ onUnmounted(() => clearInterval(timer))
 </script>
 
 <template>
-  <section class="game-panel">
-    <h2>単位ゲーム：履修登録</h2>
+  <section class="game-panel course-game" :class="{ playing: started }">
     <template v-if="!started">
-      <p>時間割に科目を配置し、各分野の目標点を目指そう。</p>
-      <p>空きコマを押すと科目一覧が開きます。科目を選ぶと、授業の内容とゲームとの関係を読めます。</p>
-      <p>同じ科目は1回だけ。固定科目は変更不可。選び直し可能。制限時間{{ data.settings.puzzleSeconds }}秒。</p>
+      <h2>単位ゲーム：履修登録</h2>
+      <p class="rule-goal"><strong>{{ data.settings.puzzleSeconds }}秒で時間割を作り、3つの分野すべての目標単位を集めよう！</strong></p>
+      <ol class="rule-steps"><li><b>時間割のコマを押す。</b>その時間に選べる3科目が右に出ます。</li><li><b>科目を1つ選ぶ。</b>科目の分野に2単位が加わります。</li><li><b>右上の「あと○単位」を見て、足りない分野を増やす。</b>3分野とも達成するとボーナス{{ data.settings.allAttributesBonus }}点！</li></ol>
+      <p>同じ科目は1回だけ。先に選ぶと、別の時間では選べなくなります。候補の分野も時間ごとに違います。</p>
+      <p>困ったら「選択を解除」で選び直そう。固定科目は最初から登録済みで、変更できません。</p>
+      <p>単位の合計＋ボーナスが得点です。時間切れ、または「結果を見る」で終了します。</p>
       <p class="note">{{ data.curriculumNote }}</p>
-      <button @click="start">履修登録を始める</button>
-      <button @click="emit('cancel')">タイトルへ</button>
+      <button @click="start">履修登録を始める</button><button @click="emit('cancel')">タイトルへ</button>
     </template>
     <template v-else>
-      <div class="status-row">
-        <strong role="timer">残り {{ remaining }} 秒</strong>
-        <span>登録 {{ result.selectedSubjectIds.length }} / {{ slots.length }} 科目</span>
-        <button @click="finish">結果を見る</button>
-      </div>
-      <div class="attribute-list">
-        <div v-for="item in data.attributes" :key="item.id" :style="{ borderColor: item.color }">
-          {{ item.name }} {{ result.attributeScores[item.id] }} / {{ item.clearScore }}
-          {{ result.attributeScores[item.id] >= item.clearScore ? '達成！' : '' }}
-        </div>
-      </div>
-      <div class="course-layout">
-        <div class="schedule">
-          <div class="timetable">
-            <div v-for="day in days" :key="day" class="day-column">
-              <h3>{{ day }}</h3>
-              <button v-for="slot in slots.filter(item => item.day === day)" :key="slot.id"
-                class="slot-button" :class="{ selected: selectedId(slot), active: activeSlot?.id === slot.id }"
-                :style="selectedId(slot) ? { borderColor: attribute(subject(selectedId(slot)).attributeId).color } : {}"
-                :aria-pressed="activeSlot?.id === slot.id" @click="openSlot(slot)">
-                <small>{{ slot.period }}限 {{ slot.fixed ? '固定' : '' }}</small>
-                <span>{{ selectedId(slot) ? subject(selectedId(slot)).name : '＋ 科目を選ぶ' }}</span>
-                <small v-if="selectedId(slot)">{{ attribute(subject(selectedId(slot)).attributeId).name }} +{{ subject(selectedId(slot)).points }}</small>
-              </button>
-            </div>
+      <header class="game-header">
+        <div><h2>履修登録</h2><small>登録 {{ result.selectedSubjectIds.length }} / {{ slots.length }} 科目</small><br><button @click="finish">結果を見る</button></div>
+        <div class="clock" role="timer"><small>残り時間</small><strong>{{ remaining }}<small> 秒</small></strong></div>
+        <div class="goals" aria-label="クリアまでの単位数">
+          <strong>クリアまで</strong>
+          <div v-for="item in data.attributes" :key="item.id" :style="{ borderColor: item.color }">
+            <span>{{ item.name }}</span><b>{{ Math.max(0, item.clearScore - result.attributeScores[item.id]) === 0 ? '達成！' : 'あと ' + Math.max(0, item.clearScore - result.attributeScores[item.id]) + ' 単位' }}</b>
+            <small>{{ result.attributeScores[item.id] }} / {{ item.clearScore }}</small>
           </div>
-          <aside v-if="lastSelected" class="learning-note" aria-live="polite">
-            <strong>{{ lastSelected.name }}で学ぶこと</strong>
-            <p>{{ lastSelected.description }}</p>
-            <p>このゲームとの関係：{{ lastSelected.gameConnection }}</p>
-          </aside>
-          <p v-else class="note">空きコマを選んでください。色と分野名で属性を表示します。</p>
+        </div>
+      </header>
+      <div class="course-layout">
+        <div class="timetable">
+          <div v-for="day in days" :key="day" class="day-column">
+            <h3>{{ day }}</h3>
+            <button v-for="slot in slots.filter(item => item.day === day)" :key="slot.id" class="slot-button"
+              :class="{ selected: selectedId(slot), active: activeSlot?.id === slot.id }"
+              :style="selectedId(slot) ? { borderColor: attribute(subject(selectedId(slot)).attributeId).color } : {}"
+              :aria-pressed="activeSlot?.id === slot.id" @click="openSlot(slot)">
+              <small>{{ slot.period }}限 {{ slot.fixed ? '固定' : '' }}</small>
+              <span>{{ selectedId(slot) ? subject(selectedId(slot)).name : '＋ 科目を選ぶ' }}</span>
+              <small v-if="selectedId(slot)">{{ attribute(subject(selectedId(slot)).attributeId).name }} +{{ subject(selectedId(slot)).points }}単位</small>
+            </button>
+            <div v-if="day === '水'" class="no-class">3・4限は授業なし</div>
+          </div>
         </div>
         <aside ref="panel" class="choice-panel" tabindex="-1" aria-label="科目選択">
           <template v-if="activeSlot">
-            <div class="panel-heading"><h3>{{ activeSlot.day }}曜 {{ activeSlot.period }}限の科目</h3><button @click="clearSlot">選択を解除</button></div>
-            <label>科目を探す <input v-model="search" type="search" placeholder="科目名・学ぶ内容" /></label>
-            <div class="filters">
-              <button :aria-pressed="attributeFilter === 'all'" @click="attributeFilter = 'all'">すべて</button>
-              <button v-for="item in data.attributes" :key="item.id" :aria-pressed="attributeFilter === item.id" @click="attributeFilter = item.id">{{ item.name }}</button>
-            </div>
+            <div class="panel-heading"><h3>{{ activeSlot.day }}曜 {{ activeSlot.period }}限</h3><button v-if="!activeSlot.fixed" @click="clearSlot">選択を解除</button></div>
+            <p class="note">{{ activeSlot.fixed ? '固定科目：変更できません' : 'この時間の3候補から選ぼう' }}</p>
             <div class="choice-list">
               <button v-for="item in choices" :key="item.id" class="subject-card" :disabled="!available(item.id)"
                 :style="{ borderLeftColor: attribute(item.attributeId).color }" @click="choose(item)">
                 <strong>{{ item.name }}</strong>
-                <small>{{ attribute(item.attributeId).name }} +{{ item.points }} ／ {{ !available(item.id) ? '他コマで登録済み' : selections[activeSlot.id] === item.id ? '選択中' : '選択可能' }}</small>
+                <small>{{ attribute(item.attributeId).name }} +{{ item.points }}単位 ／ {{ activeSlot.fixed ? '固定' : selections[activeSlot.id] === item.id ? '選択中' : !available(item.id) ? '他コマで登録済み' : '選択可能' }}</small>
                 <span>{{ item.description }}</span>
               </button>
-              <p v-if="!choices.length">条件に合う科目がありません。</p>
             </div>
           </template>
-          <p v-else>左の時間割で、変更したいコマを選んでください。</p>
+          <div v-else class="empty-choice"><h3>まずコマを選ぼう</h3><p>左の時間割を押すと、その時間の科目がここに出ます。</p><p>色と分野名を見て、バランスよく履修しよう。</p></div>
         </aside>
       </div>
     </template>
   </section>
 </template>
-
 <style scoped>
-h2 { margin-top: 0; } h3 { margin: .4rem 0; } p { line-height: 1.6; }
-.status-row { display: flex; align-items: center; flex-wrap: wrap; gap: 1rem; }
-.attribute-list { display: flex; flex-wrap: wrap; gap: .5rem; margin: .5rem 0 1rem; }
-.attribute-list > div { padding: .5rem; border: 2px solid; border-radius: 8px; }
-.course-layout { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(300px, 1fr); gap: 1rem; }
-.timetable { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: .35rem; }
-.day-column h3 { text-align: center; }
-.slot-button { display: flex; flex-direction: column; gap: .4rem; width: 100%; min-height: 94px; margin: 0 0 .4rem; padding: .5rem; color: #20344a; background: #f2f6fb; border: 2px solid #c5d0dd; text-align: left; overflow-wrap: anywhere; }
-.slot-button:hover { background: #e4edfa; } .slot-button.active { outline: 3px solid #20344a; outline-offset: -5px; }
-.slot-button.selected { background: #fff; } .slot-button small { font-size: .75rem; }
-.choice-panel { padding: .8rem; background: #f2f6fb; border-radius: 12px; }
-.panel-heading { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; }
-input { box-sizing: border-box; width: 100%; padding: .6rem; font-size: 1rem; margin-top: .4rem; }
-.filters { display: flex; flex-wrap: wrap; gap: .3rem; margin: .7rem 0; }
-.filters button, .panel-heading button { font-size: .8rem; padding: .45rem; margin: 0; }
-.filters button[aria-pressed="true"] { background: #153a72; outline: 2px solid #153a72; outline-offset: 2px; }
-.choice-list { display: grid; gap: .5rem; max-height: 48vh; overflow-y: auto; padding: .25rem; }
-.subject-card { display: flex; flex-direction: column; gap: .3rem; margin: 0; padding: .7rem; background: white; color: #20344a; text-align: left; border: 1px solid #c5d0dd; border-left: 6px solid; }
-.subject-card:hover { background: #e5edfa; } .subject-card:disabled { opacity: .5; cursor: not-allowed; background: #e2e5e9; }
-.subject-card span { font-size: .9rem; } .learning-note { margin-top: .8rem; padding: .8rem; background: #fff7dc; border-radius: 8px; }
-.learning-note p { margin: .4rem 0; } .note { color: #526074; font-size: .85rem; }
-@media (max-width: 900px) { .course-layout { grid-template-columns: 1fr; } .choice-list { max-height: 40vh; } }
+.game-panel.course-game { padding: 1rem; box-sizing: border-box; }
+.rule-steps { padding-left: 1.5rem; line-height: 1.8; } .rule-steps li { margin: .6rem 0; } .rule-goal { background: #fff7dc; padding: .8rem; border-radius: 10px; }
+h2 { margin: 0 0 .4rem; font-size: 1.5rem; } h3 { margin: 0; } p { line-height: 1.6; }
+.game-header { display: grid; grid-template-columns: 1fr .8fr 1.2fr; gap: 1rem; align-items: center; margin: 0 0 .7rem; }
+.game-header button { padding: .45rem .7rem; margin: .4rem 0 0; }
+.clock { text-align: center; } .clock > small { display: block; } .clock strong { display: block; font-size: 2.7rem; font-variant-numeric: tabular-nums; } .clock strong small { font-size: 1rem; }
+.goals > strong { font-size: .85rem; } .goals > div { display: flex; gap: .5rem; align-items: center; border-left: 5px solid; padding: .2rem .5rem; font-size: .85rem; } .goals b { margin-left: auto; } .goals small { min-width: 3rem; text-align: right; }
+.course-layout { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(300px, 1fr); gap: .8rem; }
+.timetable { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: .4rem; }
+.day-column { display: grid; grid-template-rows: 26px repeat(4, minmax(82px, 1fr)); gap: .4rem; }
+.day-column h3 { text-align: center; font-size: 1rem; }
+.slot-button { display: flex; flex-direction: column; justify-content: center; gap: .3rem; width: 100%; margin: 0; padding: .45rem; color: #20344a; background: #f2f6fb; border: 2px solid #c5d0dd; text-align: left; overflow-wrap: anywhere; }
+.slot-button:hover { background: #e4edfa; } .slot-button.active { outline: 3px solid #20344a; outline-offset: -5px; } .slot-button.selected { background: white; } .slot-button small { font-size: .72rem; } .slot-button span { font-weight: bold; font-size: .9rem; }
+.no-class { grid-row: span 2; text-align: center; align-self: center; font-size: .8rem; color: #526074; }
+.choice-panel { padding: .75rem; background: #f2f6fb; border-radius: 12px; }
+.panel-heading { display: flex; align-items: center; justify-content: space-between; gap: .5rem; } .panel-heading button { font-size: .8rem; padding: .4rem; margin: 0; }
+.choice-list { display: grid; gap: .6rem; }
+.subject-card { display: flex; flex-direction: column; gap: .35rem; margin: 0; padding: .7rem; background: white; color: #20344a; text-align: left; border: 1px solid #c5d0dd; border-left: 6px solid; line-height: 1.5; }
+.subject-card:hover { background: #e5edfa; } .subject-card:disabled { opacity: .65; cursor: not-allowed; background: #e2e5e9; } .subject-card span { font-size: .85rem; } .subject-card small { font-size: .75rem; }
+.note { color: #526074; font-size: .8rem; margin: .5rem 0; }
+@media (min-width: 1000px) and (min-height: 650px) { .course-game.playing { min-height: calc(100svh - 16px); display: flex; flex-direction: column; } .course-layout { flex: 1; } }
+@media (max-width: 999px) { .course-layout { grid-template-columns: 1fr; } .game-header { grid-template-columns: 1fr 1fr; } .goals { grid-column: 1 / -1; } }
 </style>

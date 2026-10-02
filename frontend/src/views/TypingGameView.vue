@@ -94,37 +94,37 @@ onUnmounted(() => clearInterval(timer))
 </script>
 
 <template>
-  <section class="game-panel">
-    <h2>タイピング：授業に挑戦</h2>
+  <section class="game-panel typing-game" :class="{ playing: started }">
+    <h2 v-if="!started">タイピング：授業に挑戦</h2>
     <template v-if="!started">
-      <p>科目ごとの用語と意味を読み、表示されたローマ字を入力しよう。</p>
-      <p>正解入力1文字＝1点。ミスで減点しません。制限時間{{ data.settings.typingSeconds }}秒。</p>
-      <p>日本語入力（IME）をオフにしてください。文章問題では空白も入力します。</p>
-      <p>{{ mode === 'sequential' ? 'あなたが履修登録した科目だけから出題します。' : '全科目からランダムに出題します。' }}</p>
-      <p>正確さと速さの条件を満たすと、短い文章問題も出現します。</p>
+      <p><strong>{{ data.settings.typingSeconds }}秒で、正しい文字をできるだけ多く入力しよう！</strong></p>
+      <ol class="rule-steps"><li><b>日本語入力（IME）をオフにする。</b>半角英字で入力します。</li><li><b>下に出ているローマ字を左から入力する。</b>正解1文字につき1点。文章もスペースなしで続けて入力します。</li><li><b>全部入力すると次の問題へ。</b>間違えても減点なし。同じ位置から正しい文字を入力して続けられます。</li></ol>
+      <p>{{ mode === 'sequential' ? '出題は、単位ゲームであなたが選んだ科目から。' : '出題は、すべての科目からランダム。' }}</p>
+      <p>ミスなく続けて解き、正確さと速さの条件を満たすと文章問題も登場します。</p>
+      <details><summary>文章問題が出る条件</summary><p>開始から{{ data.settings.sentenceChallenge.minimumSeconds }}秒以上、{{ data.settings.sentenceChallenge.minimumStreak }}問連続ノーミス、正確率{{ data.settings.sentenceChallenge.minimumAccuracy }}%以上、1分あたり{{ data.settings.sentenceChallenge.minimumCpm }}文字以上を同時に達成。解放後は{{ data.settings.sentenceChallenge.sentenceEvery }}問ごとに文章問題です。</p></details>
+      <p>時間切れ、または「結果を見る」で終了。言葉の意味は結果画面で読めます。</p>
       <p v-if="!pool.length">対応する問題がありません。タイトルに戻って選び直してください。</p>
       <button :disabled="!pool.length" @click="start">タイピングを始める</button>
       <button @click="emit('cancel')">タイトルへ</button>
     </template>
     <template v-else>
-      <div class="stats"><strong role="timer">残り {{ remaining }} 秒</strong><span>{{ score }} 点</span><span>正確率 {{ metrics.accuracy }}%</span><span>{{ metrics.cpm }} 文字/分</span></div>
+      <header class="typing-header"><div><h2>授業に挑戦</h2><span>{{ score }} 点 ／ 正確率 {{ metrics.accuracy }}%</span></div><div class="clock" role="timer"><small>残り時間</small><strong>{{ remaining }}<small> 秒</small></strong></div><button @click="finish">結果を見る</button></header>
       <p class="challenge-status">{{ sentencesUnlocked ? '文章チャレンジ解放！' : 'まずは用語を入力しよう' }}</p>
       <div ref="playArea" tabindex="0" class="typing-area" :class="{ wrong }" @keydown="type" @click="playArea?.focus()">
         <p class="subject-name">{{ currentSubject.name }} ／ {{ current.kind === 'sentence' ? '文章チャレンジ' : '授業のキーワード' }}</p>
         <p class="question-text">{{ current.text }}</p>
-        <p class="romaji"><span v-for="(letter, index) in current.romaji" :key="index" :class="{ typed: index < position, cursor: index === position }">{{ letter === ' ' ? '␣' : letter }}</span></p>
-        <p class="meaning">意味：{{ current.explanation }}</p>
+        <p class="romaji"><span v-for="(letter, index) in current.romaji" :key="index" :class="{ typed: index < position, cursor: index === position }">{{ letter }}</span></p>
         <p aria-live="polite">{{ wrong ? '違うキーです。次の文字を確認してください。' : 'この枠をクリックして半角英字で入力' }}</p>
       </div>
-      <aside class="connection"><strong>この授業とゲームの関係</strong><p>{{ currentSubject.gameConnection }}</p></aside>
-      <button @click="finish">終了して結果を見る</button>
+      <p class="review-notice">言葉の意味とゲームとのつながりは、結果画面で確認できます。</p>
     </template>
   </section>
 </template>
 
 <style scoped>
+.rule-steps { padding-left: 1.5rem; line-height: 1.8; } .rule-steps li { margin: .5rem 0; }
 h2 { margin-top: 0; }
-.stats { display: flex; gap: 1rem; flex-wrap: wrap; }
+.typing-header { display: grid; grid-template-columns: 1fr 1fr 1fr; align-items: center; gap: .5rem; } .typing-header button { justify-self: end; } .clock { text-align: center; } .clock > small { display: block; } .clock strong { font-size: 2.7rem; display: block; font-variant-numeric: tabular-nums; } .clock strong small { font-size: 1rem; } .review-notice { font-size: .85rem; color: #526074; text-align: center; } .game-panel.typing-game { box-sizing: border-box; padding: 1rem; }
 .challenge-status { color: #2258a8; font-weight: bold; }
 .typing-area { text-align: center; padding: 1.25rem 1rem; border: 3px solid #aabbd0; border-radius: 12px; }
 .typing-area:focus { border-color: #2258a8; outline: none; }
@@ -138,4 +138,6 @@ h2 { margin-top: 0; }
 .connection { margin-top: 1rem; padding: .8rem; border-left: 4px solid #2258a8; background: #f2f6fb; }
 .connection p { margin: .4rem 0; line-height: 1.6; }
 button:disabled { opacity: .5; cursor: not-allowed; }
+@media (min-width: 1000px) and (min-height: 650px) { .typing-game.playing { min-height: calc(100svh - 16px); display: flex; flex-direction: column; } .typing-area { flex: 1; display: flex; flex-direction: column; justify-content: center; } }
+@media (max-width: 600px) { .typing-header { grid-template-columns: 1fr 1fr; } .typing-header button { grid-column: 1 / -1; } }
 </style>
