@@ -48,16 +48,13 @@ function finishTyping(result) { typingResult.value = result; setTip(result.compl
 function scrollToBottom() { window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth'})}
 const trianglePoints = computed(() => {
   if (!courseResult.value) return ''
-
-  const max = 18
+  const max = 16
   const technology = Math.min(courseResult.value.attributeScores.technology, max)
   const management = Math.min(courseResult.value.attributeScores.management, max)
   const strategy = Math.min(courseResult.value.attributeScores.strategy, max)
-
   const centerX = 100
   const centerY = 90
   const radius = 70
-
   const values = [
     { value: technology, angle: -90 },
     { value: management, angle: 150 },
@@ -65,6 +62,27 @@ const trianglePoints = computed(() => {
   ]
 
   return values.map(({ value, angle }) => {
+    const ratio = value / max
+    const rad = angle * Math.PI / 180
+    const x = centerX + Math.cos(rad) * radius * ratio
+    const y = centerY + Math.sin(rad) * radius * ratio
+    return `${x},${y}`
+  }).join(' ')
+})
+const triangleTargetPoints = computed(() => {
+  const max = 16
+
+  const targetValues = [
+    { value: 12, angle: -90 },
+    { value: 10, angle: 150 },
+    { value: 10, angle: 30 }
+  ]
+
+  const centerX = 100
+  const centerY = 90
+  const radius = 70
+
+  return targetValues.map(({ value, angle }) => {
     const ratio = value / max
     const rad = angle * Math.PI / 180
     const x = centerX + Math.cos(rad) * radius * ratio
@@ -100,14 +118,14 @@ const trianglePoints = computed(() => {
           <div class="triangle-status">
           <svg class="triangle-chart" viewBox="0 0 200 190">
             <!-- 最大値18の外枠 -->
-            <polygon class="triangle-grid" points="100,20 30,145 170,145"/>
+            <polygon class="triangle-grid" points="100,20 39.4,125 160.6,125"/>
             <!-- 目標値の三角形 -->
-            <polygon class="triangle-target" points="100,43.3 61.1,132.8 138.9,132.8"/>
+            <polygon class="triangle-target" :points="triangleTargetPoints"/>
             <!-- 実際のステータス -->
             <polygon class="triangle-value" :points="trianglePoints"/>
             <text x="100" y="12" text-anchor="middle">技術</text>
-            <text x="20" y="160" text-anchor="middle">管理</text>
-            <text x="180" y="160" text-anchor="middle">戦略</text>
+            <text x="20" y="145" text-anchor="middle">管理</text>
+            <text x="180" y="145" text-anchor="middle">戦略</text>
           </svg>
         </div>
       </div>
@@ -156,7 +174,10 @@ const trianglePoints = computed(() => {
 .achievement-grid article { padding: .8rem; border-top: 5px solid var(--field-color); background: #f2f6fb; border-radius: 10px; }
 .achievement-grid h3 { font-size: 1rem; margin: 0 0 .6rem; }
 .achievement-grid strong { font-size: 1.8rem; } .achievement-grid small { font-size: .8rem; }
-.achievement-grid progress { display: block; width: 100%; height: 12px; accent-color: var(--field-color); margin-top: .5rem; }
+.achievement-grid progress { display: block; width: 100%; height: 12px; margin-top: .5rem; appearance: none; -webkit-appearance: none; border: 1px solid #bfc3c8; border-radius: 999px; overflow: hidden; background: #e5e5e5; }
+.achievement-grid progress::-webkit-progress-bar { background: #e5e5e5; border-radius: 999px; }
+.achievement-grid progress::-webkit-progress-value { background: var(--field-color); border-radius: 999px; }
+.achievement-grid progress::-moz-progress-bar { background: var(--field-color); border-radius: 999px; }
 .achievement-grid p { font-size: .8rem; margin-bottom: 0; }
 .next-strategy { padding: .8rem; background: #eaf1ff; border-radius: 10px; line-height: 1.6; }
 .enrolled-list { display: flex; flex-wrap: wrap; gap: .5rem; padding-top: .7rem; }
