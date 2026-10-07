@@ -15,19 +15,19 @@
     {
       "id": "technology",
       "name": "技術（仮）",
-      "color": "#2258a8",
+      "color": "#4d8bd6",
       "clearScore": 12
     },
     {
       "id": "management",
       "name": "管理（仮）",
-      "color": "#8053a5",
+      "color": "#9b6ac0",
       "clearScore": 10
     },
     {
       "id": "strategy",
       "name": "戦略（仮）",
-      "color": "#a45b10",
+      "color": "#d88932",
       "clearScore": 10
     }
   ],
