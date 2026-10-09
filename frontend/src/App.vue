@@ -123,9 +123,9 @@ const triangleTargetPoints = computed(() => {
             <polygon class="triangle-target" :points="triangleTargetPoints"/>
             <!-- 実際のステータス -->
             <polygon class="triangle-value" :points="trianglePoints"/>
-            <text x="100" y="12" text-anchor="middle">技術</text>
-            <text x="20" y="145" text-anchor="middle">管理</text>
-            <text x="180" y="145" text-anchor="middle">戦略</text>
+            <text x="100" y="12" text-anchor="middle">テクノロジ</text>
+            <text x="20" y="145" text-anchor="middle">マネジメント</text>
+            <text x="180" y="145" text-anchor="middle">ストラテジ</text>
           </svg>
         </div>
       </div>
