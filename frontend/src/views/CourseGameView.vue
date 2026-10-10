@@ -30,6 +30,13 @@ async function openSlot(slot) {
   await nextTick()
   panel.value?.focus()
 }
+function playSound(filename) {
+  const audio = new Audio(`/sounds/${filename}.mp3`)
+  audio.volume = 0.5
+  audio.play().catch(error => {
+    console.warn('効果音を再生できませんでした:', error)
+  })
+}
 function choose(item) {
   if (!activeSlot.value || !available(item.id)) return
   if (!paused.value && Date.now() >= deadline) {
@@ -39,12 +46,15 @@ function choose(item) {
   const current = selections.value[activeSlot.value.id]
   if (current === item.id) {
     delete selections.value[activeSlot.value.id]
+    playSound('subject-remove')
   } else {
     selections.value[activeSlot.value.id] = item.id
+    playSound('subject-register')
   }
 }
 function start() {
   started.value = true
+  playSound('game-start')
   deadline = Date.now() + data.settings.puzzleSeconds * 1000
   timer = setInterval(() => {
     if (paused.value) return
@@ -55,6 +65,7 @@ function finish() {
   if (finished) return
   finished = true
   clearInterval(timer)
+  playSound('game-end')
   emit('finish', result.value)
 }
 function togglePause() {
@@ -107,14 +118,7 @@ onUnmounted(() => {
           <h2>履修登録</h2>
           <button @click="finish">登録完了</button>
         </div>
-        <div class="registration-count">
-          <span class="registration-label">履修登録数</span>
-          <div class="registration-value">
-            <strong>{{ result.selectedSubjectIds.length }}</strong>
-            <span>/ {{ slots.length }} 科目</span>
-          </div>
-        </div>
-        <div class="clock" role="timer"><small>残り時間</small>
+        <div class="clock" role="timer">
           <div class="clock-content">
             <div class="timer-ring-wrap">
               <svg class="timer-ring" viewBox="0 0 44 44" aria-hidden="true">
@@ -127,8 +131,14 @@ onUnmounted(() => {
             </div>
           </div>
         </div>
+        <div class="registration-count">
+          <span class="registration-label">履修登録数</span>
+          <div class="registration-value">
+            <strong>{{ result.selectedSubjectIds.length }}</strong>
+            <span>/ {{ slots.length }} 科目</span>
+          </div>
+        </div>
         <div class="goals" aria-label="クリアまでの単位数">
-          <strong>クリアまで</strong>
           <div v-for="item in data.attributes"
           :key="item.id"
           :class="{ achieved: result.attributeScores[item.id] >= item.clearScore }"
@@ -206,20 +216,23 @@ onUnmounted(() => {
   </section>
 </template>
 <style scoped>
-.game-panel.course-game { padding: 1rem; box-sizing: border-box; }
+.game-panel.course-game { padding: 0.1rem 1rem 1rem; box-sizing: border-box; background-color: #F2F2EF; }
 .rule-steps { padding-left: 1.5rem; line-height: 1.8; } .rule-steps li { margin: .6rem 0; } .rule-goal { background: #fff7dc; padding: .8rem; border-radius: 10px; }
-h2 { margin: 0 0 .4rem; font-size: 1.5rem; } h3 { margin: 0; } p { line-height: 1.6; }
-.game-header { display: grid; grid-template-columns: 1fr auto .8fr 1.2fr; gap: 1rem; align-items: center; margin: 0 0 .7rem; }
-.game-header button { padding: .45rem .7rem; margin: .4rem 0 0; }
+h2 { margin: 0 0 .2rem; font-size: 1.5rem; }
+.game-header { display: grid; grid-template-columns: 1fr auto .8fr 1.2fr; gap: 0.75rem; align-items: center; margin: 0 0 0.4rem; }
+.game-header button { font-size: 0.95rem; padding: 0.6rem 1.2rem; margin: 0.4rem 0 0;
+                      border: none; border-radius: 999px; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+                      background: dodgerblue; color: white; cursor: pointer; }
+.game-header button:hover { background: linear-gradient( 90deg, rgba(30, 144, 255, 1) 0%, rgba(0, 212, 255, 1) 100% ); }
+.game-header button:active { transform: translateY(2px); }
 .game-header > div:first-child small { display: inline-block; margin-left: 10px; font-size: 1rem; }
 .registration-count { background: #fff4c7; border: 1px solid #e2c96b; border-radius: 4px; padding: 0.45rem 0.9rem;
-                      box-shadow: 2px 3px 0 rgba(80, 60, 30, 0.15); white-space: nowrap; align-self: center; justify-self: start; }
+                      box-shadow: 2px 3px 0 rgba(80, 60, 30, 0.15); white-space: nowrap; align-self: center; justify-self: end; }
 .registration-label { display: block; color: #805b27; font-size: 0.75rem; font-weight: bold; margin-bottom: 0.1rem; }
 .registration-value { display: flex; align-items: baseline; gap: 0.25rem; color: #20344a; }
 .registration-value strong { font-size: 1.8rem; line-height: 1; font-weight: 800; color: #20344a; }
 .registration-value span { font-size: 0.9rem; }
-.clock { text-align: center; }
-.clock > small { display: block; transform: translateX(-45px); }
+.clock { text-align: center; justify-self: end; transform: translateX(12rem); }
 .clock-content { display: flex; align-items: center; justify-content: center; }
 .timer-ring-wrap { position: relative; width: 70px; height: 70px; }
 .timer-ring { width: 70px; height: 70px; transform: rotate(-90deg); }
@@ -228,14 +241,13 @@ h2 { margin: 0 0 .4rem; font-size: 1.5rem; } h3 { margin: 0; } p { line-height: 
 .timer-ring-bg, .timer-ring-progress { fill: none; stroke-width: 4; }
 .timer-ring-bg { stroke: #d9d9d9; }
 .timer-ring-progress { stroke: #20344a; stroke-linecap: round; stroke-dasharray: 113.1; transition: stroke-dashoffset .15s linear; }
-.goals { display: grid; grid-template-columns: repeat(3, 1fr); gap: .5rem; }
-.goals > strong { grid-column: 1 / -1; font-size: .85rem; }
+.goals { display: grid; grid-template-columns: repeat(3, 1fr); gap: .3rem .5rem; }
 .goals > div { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .2rem; border: 3px solid; border-radius: 8px; padding: .4rem .3rem; font-size: .85rem; }
 .goals > div.achieved { background: var(--attribute-color); color: #fff; }
 .goals b { margin-left: 0; }
 .goals small { min-width: 0; text-align: center; }
 .course-layout { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(300px, 1fr); gap: .8rem; align-items: stretch; }
-.wood-frame { position: relative; padding: 12px; box-sizing: border-box; overflow: hidden; }
+.wood-frame { position: relative; padding: 12px; box-sizing: border-box; min-height: 0; }
 .wood-frame-top, .wood-frame-bottom, .wood-frame-left, .wood-frame-right {
    position: absolute; background-image: url('/images/wood-frame-texture.png'); background-repeat: repeat; z-index: 2; pointer-events: none; }
 /* 上 */
@@ -246,9 +258,9 @@ h2 { margin: 0 0 .4rem; font-size: 1.5rem; } h3 { margin: 0; } p { line-height: 
 .wood-frame-left { top: 0; bottom: 0; left: 0; width: 12px; background-repeat: repeat-y; transform: rotate(180deg); }
 /* 右 */
 .wood-frame-right { top: 0; bottom: 0; right: 0; width: 12px; background-repeat: repeat-y; transform: rotate(180deg); }
-.timetable { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: .4rem; padding: 1rem; box-sizing: border-box; background-image: url('/images/timetable-bg.png'); background-repeat: repeat; background-position: center; }
-.day-column { display: grid; grid-template-rows: 26px repeat(4, 110px); gap: .4rem; }
-.day-column h3 { text-align: center; font-size: 1rem; }
+.timetable { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: .4rem; padding: 0.1rem 1rem 1rem; box-sizing: border-box; height: 100%; background-image: url('/images/timetable-bg.png'); background-repeat: repeat; background-position: center; }
+.day-column { display: grid; grid-template-rows: 36px repeat(4, 110px); gap: .4rem; }
+.day-column h3 { text-align: center; font-size: 1.1rem; align-self: center; color: #20344a; }
 .slot-button { position: relative; display: flex; flex-direction: column; justify-content: center; gap: .3rem; width: 100%; margin: 0; padding: 1.1rem .45rem .45rem; color: #20344a; background: white; border: 2px solid #d8cf82; text-align: left; overflow-wrap: anywhere; box-shadow: 2px 3px 6px rgba(0, 0, 0, .15);
                min-height: 0; overflow: hidden;}
 .slot-button::before { content: ''; position: absolute; top: .35rem; left: 50%; transform: translateX(-50%); width: 13px; height: 13px; border-radius: 50%; background: #d94b4b; border: 2px solid #b73535; box-shadow: 1px 2px 2px rgba(0, 0, 0, .25), inset 1px 1px 2px rgba(255, 255, 255, .5); }
