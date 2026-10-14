@@ -1,0 +1,58 @@
+// 読みが同じ代表的な綴りを、音のまとまりごとに受け付ける。
+// 問題全体の組合せを展開せず、入力済みの接頭辞だけを照合する。
+const romajiGroups = [
+  ['sha', 'sya'], ['shu', 'syu'], ['sho', 'syo'], ['shi', 'si'],
+  ['cha', 'tya', 'cya'], ['chu', 'tyu', 'cyu'], ['cho', 'tyo', 'cyo'],
+  ['chi', 'ti'], ['tsu', 'tu'], ['fu', 'hu'], ['ji', 'zi'],
+  ['ja', 'jya', 'zya'], ['ju', 'jyu', 'zyu'], ['jo', 'jyo', 'zyo']
+]
+const doubledGroups = romajiGroups.map(group => [...new Set(group.flatMap(spelling =>
+  spelling.startsWith('ch') ? ['c' + spelling, 't' + spelling] : [spelling[0] + spelling]))])
+const spellings = [...romajiGroups, ...doubledGroups]
+  .flatMap(group => group.map(spelling => ({ spelling, alternatives: group })))
+  .sort((a, b) => b.spelling.length - a.spelling.length)
+
+export function makeTypingTokens(romaji) {
+  const tokens = []
+  let index = 0
+  while (index < romaji.length) {
+    const match = spellings.find(item => romaji.startsWith(item.spelling, index))
+    const canonical = match?.spelling ?? romaji[index]
+    tokens.push({ canonical, alternatives: [canonical, ...(match?.alternatives ?? []).filter(s => s !== canonical)] })
+    index += canonical.length
+  }
+  return tokens
+}
+
+export function matchTypingPrefix(tokens, input) {
+  const failed = new Set()
+  function visit(tokenIndex, position) {
+    if (tokenIndex === tokens.length) return position === input.length ? { completed: true, suffix: '' } : null
+    const state = `${tokenIndex}:${position}`
+    if (failed.has(state)) return null
+    const rest = input.slice(position)
+    for (const spelling of tokens[tokenIndex].alternatives) {
+      if (rest.length < spelling.length && spelling.startsWith(rest)) {
+        return { completed: false, suffix: spelling.slice(rest.length) + tokens.slice(tokenIndex + 1).map(t => t.canonical).join('') }
+      }
+      if (rest.startsWith(spelling)) {
+        const result = visit(tokenIndex + 1, position + spelling.length)
+        if (result) return result
+      }
+    }
+    failed.add(state)
+    return null
+  }
+  const result = visit(0, 0)
+  return result ? { valid: true, completed: result.completed, displayRomaji: input + result.suffix } : { valid: false, completed: false }
+}
+
+export function checkTypingInput(tokens, input, key) {
+  const previous = matchTypingPrefix(tokens, input)
+  if (key.length !== 1) return { correct: false, input, position: input.length, completed: false, displayRomaji: previous.displayRomaji }
+  const next = input + key.toLowerCase()
+  const result = matchTypingPrefix(tokens, next)
+  return { correct: result.valid, input: result.valid ? next : input,
+    position: result.valid ? next.length : input.length, completed: result.valid && result.completed,
+    displayRomaji: result.valid ? result.displayRomaji : previous.displayRomaji }
+}
