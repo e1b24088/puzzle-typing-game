@@ -1,4 +1,5 @@
 <script setup>
+import TypingResultView from './views/TypingResultView.vue'
 import { computed, nextTick, onMounted, ref } from 'vue'
 import TitleView from './views/TitleView.vue'
 import CourseGameView from './views/CourseGameView.vue'
@@ -136,17 +137,7 @@ const triangleTargetPoints = computed(() => {
       <button @click="show(mode === 'sequential' ? 'typing' : 'title')">{{ mode === 'sequential' ? '履修した科目のタイピングへ' : 'タイトルへ' }}</button>
     </section>
     <TypingGameView v-else-if="screen === 'typing'" :mode="mode" :selected-subject-ids="courseResult?.selectedSubjectIds ?? []" @finish="finishTyping" @cancel="show('title')" />
-    <section v-else-if="screen === 'typing-result'" class="result-view">
-      <h2>授業チャレンジの結果</h2>
-      <p class="score">{{ typingResult.score }} 点</p>
-      <p>{{ typingResult.completed }} 問完了 ／ 正確率 {{ typingResult.accuracy }}% ／ {{ typingResult.cpm }} 文字/分</p>
-      <p>ミス {{ typingResult.mistakes }} 回{{ typingResult.sentencesUnlocked ? ' ／ 文章チャレンジ解放！' : '' }}</p>
-      <p v-if="mode === 'sequential'">総合：{{ courseResult.score + typingResult.score }} 点</p>
-      <aside v-if="learningTip" class="learning-tip"><h3>ひとこと学習：{{ learningTip.subjectName }}</h3><p>{{ learningTip.text }}</p></aside>
-      <details v-if="reviewItems.length" open><summary>入力した用語を振り返る（{{ reviewItems.length }}種類）</summary><article v-for="item in reviewItems" :key="item.id" class="review-card"><small>{{ item.subject?.name }}</small><h3>{{ item.text }}</h3><p>{{ item.explanation }}</p><p class="game-link">このゲームでは：{{ item.subject?.gameConnection }}</p></article></details>
-      <button @click="show('title')">タイトルへ</button>
-      <button @click="show('behind')">開発の裏側を見る</button>
-    </section>
+    <TypingResultView v-else-if="screen === 'typing-result'" :result="typingResult" :course-score="courseResult?.score ?? null" :mode="mode" :learning-tip="learningTip" @back="show('title')" @behind="show('behind')" />
     <BehindGameView v-else-if="screen === 'behind'" :backend-status="backendStatus" @back="show('title')" />
   </main>
 </template>
