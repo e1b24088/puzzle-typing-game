@@ -49,21 +49,17 @@ function finishTyping(result) { typingResult.value = result; setTip(result.compl
 function scrollToBottom() { window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth'})}
 const trianglePoints = computed(() => {
   if (!courseResult.value) return ''
-  const max = 16
-  const technology = Math.min(courseResult.value.attributeScores.technology, max)
-  const management = Math.min(courseResult.value.attributeScores.management, max)
-  const strategy = Math.min(courseResult.value.attributeScores.strategy, max)
+  const scores = courseResult.value.attributeScores
   const centerX = 100
   const centerY = 90
   const radius = 70
   const values = [
-    { value: technology, angle: -90 },
-    { value: management, angle: 150 },
-    { value: strategy, angle: 30 }
+    { value: scores.technology, max: 24, angle: -90 },
+    { value: scores.management, max: 16, angle: 150 },
+    { value: scores.strategy, max: 16, angle: 30 }
   ]
-
-  return values.map(({ value, angle }) => {
-    const ratio = value / max
+  return values.map(({ value, max, angle }) => {
+    const ratio = Math.min(value, max) / max
     const rad = angle * Math.PI / 180
     const x = centerX + Math.cos(rad) * radius * ratio
     const y = centerY + Math.sin(rad) * radius * ratio
@@ -71,19 +67,15 @@ const trianglePoints = computed(() => {
   }).join(' ')
 })
 const triangleTargetPoints = computed(() => {
-  const max = 16
-
   const targetValues = [
-    { value: 12, angle: -90 },
-    { value: 10, angle: 150 },
-    { value: 10, angle: 30 }
+    { value: 18, max: 24, angle: -90 },
+    { value: 11, max: 16, angle: 150 },
+    { value: 9, max: 16, angle: 30 }
   ]
-
   const centerX = 100
   const centerY = 90
   const radius = 70
-
-  return targetValues.map(({ value, angle }) => {
+  return targetValues.map(({ value, max, angle }) => {
     const ratio = value / max
     const rad = angle * Math.PI / 180
     const x = centerX + Math.cos(rad) * radius * ratio
@@ -102,9 +94,6 @@ const triangleTargetPoints = computed(() => {
     <TitleView v-if="screen === 'title'" @start="begin" />
     <CourseGameView v-else-if="screen === 'puzzle'" @finish="finishCourse" @cancel="show('title')" />
     <section v-else-if="screen === 'puzzle-result'" class="result-view">
-      <button class="scroll-bottom-button" @click="scrollToBottom">
-        ▼ 一番下へ
-      </button>
       <div class="result-top">
         <div class="result-banner" :class="{ cleared: courseResult.allCleared }">
           <small>履修登録 成績表</small>
@@ -118,7 +107,7 @@ const triangleTargetPoints = computed(() => {
         </div>
           <div class="triangle-status">
           <svg class="triangle-chart" viewBox="0 0 200 190">
-            <!-- 最大値18の外枠 -->
+            <!-- 最大値：技術24・経営16・戦略16 -->
             <polygon class="triangle-grid" points="100,20 39.4,125 160.6,125"/>
             <!-- 目標値の三角形 -->
             <polygon class="triangle-target" :points="triangleTargetPoints"/>
@@ -131,8 +120,6 @@ const triangleTargetPoints = computed(() => {
         </div>
       </div>
       <div class="achievement-grid"><article v-for="item in data.attributes" :key="item.id" :style="{ '--field-color': item.color }"><h3>{{ item.name }}</h3><strong>{{ courseResult.attributeScores[item.id] }}<small> / {{ item.clearScore }}単位</small></strong><progress :value="Math.min(courseResult.attributeScores[item.id], item.clearScore)" :max="item.clearScore" :aria-label="item.name + 'の達成度'"></progress><p>{{ courseResult.attributeScores[item.id] >= item.clearScore ? '目標達成！ 目標より＋' + (courseResult.attributeScores[item.id] - item.clearScore) + '単位' : 'あと ' + (item.clearScore - courseResult.attributeScores[item.id]) + '単位' }}</p></article></div>
-      <p class="next-strategy"><b>次の作戦：</b>{{ courseAdvice }}</p>
-      <details><summary>登録した科目を見る（{{ enrolledSubjects.length }}科目）</summary><div class="enrolled-list"><span v-for="item in enrolledSubjects" :key="item.id" :style="{ borderColor: data.attributes.find(attr => attr.id === item.attributeId).color }">{{ item.name }}</span></div></details>
       <aside v-if="learningTip" class="learning-tip"><h3>ひとこと学習：{{ learningTip.subjectName }}</h3><p>{{ learningTip.text }}</p></aside>
       <button @click="show(mode === 'sequential' ? 'typing' : 'title')">{{ mode === 'sequential' ? '履修した科目のタイピングへ' : 'タイトルへ' }}</button>
     </section>
@@ -170,9 +157,6 @@ const triangleTargetPoints = computed(() => {
 .achievement-grid progress::-webkit-progress-value { background: var(--field-color); border-radius: 999px; }
 .achievement-grid progress::-moz-progress-bar { background: var(--field-color); border-radius: 999px; }
 .achievement-grid p { font-size: .8rem; margin-bottom: 0; }
-.next-strategy { padding: .8rem; background: #eaf1ff; border-radius: 10px; line-height: 1.6; }
-.enrolled-list { display: flex; flex-wrap: wrap; gap: .5rem; padding-top: .7rem; }
-.enrolled-list span { border-left: 4px solid; padding: .4rem .6rem; background: #f2f6fb; }
 @media (max-width: 600px) { .achievement-grid { grid-template-columns: 1fr; } }
 .result-view { position: relative; max-width: 800px; margin: 0 auto;}
 .result-view h2 { margin-top: 0; }
@@ -195,5 +179,4 @@ details { margin: 1rem 0; } li { line-height: 1.7; }
 .triangle-value { fill: rgba(34, 88, 168, 0.25); stroke: #2258a8; stroke-width: 3;}
 .triangle-chart text { font-size: 12px; fill: #526074;}
 
-.scroll-bottom-button { position: fixed; right: 1.5rem; bottom: 1.5rem; z-index: 20; padding: .7rem 1rem; border-radius: 999px; background: #2258a8; color: white; box-shadow: 0 3px 10px rgba(0, 0, 0, .2);}
 </style>
