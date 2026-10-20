@@ -61,7 +61,31 @@ defineExpose({ focus: () => scene.value?.focus({ preventScroll: true }) })
 @keyframes shake-b { 0%,100% { transform: translateX(0); } 20%,60% { transform: translateX(-3px) rotate(-.15deg); } 40%,80% { transform: translateX(3px) rotate(.15deg); } }
 .desk-props { position: absolute; inset: 0; pointer-events: none; }
 .desk-pen { position: absolute; left: 3vw; top: 40%; width: 14px; height: 180px; background: linear-gradient(90deg, #102d43, #456882, #102d43); border-radius: 7px 7px 3px 3px; transform: rotate(12deg); box-shadow: 4px 5px 7px #39271040; } .desk-pen::before { content: ''; position: absolute; top: 18px; right: 1px; height: 52px; width: 3px; background: #c0b087; border-radius: 3px; } .desk-pen::after { content: ''; position: absolute; bottom: -18px; border-left: 7px solid transparent; border-right: 7px solid transparent; border-top: 18px solid #b2b5b4; }
-.desk-eraser { position: absolute; left: 2.6vw; bottom: 10%; width: 38px; height: 60px; background: linear-gradient(90deg, #e7e0ce 30%, #d9958f 30%); transform: rotate(-16deg); border-radius: 6px; box-shadow: 3px 5px 8px #39271035; }
+.desk-eraser {
+  position: absolute;
+  left: 2.6vw;
+  bottom: 10%;
+  box-sizing: border-box;
+  width: clamp(48px, 5vw, 72px);
+  height: auto;
+  aspect-ratio: 1.8 / 1;
+  padding: 0;
+  border: 1px solid #c9bdac;
+  border-radius: 5px;
+  background: linear-gradient(
+    to right,
+    #faf5e9 0%,
+    #eee5d5 32%,
+    #426879 32%,
+    #345567 80%,
+    #eee5d5 80%,
+    #faf5e9 100%
+  );
+  transform: rotate(-16deg);
+  box-shadow:
+    inset 0 2px 2px #ffffff80,
+    inset 0 -3px 2px #00000014,
+    3px 5px 8px #39271035; }
 .desk-watch { position: absolute; right: 2.3vw; top: 22px; width: clamp(70px, 8vw, 112px); height: clamp(190px, 27vh, 250px); border-radius: 12px; transform: rotate(3deg); background: repeating-linear-gradient(to bottom, transparent 0 22px, #b8957140 22px 23px), linear-gradient(90deg, #49372c, #795b47, #49372c); border: 1px solid #604435; box-shadow: 3px 6px 10px #39271035; }
 .watch-case { position: absolute; top: 50%; left: -12px; width: calc(100% + 24px); transform: translateY(-50%); border: 5px solid #b8b8a8; border-radius: 50%; background: #fffaf0; box-shadow: 0 0 0 2px #66726a, 3px 5px 8px #39271040; }
 .watch-dial { display: block; width: 100%; aspect-ratio: 1; }
