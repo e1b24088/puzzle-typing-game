@@ -3,7 +3,6 @@ import { computed, nextTick, onMounted, ref } from 'vue'
 import TitleView from './views/TitleView.vue'
 import CourseGameView from './views/CourseGameView.vue'
 import TypingGameView from './views/TypingGameView.vue'
-import BehindGameView from './views/BehindGameView.vue'
 import { pickLearningTip } from './utils/gameLogic.js'
 import data from './data/gameData.json'
 const screen = ref('title')
@@ -49,10 +48,7 @@ function finishTyping(result) { typingResult.value = result; setTip(result.compl
 
 <template>
   <main class="container" :class="{ 'title-container': screen === 'title', playing: screen === 'puzzle' || screen === 'typing' }">
-    <nav v-if="screen === 'title' || screen === 'behind'" class="top-nav" aria-label="展示メニュー">
-      <span v-if="screen !== 'title'">大学生活を体験しよう</span>
-      <button v-if="screen === 'title'" class="behind-button" @click="show('behind')">このゲームの裏側を見る</button>
-    </nav>
+    
     <TitleView v-if="screen === 'title'" @start="begin" />
     <CourseGameView v-else-if="screen === 'puzzle'" @finish="finishCourse" @cancel="show('title')" />
     <section v-else-if="screen === 'puzzle-result'" class="result-view">
@@ -73,9 +69,9 @@ function finishTyping(result) { typingResult.value = result; setTip(result.compl
       <aside v-if="learningTip" class="learning-tip"><h3>ひとこと学習：{{ learningTip.subjectName }}</h3><p>{{ learningTip.text }}</p></aside>
       <details v-if="reviewItems.length" open><summary>入力した用語を振り返る（{{ reviewItems.length }}種類）</summary><article v-for="item in reviewItems" :key="item.id" class="review-card"><small>{{ item.subject?.name }}</small><h3>{{ item.text }}</h3><p>{{ item.explanation }}</p><p class="game-link">このゲームでは：{{ item.subject?.gameConnection }}</p></article></details>
       <button @click="show('title')">タイトルへ</button>
-      <button @click="show('behind')">開発の裏側を見る</button>
+      
     </section>
-    <BehindGameView v-else-if="screen === 'behind'" :backend-status="backendStatus" @back="show('title')" />
+    
   </main>
 </template>
 
