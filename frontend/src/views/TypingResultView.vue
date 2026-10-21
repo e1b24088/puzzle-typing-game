@@ -3,7 +3,7 @@ import { computed, ref } from 'vue'
 import NotebookScene from '../components/NotebookScene.vue'
 import data from '../data/gameData.json'
 const props = defineProps({ result: { type: Object, required: true }, courseScore: { type: Number, default: null }, mode: String, learningTip: Object })
-const emit = defineEmits(['back', 'behind'])
+const emit = defineEmits(['back'])
 const page = ref(0)
 const tab = ref('summary')
 const reviews = computed(() => [...new Map((props.result.history ?? []).map(item => [item.id, { ...item, subject: data.subjects.find(s => s.id === item.subjectId) }])).values()])
@@ -25,7 +25,7 @@ const visible = computed(() => reviews.value.slice(page.value * 2, page.value * 
       <div class="review-heading"><h3>入力した言葉を振り返ろう</h3><div class="pager"><button :disabled="page === 0" aria-label="前の解説ページ" @click="page--">←</button><span>{{ page + 1 }} / {{ pages }}</span><button :disabled="page + 1 >= pages" aria-label="次の解説ページ" @click="page++">→</button></div></div>
       <div class="reviews"><article v-for="item in visible" :key="item.id"><small>{{ item.subject?.name }}</small><h3>{{ item.text }}</h3><p>{{ item.explanation }}</p><p class="connection"><b>このゲームでは</b><br>{{ item.subject?.gameConnection }}</p></article><p v-if="!reviews.length">まだ完了した問題はありません。もう一度挑戦して、最初の言葉を入力してみよう！</p></div>
       </template>
-      <footer><span>解説は自分のペースで、ページを変えて読めます。</span><button class="sub-button" @click="emit('behind')">ゲームの裏側を見る</button></footer>
+      <footer><span>解説は自分のペースで、ページを変えて読めます。</span></footer>
     </div>
   </NotebookScene>
 </template>
