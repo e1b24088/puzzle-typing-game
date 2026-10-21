@@ -1,6 +1,6 @@
 <script setup>
 import TypingResultView from './views/TypingResultView.vue'
-import { computed, nextTick, onMounted, ref } from 'vue'
+import { computed, nextTick, onMounted, ref, watch, onUnmounted } from 'vue'
 import TitleView from './views/TitleView.vue'
 import CourseGameView from './views/CourseGameView.vue'
 import TypingGameView from './views/TypingGameView.vue'
@@ -83,6 +83,48 @@ const triangleTargetPoints = computed(() => {
     return `${x},${y}`
   }).join(' ')
 })
+const displayedStars = ref(0)
+const lightingStar = ref(0)
+let starTimers = []
+function clearStarTimers() {
+  starTimers.forEach(clearTimeout)
+  starTimers = []
+}
+const starSound = new Audio('/sounds/star-light.mp3')
+function playStarAnimation() {
+  clearStarTimers()
+  displayedStars.value = 0
+  lightingStar.value = 0
+  const count = courseResult.value?.clearedCount ?? 0
+  for (let i = 1; i <= count; i++) {
+    const timer = setTimeout(() => {
+      displayedStars.value = i
+      lightingStar.value = i
+      starSound.currentTime = 0
+      starSound.play().catch((error) => {
+        console.warn('星の音声を再生できません:', error)
+      })
+    }, i * 1000)
+    starTimers.push(timer)
+  }
+  const finishTimer = setTimeout(() => {
+    lightingStar.value = 0
+  }, (count + 1) * 1000)
+  starTimers.push(finishTimer)
+}
+watch(
+  () => screen.value,
+  (newScreen) => {
+    if (newScreen === 'puzzle-result') {
+      playStarAnimation()
+    } else {
+      clearStarTimers()
+      displayedStars.value = 0
+      lightingStar.value = 0
+    }
+  }
+)
+onUnmounted(clearStarTimers)
 </script>
 
 <template>
@@ -96,6 +138,13 @@ const triangleTargetPoints = computed(() => {
     <section v-else-if="screen === 'puzzle-result'" class="result-view">
       <div class="result-top">
         <div class="result-banner" :class="{ cleared: courseResult.allCleared }">
+          <div class="result-stars">
+            <svg v-for="index in 3" :key="index" class="result-star"
+              :class="{ active: index <= displayedStars, lighting: index === lightingStar }"
+              viewBox="0 0 24 24" aria-hidden="true" >
+              <path d="M9.362,9.158c0,0-3.16,0.35-5.268,0.584c-0.19.023-.358.15-.421.343s0 .394.14.521l3.919,3.569-1.074,5.19c-.036.188.032.387.196.506.163.119.373.121.538.028l4.606-2.624 4.604,2.625c.168.092.378.09.541-.029.164-.119.232-.318.195-.505l-1.071-5.191 3.919-3.566c.14-.131.202-.332.14-.524s-.23-.319-.42-.341l-5.269-.586-2.183-4.83c-.082-.173-.254-.294-.456-.294s-.375.122-.453.294z" />
+            </svg>
+          </div>
           <small>履修登録 成績表</small>
           <h2>{{ courseResult.allCleared ? '全分野クリア！' : 'あと一歩、次の作戦へ！' }}</h2>
           <p class="score">{{ courseResult.score }}<small> 点</small></p>
@@ -120,8 +169,16 @@ const triangleTargetPoints = computed(() => {
         </div>
       </div>
       <div class="achievement-grid"><article v-for="item in data.attributes" :key="item.id" :style="{ '--field-color': item.color }"><h3>{{ item.name }}</h3><strong>{{ courseResult.attributeScores[item.id] }}<small> / {{ item.clearScore }}単位</small></strong><progress :value="Math.min(courseResult.attributeScores[item.id], item.clearScore)" :max="item.clearScore" :aria-label="item.name + 'の達成度'"></progress><p>{{ courseResult.attributeScores[item.id] >= item.clearScore ? '目標達成！ 目標より＋' + (courseResult.attributeScores[item.id] - item.clearScore) + '単位' : 'あと ' + (item.clearScore - courseResult.attributeScores[item.id]) + '単位' }}</p></article></div>
-      <aside v-if="learningTip" class="learning-tip"><h3>ひとこと学習：{{ learningTip.subjectName }}</h3><p>{{ learningTip.text }}</p></aside>
-      <button @click="show(mode === 'sequential' ? 'typing' : 'title')">{{ mode === 'sequential' ? '履修した科目のタイピングへ' : 'タイトルへ' }}</button>
+      <div class="result-bottom">
+        <aside v-if="learningTip" class="learning-tip">
+          <h3>ひとこと学習：{{ learningTip.subjectName }}</h3>
+          <p>{{ learningTip.text }}</p>
+        </aside>
+        <div class="result-buttons">
+          <button v-if="mode === 'sequential'" class="chalk-button" @click="show('typing')" > → 履修した科目のタイピングへ </button>
+          <button class="chalk-button" @click="show('title')" > ← タイトルへ </button>
+        </div>
+      </div>
     </section>
     <TypingGameView v-else-if="screen === 'typing'" :mode="mode" :selected-subject-ids="courseResult?.selectedSubjectIds ?? []" @finish="finishTyping" @cancel="show('title')" />
     <TypingResultView v-else-if="screen === 'typing-result'" :result="typingResult" :course-score="courseResult?.score ?? null" :mode="mode" :learning-tip="learningTip" @back="show('title')" @behind="show('behind')" />
@@ -145,11 +202,28 @@ const triangleTargetPoints = computed(() => {
 .title-container :deep(.title-buttons) { margin-top: 1.1rem; gap: 1rem; padding-bottom: .7rem; }
 .title-container :deep(.title-view .button) { min-height: 64px; padding: .65em; }
 :deep(.game-panel) { padding: clamp(1rem, 2vw, 1.7rem); }
-.result-top { display: flex; align-items: center; width: 100%;}
-.result-banner { width: 66.6667%; box-sizing: border-box; text-align: center; padding: 1rem; border-radius: 16px; background: linear-gradient(130deg, #e7efff, #f4edff); border: 2px solid #c9d7ed;}
-.triangle-status { width: 33.3333%; box-sizing: border-box;}
+.result-top { display: flex; align-items: center; width: 100%; box-sizing: border-box; padding: 0.0rem 1rem; border: 2px solid #789184; border-radius: 16px; background: #3c7058; }
+.result-banner { width: 66.6667%; box-sizing: border-box; text-align: center; padding: 1rem; border-radius: 16px; background: transparent; border: none; color: #fff; }
+.result-banner h2 { margin: .1rem 0; line-height: 1.05; }
+.result-banner .score { margin: 0; line-height: 1; }
+.result-banner > p { margin: .35rem 0; line-height: 1.2; }
+.result-banner .score-breakdown { display: flex; justify-content: center; flex-wrap: wrap;
+               gap: .5rem 1rem; margin-top: .35rem; padding: .5rem .75rem; border-radius: 8px;
+               background: #3c7058; color: #fff; line-height: 1.2; }
+.result-stars { display: flex; justify-content: center; gap: 0.5rem; margin-bottom: 0.4rem; }
+.result-star { width: 40px; height: 40px; fill: #000; transition: fill 0.3s, transform 0.3s; }
+.result-star.active { fill: #ffeb49; filter: drop-shadow(0 0 5px rgba(255, 235, 73, 0.8)); }
+.result-star:hover { transform: scale(1.1); }
+.result-star.active { fill: #ffeb49; filter: drop-shadow(0 0 5px rgba(255, 235, 73, 0.8)); }
+.result-star.lighting { animation: star-light-up 0.35s ease-out; }
+@keyframes star-light-up {
+  0% { transform: scale(0.6) rotate(0deg); filter: brightness(1); }
+  60% { transform: scale(1.6) rotate(180deg); filter: brightness(1.8) drop-shadow(0 0 10px #ffeb49); }
+  100% { transform: scale(1.2) rotate(360deg); filter: brightness(1) drop-shadow(0 0 5px rgba(255, 235, 73, 0.8)); }
+}
+.triangle-status { width: 33.3333%; box-sizing: border-box; padding-top: 20px; }
 .achievement-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .7rem; margin: 1rem 0; }
-.achievement-grid article { padding: .8rem; border-top: 5px solid var(--field-color); background: #f2f6fb; border-radius: 10px; }
+.achievement-grid article { padding: .8rem; border-top: 5px solid var(--field-color); background: #f2f6fb; border-radius: 10px; color: #222; }
 .achievement-grid h3 { font-size: 1rem; margin: 0 0 .6rem; }
 .achievement-grid strong { font-size: 1.8rem; } .achievement-grid small { font-size: .8rem; }
 .achievement-grid progress { display: block; width: 100%; height: 12px; margin-top: .5rem; appearance: none; -webkit-appearance: none; border: 1px solid #bfc3c8; border-radius: 999px; overflow: hidden; background: #e5e5e5; }
@@ -158,25 +232,32 @@ const triangleTargetPoints = computed(() => {
 .achievement-grid progress::-moz-progress-bar { background: var(--field-color); border-radius: 999px; }
 .achievement-grid p { font-size: .8rem; margin-bottom: 0; }
 @media (max-width: 600px) { .achievement-grid { grid-template-columns: 1fr; } }
-.result-view { position: relative; max-width: 800px; margin: 0 auto;}
+.result-view { position: relative; width: 100%; max-width: 1000px; height: 630px; margin: 0 auto;
+               padding: 1.5rem; box-sizing: border-box; background: #284b3c; border: 18px solid transparent;
+               border-image: url('/images/metal-frame-texture.png') 18 stretch; color: #fff; }
 .result-view h2 { margin-top: 0; }
 .score { font-size: 2.5rem; font-weight: bold; margin: .5rem 0; }
 .result-attributes { display: flex; gap: .5rem; flex-wrap: wrap; }
 .result-attributes p { border-left: 5px solid; background: #f2f6fb; padding: .7rem; }
-.learning-tip { margin: 1rem 0; padding: 1rem; border-radius: 10px; background: #fff7dc; }
+.result-bottom { display: flex; align-items: stretch; gap: 1rem; margin-top: 1rem; }
+.result-buttons { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 0.8rem; min-width: 0; }
+.result-buttons button { width: 100%; padding: 0.7rem; cursor: pointer; }
+/* 黒板にチョークで書いたようなタイトルボタン */
+.result-buttons button.chalk-button { width: fit-content; align-self: center; padding: 0.5rem 0.8rem;
+                                      background: transparent; color: #f5f1df; border: none; border-radius: 0;
+                                      font-size: 1rem; font-weight: bold; letter-spacing: 0.04em; box-shadow: none;
+                                      text-decoration: none; border-bottom: 3px solid #f5f1df; transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+                                    }
+.result-buttons button.chalk-button:hover { background: transparent; color: #ffeb9c; border-bottom-color: #ffeb9c; transform: translateY(-2px); }
+.result-buttons button.chalk-button:active { transform: translateY(1px); }
+.result-buttons button.chalk-button:focus-visible { outline: 2px dashed #ffeb9c; outline-offset: 5px; }
+.learning-tip { flex: 2; min-width: 0; margin: 0; padding: 1rem; box-sizing: border-box; border-radius: 10px; background: #284b3c; border: 2px solid #f0c94d; color: #fff; }
 .learning-tip h3 { margin: 0; } .learning-tip p { line-height: 1.7; }
 details { margin: 1rem 0; } li { line-height: 1.7; }
-
-.triangle-chart { display: block;
-  width: 100%;
-  max-width: 240px;
-  margin: 0 auto;
-  overflow: visible;
-}
-
+.triangle-chart { display: block; width: 100%; max-width: 240px; margin: 0 auto; overflow: visible; }
 .triangle-grid { fill: none; stroke: #b8c2d1; stroke-width: 2;}
 .triangle-target { fill: rgba(128, 83, 165, 0.08); stroke: #b8c2d1; stroke-width: 1.5; stroke-dasharray: 4 3;}
-.triangle-value { fill: rgba(34, 88, 168, 0.25); stroke: #2258a8; stroke-width: 3;}
-.triangle-chart text { font-size: 12px; fill: #526074;}
+.triangle-value { fill: rgba(255, 105, 180, 0.3); stroke: #eb557d; stroke-width: 3; }
+.triangle-chart text { font-size: 12px; fill: #fff;}
 
 </style>

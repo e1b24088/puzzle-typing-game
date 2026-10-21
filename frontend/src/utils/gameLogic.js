@@ -152,7 +152,17 @@ export function scorePuzzle( slots, selections, subjects, attributes, bonus, con
   const cleared = attributes.filter(item => attributeScores[item.id] >= item.clearScore)
   const allCleared = cleared.length === attributes.length
   const earnedPoints = Object.values(attributeScores).reduce((sum, points) => sum + points, 0)
-  return { selectedSubjectIds, attributeScores, earnedPoints, bonus: allCleared ? bonus : 0, score: earnedPoints + (allCleared ? bonus : 0), clearedCount: cleared.length, allCleared }
+  // クリアした分野1つにつき5Pのボーナス
+  const clearBonus = cleared.length * 5
+  return {
+    selectedSubjectIds,
+    attributeScores,
+    earnedPoints,
+    bonus: clearBonus,
+    score: earnedPoints + clearBonus,
+    clearedCount: cleared.length,
+    allCleared
+  }
 }
 export function typingMetrics(score, mistakes, elapsedSeconds) {
   const attempts = score + mistakes
