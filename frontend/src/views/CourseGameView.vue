@@ -18,6 +18,68 @@ const timerProgress = computed(() => {
 let deadline = 0
 let timer
 let finished = false
+
+// ルール説明スライド
+const currentSlide = ref(0)
+const ruleSlides = [
+  {
+    title: '時間割の見方',
+    description: [
+      'あなたはこれから、自分だけの時間割を作ります。',
+      '赤線で囲われた部分が曜日と時間帯ごとに科目を登録する時間割です。',
+      '青枠で囲われた部分にあるメモが、履修できる科目の候補です。'
+    ],
+    image: '/images/course-slide1.png'
+  },
+  {
+    title: '科目の選び方',
+    description: [
+      '時間割のコマを選ぶと、その時間に履修できる科目が表示されます。',
+      '候補の中から科目を選んで、時間割に登録しましょう。',
+      '科目によって分野や獲得できる単位数が異なります。'
+    ],
+    image: '/videos/course-slide2.mp4'
+  },
+  {
+    title: '履修登録のルール',
+    description: [
+      '赤枠で囲われた固定科目は最初から登録されており、変更できません。',
+      '登録済みの科目をもう一度選ぶと、選択を解除できます。',
+      '青枠の科目のように同じ科目を別のコマで複数回登録することはできません。'
+    ],
+    image: '/images/course-slide3.png'
+  },
+  {
+    title: 'クリア条件',
+    description: [
+      '3つの分野それぞれに、目標となる単位数が設定されています。',
+      '右上の目標表示を確認しながら、時間割を組み立てましょう。',
+      `3分野すべての目標を達成すると、ボーナス${data.settings.allAttributesBonus}点を獲得できます。`
+    ],
+    image: '/images/tmp.png'
+  },
+  {
+    title: '特殊な科目',
+    description: [
+      '連コマの科目は、連続する複数の時間帯に登録されます。',
+      '前提科目がある科目は、必要な科目を先に登録する必要があります。',
+      '時間割全体を確認しながら、効率よく履修登録を進めましょう。'
+    ],
+    image: '/images/tmp.png'
+  }
+]
+// 前のスライドへ
+function previousSlide() {
+  if (currentSlide.value > 0) {
+    currentSlide.value--
+  }
+}
+// 次のスライドへ
+function nextSlide() {
+  if (currentSlide.value < ruleSlides.length - 1) {
+    currentSlide.value++
+  }
+}
 const result = computed(() => scorePuzzle( slots, selections.value, data.subjects, data.attributes, data.settings.allAttributesBonus, data.consecutiveGroups ))
 // 目標達成時の花火演出
 const fireworks = ref({})
@@ -172,14 +234,34 @@ onUnmounted(() => {
 <template>
   <section class="game-panel course-game" :class="{ playing: started }">
     <template v-if="!started">
-      <h2>単位ゲーム：履修登録</h2>
-      <p class="rule-goal"><strong>{{ data.settings.puzzleSeconds }}秒で時間割を作り、3つの分野すべての目標単位を集めよう！</strong></p>
-      <ol class="rule-steps"><li><b>時間割のコマを押す。</b>その時間に選べる3科目が右に出ます。</li><li><b>科目を1つ選ぶ。</b>科目の分野に2単位が加わります。</li><li><b>右上の「あと○単位」を見て、足りない分野を増やす。</b>3分野とも達成するとボーナス{{ data.settings.allAttributesBonus }}点！</li></ol>
-      <p>同じ科目は1回だけ。先に選ぶと、別の時間では選べなくなります。候補の分野も時間ごとに違います。</p>
-      <p>困ったら「選択を解除」で選び直そう。固定科目は最初から登録済みで、変更できません。</p>
-      <p>単位の合計＋ボーナスが得点です。時間切れ、または「登録完了」で終了します。</p>
-      <p class="note">{{ data.curriculumNote }}</p>
-      <button @click="start">履修登録を始める</button><button @click="emit('cancel')">タイトルへ</button>
+      <div class="rule-page">
+        <!-- スライドのタイトル -->
+        <h2 class="rule-title">{{ ruleSlides[currentSlide].title }}</h2>
+        <!-- 説明文と画像 -->
+        <div class="rule-content">
+          <div class="rule-description">
+            <p v-for="(line, index) in ruleSlides[currentSlide].description" :key="index">{{ line }}</p>
+          </div>
+          <div class="rule-image">
+            <video v-if="ruleSlides[currentSlide].image.endsWith('.mp4')"
+                   :src="ruleSlides[currentSlide].image" autoplay muted loop playsinline></video>
+            <img v-else :src="ruleSlides[currentSlide].image" :alt="ruleSlides[currentSlide].title"/>
+          </div>
+        </div>
+        <!-- スライド移動 -->
+        <nav class="rule-navigation" aria-label="ルール説明のページ移動">
+          <button type="button" class="rule-arrow" :disabled="currentSlide === 0" @click="previousSlide" aria-label="前のページ"> ← </button>
+          <span class="rule-page-number"> {{ currentSlide + 1 }} / {{ ruleSlides.length }} </span>
+          <button v-if="currentSlide < ruleSlides.length - 1" type="button" class="rule-arrow" @click="nextSlide" aria-label="次のページ" > → </button>
+          <!-- 最終ページでは右側を空欄にする -->
+          <span v-else class="rule-arrow-placeholder" aria-hidden="true"></span>
+        </nav>
+        <!-- 下部の操作ボタン -->
+        <div class="rule-footer">
+          <button type="button" class="rule-title-button" @click="emit('cancel')"> タイトルへ </button>
+          <button type="button" class="rule-start-button" @click="start"> 履修登録を始める</button>
+        </div>
+      </div>
     </template>
     <template v-else>
       <header class="game-header">
@@ -317,7 +399,53 @@ onUnmounted(() => {
 </template>
 <style scoped>
 .game-panel.course-game { padding: 0.1rem 1rem 1rem; box-sizing: border-box; background-color: #F2F2EF; }
-.rule-steps { padding-left: 1.5rem; line-height: 1.8; } .rule-steps li { margin: .6rem 0; } .rule-goal { background: #fff7dc; padding: .8rem; border-radius: 10px; }
+/* ルール説明画面全体 */
+.rule-page { display: flex; flex-direction: column; min-height: 0; box-sizing: border-box;
+             padding: 1rem 1.5rem; gap: 1rem; }
+/* スライドタイトル */
+.rule-title { margin: 0; text-align: center; font-size: 2rem; color: #20344a; }
+/* 説明文と画像 */
+.rule-content { display: grid; grid-template-columns: 1fr 1.2fr; align-items: center; gap: 2rem;
+                width: 100%; max-width: 1200px; margin: 0 auto; }
+/* 説明文 */
+.rule-description { display: flex; flex-direction: column; justify-content: center; gap: 1rem;
+                    font-size: 1.1rem; line-height: 1.8; }
+.rule-description p { margin: 0; }
+/* スライド画像 */
+.rule-image { width: 100%; aspect-ratio: 16 / 9; overflow: hidden; border: 3px solid #20344a;
+              border-radius: 8px; background: #fff; box-shadow: 4px 4px 0 rgba(32, 52, 74, 0.2); }
+.rule-image img,
+.rule-image video { display: block; width: 100%; height: 100%; object-fit: contain; }/* ページ移動 */
+.rule-navigation { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+                   width: 100%; max-width: 500px; margin: 0 auto; gap: 1rem; }
+.rule-arrow { justify-self: center; min-width: 56px; min-height: 44px; padding: 0.4rem 1rem; font-size: 1.5rem;
+              font-weight: bold; color: #fff; background: #064583; border: 2px solid #20344a; border-radius: 8px; cursor: pointer; }
+.rule-arrow:hover:not(:disabled) { background: #0A579F; }
+.rule-arrow:disabled { opacity: 0.35; cursor: not-allowed; }
+.rule-page-number { font-size: 1.1rem; font-weight: bold; color: #20344a; white-space: nowrap; }
+.rule-arrow-placeholder { width: 56px; height: 44px; justify-self: center; visibility: hidden; }
+/* 下部のボタン */
+.rule-footer { display: flex; justify-content: space-between; align-items: center; gap: 1rem; width: 100%;
+               max-width: 1200px; margin: auto auto 0; padding-top: 0.5rem; }
+/* タイトルへ */
+.rule-title-button { padding: 0.75rem 1.5rem; color: #20344a; background: #fff; border: 2px solid #20344a;
+                     border-radius: 8px; font-weight: bold; cursor: pointer; }
+.rule-title-button:hover { background: #e6ebf0; }
+/* 履修登録を始める */
+.rule-start-button { padding: 0.85rem 2rem; color: #fff; background: #064583; border: 2px solid #20344a; border-radius: 8px;
+                     box-shadow: 3px 3px 0 #20344a; font-size: 1.1rem; font-weight: bold; cursor: pointer; }
+.rule-start-button:hover { background: #0A579F; }
+.rule-start-button:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 #20344a; }
+/* 画面が狭い場合 */
+@media (max-width: 700px) {
+  .rule-page { padding: 0.75rem; gap: 0.75rem; }
+  .rule-title { font-size: 1.5rem; }
+  .rule-content { grid-template-columns: 1fr; gap: 1rem; }
+  .rule-description { font-size: 0.95rem; gap: 0.5rem; }
+  .rule-footer { gap: 0.5rem; }
+  .rule-title-button,
+  .rule-start-button { padding: 0.7rem 0.8rem; font-size: 0.9rem; }
+}
 h2 { margin: 0 0 .2rem; font-size: 1.5rem; }
 .game-header { display: grid; grid-template-columns: 1fr auto .8fr 1.2fr; gap: 0.75rem; align-items: center; margin: 0 0 0.4rem; position: relative; }
 .game-title { display: flex; flex-direction: column; align-items: flex-start; }
