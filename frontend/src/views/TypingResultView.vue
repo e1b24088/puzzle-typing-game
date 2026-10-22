@@ -7,13 +7,13 @@ const emit = defineEmits(['back'])
 const page = ref(0)
 const tab = ref('summary')
 const reviews = computed(() => [...new Map((props.result.history ?? []).map(item => [item.id, { ...item, subject: data.subjects.find(s => s.id === item.subjectId) }])).values()])
-const pages = computed(() => Math.max(1, Math.ceil(reviews.value.length / 2)))
-const visible = computed(() => reviews.value.slice(page.value * 2, page.value * 2 + 2))
+const pages = computed(() => Math.max(1, Math.ceil(reviews.value.length / 4)))
+const visible = computed(() => reviews.value.slice(page.value * 4, page.value * 4 + 4))
 </script>
 <template>
   <NotebookScene aria-label="タイピングの学習記録">
     <div class="record">
-      <header><div><small>CAMPUS NOTE / 学習記録</small><h2>授業チャレンジの結果</h2></div><button @click="emit('back')">タイトルへ</button></header>
+      <header><div><small>CAMPUS NOTE / 学習記録</small><h2>授業チャレンジの結果</h2></div></header>
       <nav class="record-tabs" aria-label="結果の表示を選ぶ"><button :aria-pressed="tab === 'summary'" @click="tab = 'summary'">成績を見る</button><button :aria-pressed="tab === 'review'" @click="tab = 'review'">言葉の復習（{{ reviews.length }}種類）</button></nav>
       <template v-if="tab === 'summary'">
       <div class="summary"><div><small>スコア</small><strong>{{ result.score }}<span>点</span></strong></div><div><small>正確率</small><strong>{{ result.accuracy }}<span>%</span></strong></div><div><small>完了した問題</small><strong>{{ result.completed }}<span>問</span></strong></div><div><small>入力の速さ</small><strong>{{ result.cpm }}<span>文字/分</span></strong></div></div>
@@ -25,7 +25,10 @@ const visible = computed(() => reviews.value.slice(page.value * 2, page.value * 
       <div class="review-heading"><h3>入力した言葉を振り返ろう</h3><div class="pager"><button :disabled="page === 0" aria-label="前の解説ページ" @click="page--">←</button><span>{{ page + 1 }} / {{ pages }}</span><button :disabled="page + 1 >= pages" aria-label="次の解説ページ" @click="page++">→</button></div></div>
       <div class="reviews"><article v-for="item in visible" :key="item.id"><small>{{ item.subject?.name }}</small><h3>{{ item.text }}</h3><p>{{ item.explanation }}</p><p class="connection"><b>このゲームでは</b><br>{{ item.subject?.gameConnection }}</p></article><p v-if="!reviews.length">まだ完了した問題はありません。もう一度挑戦して、最初の言葉を入力してみよう！</p></div>
       </template>
-      <footer><span>解説は自分のペースで、ページを変えて読めます。</span></footer>
+      <footer>
+        <span>解説は自分のペースで、ページを変えて読めます。</span>
+        <button class="return-title" @click="emit('back')">← タイトルへ</button> 
+      </footer>
     </div>
   </NotebookScene>
 </template>
@@ -35,4 +38,14 @@ const visible = computed(() => reviews.value.slice(page.value * 2, page.value * 
 .tip { padding: 10px 14px; border-left: 4px solid #c8a55e; background: #fbf2dbe0; border-radius: 6px; font-size: 14px; } .tip p { margin: 5px 0 0; line-height: 1.5; } .review-heading { display: flex; justify-content: space-between; align-items: center; gap: 12px; } .review-heading h3 { margin: 0; font-size: 17px; } .pager { display: flex; align-items: center; gap: 12px; font-size: 14px; } .pager button { padding: 5px 12px; } .reviews { flex: 1; min-height: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; } article { background: #ffffffce; border: 1px solid #a7bdb750; border-radius: 10px; padding: 14px; } article h3 { font-size: 20px; margin: 6px 0; } article p { font-size: 15px; line-height: 1.6; margin: 8px 0; overflow-wrap: anywhere; } .connection { border-left: 3px solid #719891; padding-left: 10px; } footer { display: flex; justify-content: space-between; align-items: center; gap: 12px; color: #657a71; font-size: 13px; } .sub-button { color: #446e67; background: #fffdf5; border: 1px solid #9eb4ad; } .sub-button:hover { background: #edf4ea; }
 @media (max-height: 700px) { .record { gap: 8px; } .summary { padding: 8px; } article { padding: 10px; } article p { font-size: 14px; line-height: 1.45; } .tip { font-size: 13px; } }
 @media (max-width: 700px) { .summary { padding: 6px; } .summary strong { font-size: 24px; } .reviews { gap: 6px; } article { padding: 8px; } article p { font-size: 13px; } article h3 { font-size: 17px; } footer > span { display: none; } }
+/* typing-review-input-update-v1 */
+.reviews { grid-template-rows: repeat(2, minmax(0, 1fr)); gap: 10px; }
+article { min-height: 0; padding: 10px 12px; overflow: auto; scrollbar-width: thin; }
+article h3 { font-size: clamp(17px, 1.9cqw, 23px); margin: 4px 0; }
+article small { font-size: 14px; font-weight: bold; }
+article p { font-size: 14px; line-height: 1.45; margin: 5px 0; }
+.connection { padding-left: 8px; }
+.return-title { min-height: 44px; padding: 10px 24px; color: #fff; font-size: 17px; font-weight: bold; box-shadow: 0 3px 8px #203a2930; }
+@media (max-height: 700px) { .record { gap: 6px; } h2 { font-size: 22px; margin: 2px 0 0; } .reviews { gap: 6px; } article { padding: 6px 9px; } article p { font-size: 13px; margin: 3px 0; line-height: 1.35; } article h3 { font-size: 17px; } }
+
 </style>

@@ -109,4 +109,7 @@ defineExpose({ focus: () => scene.value?.focus({ preventScroll: true }) })
 @media (max-width: 800px) { .notebook-scene { padding: 100px 14px 58px; } .notebook-content { padding: 16px; } .desk-pen, .desk-eraser { display: none; } .desk-watch { top: 4px; right: 22px; width: 62px; height: 72px; transform: none; } .watch-case { left: -5px; width: 68px; border-width: 3px; } .watch-time { bottom: -18px; font-size: 10px; padding: 2px; } }
 @media (max-width: 800px) { .desk-watch { right: 43px; width: 30px; } .watch-case { left: 50%; transform: translate(-50%, -50%); } }
 @media (prefers-reduced-motion: reduce) { .shake-a, .shake-b, .urgent .watch-case { animation: none; } .turn-page { display: none; } .countdown-hand { transition: none; } }
+/* typing-review-input-update-v1 */
+.desk-watch { height: min(clamp(380px, 54vh, 500px), calc(100dvh - 80px)); }
+@media (max-width: 800px) { .notebook-scene { padding-top: 158px; } .desk-watch { height: 144px; } }
 </style>

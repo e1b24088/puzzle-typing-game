@@ -60,6 +60,7 @@ function nextQuestion() {
   typedInput.value = ''
   displayRomaji.value = current.value.romaji.replace(/\s+/g, '')
   typingTokens = makeTypingTokens(displayRomaji.value)
+  displayRomaji.value = typingTokens.map(token => token.canonical).join('')
   wrong.value = false
   questionHadMistake = false
 }
@@ -142,7 +143,7 @@ onUnmounted(() => { clearInterval(timer); pageTurn.dispose(); window.removeEvent
     </div>
     <div v-else class="play-content">
       <p v-if="paused" class="pause-banner" role="status">開発確認：時計と入力を停止中。F9で再開します。</p>
-      <header class="page-header"><span>{{ currentSubject?.name }}</span><span>{{ current.kind === 'sentence' ? '文章チャレンジ' : '授業のキーワード' }}</span></header>
+      <header class="page-header"><span class="subject-name">{{ currentSubject?.name }}</span><span>{{ current.kind === 'sentence' ? '文章チャレンジ' : '授業のキーワード' }}</span></header>
       <div class="reading-center">
         <div class="reading-stats" aria-label="プレイ状況"><div><small>スコア</small><strong>{{ score }}<span>点</span></strong></div><div><small>正確率</small><strong>{{ score + mistakes ? metrics.accuracy : '—' }}<span>%</span></strong></div></div>
         <p class="question-text" :style="{ fontSize: questionFont }">{{ current.text }}</p>
@@ -150,7 +151,7 @@ onUnmounted(() => { clearInterval(timer); pageTurn.dispose(); window.removeEvent
         <p class="input-message" :class="{ 'wrong-message': wrong }" role="status">{{ paused ? 'F9で再開できます' : wrong ? '違うキーです。下線の文字をもう一度。' : '半角英字で入力してください' }}</p>
         <p class="time-warning" role="status">{{ timeWarning }}</p>
       </div>
-      <footer class="page-footer"><span>{{ sentencesUnlocked ? '文章チャレンジ解放！' : '言葉の意味は、結果で振り返ろう。' }}<small v-if="debugPauseEnabled"> ／ F9：開発用の一時停止</small></span><span>第 {{ completed + 1 }} ページ</span></footer>
+      <footer class="page-footer"><span>{{ sentencesUnlocked ? '文章チャレンジ解放！' : '言葉の意味は、結果で振り返ろう。' }}<small v-if="debugPauseEnabled"> ／ F9：開発用の一時停止</small></span><span class="page-number" :aria-label="`${completed + 1}ページ`">{{ completed + 1 }}</span></footer>
     </div>
     <template #action><PencilButton v-if="started" @click.stop="finish" /></template>
   </NotebookScene>
@@ -165,4 +166,7 @@ button { font-size: 15px; padding: 12px 20px; margin: 0; background: #446e67; bo
 .rule-dialog { width: min(600px, 80vw); border: 1px solid #9fb5aa; border-radius: 12px; padding: 24px; color: #293b42; background: #fffdf5; box-shadow: 0 12px 50px #203a2940; } .rule-dialog h2 { font-size: 24px; } .rule-dialog p { line-height: 1.8; } .rule-dialog::backdrop { background: #293b4266; }
 @media (max-width: 700px) { .rule-cards { gap: 6px; } .rule-cards li { padding: 10px 6px; } .rule-cards h3 { font-size: 14px; } .rule-cards p, .intro-context { font-size: 13px; } .reading-stats { gap: 18px; padding: 8px 14px; } .page-footer { font-size: 11px; } }
 @media (max-height: 600px) { .intro { gap: 8px; } .rule-cards li { padding: 10px; } .rule-cards h3 { margin: 6px 0; } .reading-center { gap: 5px; padding: 5px 0; } .page-header, .page-footer { padding: 5px 0; } }
+/* typing-review-input-update-v1 */
+.subject-name { font-size: clamp(20px, 2.4cqw, 30px); font-weight: 800; color: #294e49; line-height: 1.3; }
+.page-number { font-size: 18px; font-weight: bold; font-variant-numeric: tabular-nums; }
 </style>

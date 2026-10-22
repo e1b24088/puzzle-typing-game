@@ -33,3 +33,38 @@ test('all current questions accept original spellings without whitespace', () =>
     inputAll(text, text)
   }
 })
+
+test('ja ji ju je jo accept z spellings in both directions and mixtures', () => {
+  for (const [first, second] of [['ja', 'zya'], ['ji', 'zi'], ['ju', 'zyu'], ['je', 'zye'], ['jo', 'zyo']]) {
+    inputAll(first, second); inputAll(second, first)
+    inputAll(first, second.toUpperCase())
+  }
+  inputAll('jajijujejo', 'zyajizyujezyo')
+})
+
+test('nasal n before consonants accepts single and double input independently of source', () => {
+  for (const source of ['sanpo', 'sannpo']) {
+    inputAll(source, 'sanpo'); inputAll(source, 'sannpo')
+    assert.equal(makeTypingTokens(source).map(t => t.canonical).join(''), 'sanpo')
+  }
+  inputAll('honndana', 'hondana'); inputAll('hondana', 'honndana')
+  inputAll('hennsyuu', 'henshuu'); inputAll('henshuu', 'hennsyuu')
+})
+
+test('nasal before vowels and y cannot omit the separating n', () => {
+  inputAll('zenninn', 'zenninn'); inputAll('honnya', 'honnya')
+  for (const [source, short] of [['zenninn', 'zeninn'], ['honnya', 'honya'], ['hannou', 'hanou']]) {
+    assert.equal(checkTypingInput(makeTypingTokens(source), short.slice(0, 3), short[3]).correct, false)
+  }
+  assert.equal(makeTypingTokens('honnya').map(t => t.canonical).join(''), 'honya')
+})
+
+test('n in na ni nu ne no nya is not treated as a nasal', () => {
+  for (const source of ['nani', 'nuno', 'nen', 'nya', 'nyu', 'nyo']) inputAll(source, source)
+  inputAll('tokutennohenka', 'tokutennnohenka')
+  const tokens = makeTypingTokens('sanpo')
+  const wrong = checkTypingInput(tokens, 'san', 'a')
+  assert.equal(wrong.correct, false)
+  assert.equal(wrong.input, 'san')
+  inputAll('sanpo', 'sannpo')
+})
