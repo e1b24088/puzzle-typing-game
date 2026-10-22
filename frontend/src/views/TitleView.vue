@@ -115,12 +115,26 @@ const filters = [
 /* From Uiverse.io by AatreyuShau */
 
 .title-view {
-  background: #f4f0e7;
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 3rem 5%;
+  background-image: url('/images/title-bg.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
   text-align: center;
 }
 
-.title-view h2 {
-  font-size: clamp(1.6rem, 4vw, 2.4rem);
+.title-view h2,
+.title-view p,
+.title-buttons {
+  width: min(100%, 340px);
+  margin-left: auto;
+  margin-right: 0;
+  box-sizing: border-box;
 }
 
 .title-buttons {
@@ -130,6 +144,8 @@ const filters = [
   gap: 2rem;
   margin-top: 2.5rem;
   padding: 0 1rem 1rem;
+  width: min(100%, 340px);
+  box-sizing: border-box;
 }
 
 .title-view .button {
