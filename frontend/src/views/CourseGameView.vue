@@ -234,32 +234,43 @@ onUnmounted(() => {
 <template>
   <section class="game-panel course-game" :class="{ playing: started }">
     <template v-if="!started">
-      <div class="rule-page">
-        <!-- スライドのタイトル -->
-        <h2 class="rule-title">{{ ruleSlides[currentSlide].title }}</h2>
-        <!-- 説明文と画像 -->
-        <div class="rule-content">
-          <div class="rule-description">
-            <p v-for="(line, index) in ruleSlides[currentSlide].description" :key="index">{{ line }}</p>
+      <div class="rules-screen">
+        <div class="rules-panel">
+          <!-- スライド本体：切り替えアニメーション -->
+          <Transition name="slide" mode="out-in">
+            <div class="rule-slide" :key="currentSlide">
+              <!-- 説明文と画像・動画 -->
+              <div class="rule-content">
+                <div class="rule-description">
+                  <!-- スライドのタイトル -->
+                  <div class="rule-heading">
+                    <h2 class="rule-title">{{ ruleSlides[currentSlide].title }}</h2>
+                  </div>
+                  <p v-for="(line, index) in ruleSlides[currentSlide].description" :key="index">{{ line }}</p>
+                </div>
+                <div class="rule-image">
+                  <video v-if="ruleSlides[currentSlide].image.endsWith('.mp4')" :src="ruleSlides[currentSlide].image" autoplay muted loop playsinline ></video>
+                  <img v-else :src="ruleSlides[currentSlide].image" :alt="ruleSlides[currentSlide].title"/>
+                </div>
+              </div>
+            </div>
+          </Transition>
+          <!-- スライド移動 -->
+          <nav class="rule-navigation" aria-label="ルール説明のページ移動"><!-- 2ページ目以降で前へボタンを表示 -->
+            <button v-if="currentSlide > 0" type="button" class="rule-arrow" @click="previousSlide" aria-label="前のページ" > ← 前へ </button>
+            <!-- 1ページ目では左側を空欄にする -->
+            <span v-else class="rule-arrow-placeholder" aria-hidden="true" ></span>
+            <span class="rule-page-indicator">{{ currentSlide + 1 }} / {{ ruleSlides.length }}</span>
+            <button v-if="currentSlide < ruleSlides.length - 1" type="button" class="rule-arrow rule-next-arrow" @click="nextSlide" aria-label="次のページ" > 次へ → </button>
+            <span v-else class="rule-arrow-placeholder" aria-hidden="true" ></span>
+          </nav>
+          <!-- 下部の操作ボタン -->
+          <div class="rule-footer">
+            <button type="button" class="rule-title-button" @click="emit('cancel')" >タイトルへ戻る</button>
+            <button type="button" class="rule-start-button" @click="start"> 履修登録を始める 
+              <span aria-hidden="true">▶</span>
+            </button>
           </div>
-          <div class="rule-image">
-            <video v-if="ruleSlides[currentSlide].image.endsWith('.mp4')"
-                   :src="ruleSlides[currentSlide].image" autoplay muted loop playsinline></video>
-            <img v-else :src="ruleSlides[currentSlide].image" :alt="ruleSlides[currentSlide].title"/>
-          </div>
-        </div>
-        <!-- スライド移動 -->
-        <nav class="rule-navigation" aria-label="ルール説明のページ移動">
-          <button type="button" class="rule-arrow" :disabled="currentSlide === 0" @click="previousSlide" aria-label="前のページ"> ← </button>
-          <span class="rule-page-number"> {{ currentSlide + 1 }} / {{ ruleSlides.length }} </span>
-          <button v-if="currentSlide < ruleSlides.length - 1" type="button" class="rule-arrow" @click="nextSlide" aria-label="次のページ" > → </button>
-          <!-- 最終ページでは右側を空欄にする -->
-          <span v-else class="rule-arrow-placeholder" aria-hidden="true"></span>
-        </nav>
-        <!-- 下部の操作ボタン -->
-        <div class="rule-footer">
-          <button type="button" class="rule-title-button" @click="emit('cancel')"> タイトルへ </button>
-          <button type="button" class="rule-start-button" @click="start"> 履修登録を始める</button>
         </div>
       </div>
     </template>
@@ -407,10 +418,6 @@ onUnmounted(() => {
 /* 説明文と画像 */
 .rule-content { display: grid; grid-template-columns: 1fr 1.2fr; align-items: center; gap: 2rem;
                 width: 100%; max-width: 1200px; margin: 0 auto; }
-/* 説明文 */
-.rule-description { display: flex; flex-direction: column; justify-content: center; gap: 1rem;
-                    font-size: 1.1rem; line-height: 1.8; }
-.rule-description p { margin: 0; }
 /* スライド画像 */
 .rule-image { width: 100%; aspect-ratio: 16 / 9; overflow: hidden; border: 3px solid #20344a;
               border-radius: 8px; background: #fff; box-shadow: 4px 4px 0 rgba(32, 52, 74, 0.2); }
@@ -432,10 +439,106 @@ onUnmounted(() => {
                      border-radius: 8px; font-weight: bold; cursor: pointer; }
 .rule-title-button:hover { background: #e6ebf0; }
 /* 履修登録を始める */
-.rule-start-button { padding: 0.85rem 2rem; color: #fff; background: #064583; border: 2px solid #20344a; border-radius: 8px;
-                     box-shadow: 3px 3px 0 #20344a; font-size: 1.1rem; font-weight: bold; cursor: pointer; }
+.rule-start-button { padding: 0.85rem 2rem; color: #fff; background: #064583; border: 2px solid #20344a; border-radius: 8px; box-shadow: 3px 3px 0 #20344a; font-size: 1.1rem; font-weight: bold; cursor: pointer; }
 .rule-start-button:hover { background: #0A579F; }
 .rule-start-button:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 #20344a; }
+.rule-start-button:hover { background: #0A579F; }
+.rule-start-button:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 #20344a; }
+/* ルール説明画面全体 */
+.rules-screen { background-image: repeating-linear-gradient( 0deg, transparent 0px, transparent 29px, #d9e2e9 29px, #d9e2e9 30px ); background-size: 100% 30px; }
+.rule-heading { margin-bottom: 1rem; }
+.rule-step { display: inline-block; margin-bottom: 0.4rem; color: #7dd3fc; font-size: 0.8rem; font-weight: 800; letter-spacing: 0.12em; }
+.rule-title { color: #343b43; border-bottom: 2px solid #b8cfe1; padding-bottom: 1rem; }
+/* 説明文と画像を左右に配置 */
+.rule-content { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+                gap: 2rem; align-items: center; min-height: 280px; }
+/* 説明文 */
+.rule-description { display: flex; flex-direction: column; justify-content: center; gap: 0; font-size: 1.1rem; line-height: 30px; color: #454b52; margin: 0; padding-top: 25px;}
+.rule-description p { margin: 0; padding: 0; }
+/* 画像・動画の表示枠 */
+.rule-image { display: flex; align-items: center; justify-content: center; min-width: 0; overflow: hidden;
+              border: 1px solid rgba(148, 163, 184, 0.25); border-radius: 12px; background: #0b1220; }
+.rule-image img,
+.rule-image video { display: block; width: 100%; max-height: 340px; object-fit: contain; }
+/* 前へ・次へ */
+.rule-navigation { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 1rem; margin-top: 1rem; }
+.rule-arrow { justify-self: start; padding: 0.65rem 1rem; border: 1px solid #52647c;
+              border-radius: 9px; color: #e2e8f0; background: #26364c; font-size: 0.95rem;
+              font-weight: 700; cursor: pointer; transition: background 0.2s, transform 0.2s; }
+.rule-arrow:hover:not(:disabled) { transform: translateY(-2px); background: #344b68; }
+.rule-arrow:disabled { opacity: 0.35; cursor: not-allowed; }
+.rule-next-arrow { justify-self: end; }
+/* ページ番号 */
+.rule-page-indicator { color: #343b43; font-size: 0.95rem; font-weight: 800; }
+.rule-arrow-placeholder { justify-self: end; width: 5.5rem; }
+/* 下部の操作ボタン */
+.rule-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid #d8d5cb;
+}
+/* ボタン共通 */
+.rule-title-button,
+.rule-start-button {
+  min-height: 46px;
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition:
+    transform 0.2s,
+    background 0.2s,
+    box-shadow 0.2s;
+}
+/* タイトルへ戻る：ノートの紙に馴染むデザイン */
+.rule-title-button {
+  border: 1px solid #b9b3a6;
+  color: #45566a;
+  background: #fffdf7;
+  box-shadow: 0 2px 0 #e2ddd1;
+}
+.rule-title-button:hover {
+  background: #f0ede4;
+  transform: translateY(-1px);
+}
+/* 履修登録を始める：青い付箋風 */
+.rule-start-button {
+  border: 1px solid #47769f;
+  color: #ffffff;
+  background: #5687b5;
+  box-shadow: 0 4px 0 #3f6688;
+}
+.rule-start-button:hover {
+  transform: translateY(-2px);
+  background: #6799c5;
+  box-shadow: 0 6px 0 #3f6688;
+}
+/* 押したとき */
+.rule-title-button:active,
+.rule-start-button:active {
+  transform: translateY(1px);
+  box-shadow: none;
+}
+/* スライド切り替えアニメーション */
+.slide-enter-active,
+.slide-leave-active { transition: opacity 0.18s ease, transform 0.18s ease; }
+.slide-enter-from { opacity: 0; transform: translateX(18px); }
+.slide-leave-to { opacity: 0; transform: translateX(-18px); }
+/* スマートフォンなど狭い画面 */
+@media (max-width: 700px) {
+  .rules-screen { padding: 1rem; }
+  .rules-panel { padding: 1.25rem; }
+  .rule-content { grid-template-columns: 1fr; gap: 1.25rem; min-height: 0; }
+  .rule-image img,.rule-image video { max-height: 260px; }
+  .rule-footer { align-items: stretch; }
+  .rule-title-button,.rule-start-button { padding: 0.7rem; font-size: 0.85rem;}
+}
+
 /* 画面が狭い場合 */
 @media (max-width: 700px) {
   .rule-page { padding: 0.75rem; gap: 0.75rem; }
