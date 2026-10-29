@@ -8,12 +8,12 @@ const buttons = [
     game: 'puzzle'
   },
   {
-    label: '単位ゲームのみ',
+    label: '履修登録ゲーム',
     mode: 'select',
     game: 'puzzle'
   },
   {
-    label: 'タイピングのみ',
+    label: 'タイピングゲーム',
     mode: 'select',
     game: 'typing'
   }
@@ -29,9 +29,11 @@ const filters = [
 
 <template>
   <section class="title-view">
-    <h2>大学生活を体験しよう！</h2>
-    <p>履修登録とタイピングに挑戦</p>
-    <p>通しプレイの体験時間：約3分</p>
+    <div class="title-text">
+      <h2>大学生活を体験しよう！</h2>
+      <p>履修登録とタイピングに挑戦</p>
+      <p>通しプレイの体験時間：約3分</p>
+    </div>
 
     <div class="title-buttons">
       <!-- From Uiverse.io by AatreyuShau -->
@@ -115,8 +117,9 @@ const filters = [
 /* From Uiverse.io by AatreyuShau */
 
 .title-view {
-  min-height: 100vh;
+  height: 90vh;
   box-sizing: border-box;
+  justify-content: center;
   padding: 3rem 5%;
   background-image: url('/images/title-bg.png');
   background-size: cover;
@@ -128,16 +131,48 @@ const filters = [
   text-align: center;
 }
 
-.title-view h2,
-.title-view p,
-.title-buttons {
-  width: min(100%, 340px);
+.title-text {
+  width: min(100%, 500px);
   margin-left: auto;
-  margin-right: 0;
+  margin-right: 3;
+  text-align: center;
   box-sizing: border-box;
 }
 
+
+.title-text h2,
+.title-text p {
+  width: 100%;
+  text-align: center;
+  color: #000;
+  background: transparent;
+  -webkit-text-stroke: 1px #fff;
+  paint-order: stroke fill;
+  text-shadow: 2px 3px 5px rgba(0, 0, 0, 0.55);
+}
+
+.title-text h2 {
+  font-size: 2.7rem;
+  font-weight: 900;
+  margin-bottom: 1rem;
+}
+
+.title-text p:first-of-type {
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin-bottom: 0.75rem;
+}
+
+.title-text p:last-of-type {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
 .title-buttons {
+  width: min(100%, 340px);
+  margin-left: auto;
+  margin-right: 5rem;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -161,7 +196,7 @@ const filters = [
   border: 0;
   border-radius: 2rem;
   color: #333;
-  background: transparent;
+  background: rgba(255, 255, 255, 0.7);
   font-family: "Courier New", monospace;
   font-size: clamp(1rem, 3vw, 1.5rem);
   font-weight: bold;
@@ -195,7 +230,7 @@ const filters = [
 .button-cosm {
   position: absolute;
   z-index: 0;
-  fill: #33333366;
+  fill: #8B5E3C;
   pointer-events: none;
   transition: 0.3s ease-out;
   scale: 0.5;
@@ -208,7 +243,7 @@ const filters = [
 }
 
 .title-view .button:hover {
-  background: transparent;
+  background: rgba(255, 255, 255, 0.85);
   rotate: -2.5deg;
   animation: hover 2.5s infinite ease-in-out;
 }
@@ -223,7 +258,7 @@ const filters = [
 }
 
 .title-view .button:active {
-  background: transparent;
+  background: rgba(255, 255, 255, 0.9);
   box-shadow: inset #333333f1 4px 4px 0 1px;
   rotate: -2.5deg;
   animation: active 1s infinite ease-in-out;
@@ -238,7 +273,7 @@ const filters = [
 }
 
 .button:active .button-cosm {
-  fill: #333333f1;
+  fill: #8B5E3C;
   rotate: -135deg;
   translate: calc(-100% + 55px) 1.6rem;
   animation: none;

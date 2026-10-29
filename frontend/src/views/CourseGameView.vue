@@ -9,11 +9,14 @@ const activeSlot = ref(null)
 const started = ref(false)
 const paused = ref(false)
 let pausedAt = 0
-const remaining = ref(data.settings.puzzleSeconds)
+// 制限時間（開始時の設定値を保持）
+const totalTime = data.settings.puzzleSeconds
+const remaining = ref(totalTime)
 const panel = ref(null)
-const timerProgress = computed(() => {
-  const total = data.settings.puzzleSeconds
-  return total > 0 ? remaining.value / total : 0
+// 経過時間に応じた秒針の回転角度
+const timerRotation = computed(() => {
+  const elapsedTime = totalTime - remaining.value
+  return (elapsedTime / 60) * 360
 })
 let deadline = 0
 let timer
@@ -54,7 +57,8 @@ const ruleSlides = [
     description: [
       '赤枠で囲われた部分には、3つの分野それぞれの目標となる単位数が設定されています。',
       '右上の目標表示を確認しながら、時間割を組み立てましょう。',
-      `3分野すべての目標を達成すると、ボーナス${data.settings.allAttributesBonus}点を獲得できます。`
+      '各分野一つ達成するとボーナス5点',
+      `3分野すべての目標を達成すると、さらにボーナス${data.settings.allAttributesBonus}点を獲得できます。`
     ],
     image: '/images/course-slide4.png'
   },
@@ -69,6 +73,14 @@ const ruleSlides = [
     image: '/images/course-slide5.png'
   }
 ]
+// ルール説明内の赤線・青線などを色分けする
+const formatRuleLine = (line) => {
+  return line
+    .replaceAll('赤線', '<span class="red-highlight">赤線</span>')
+    .replaceAll('赤枠', '<span class="red-highlight">赤枠</span>')
+    .replaceAll('青線', '<span class="blue-highlight">青線</span>')
+    .replaceAll('青枠', '<span class="blue-highlight">青枠</span>')
+}
 // 前のスライドへ
 function previousSlide() {
   if (currentSlide.value > 0) {
@@ -242,12 +254,12 @@ onUnmounted(() => {
             <div class="rule-slide" :key="currentSlide">
               <!-- 説明文と画像・動画 -->
               <div class="rule-content">
-                <div class="rule-description">
-                  <!-- スライドのタイトル -->
+               <div class="rule-description">
                   <div class="rule-heading">
                     <h2 class="rule-title">{{ ruleSlides[currentSlide].title }}</h2>
                   </div>
-                  <p v-for="(line, index) in ruleSlides[currentSlide].description" :key="index">{{ line }}</p>
+                  <p v-for="(line, index) in ruleSlides[currentSlide].description" :key="index"
+                    v-html="formatRuleLine(line)"></p>
                 </div>
                 <div class="rule-image">
                   <video v-if="ruleSlides[currentSlide].image.endsWith('.mp4')" :src="ruleSlides[currentSlide].image" autoplay muted loop playsinline ></video>
@@ -278,7 +290,7 @@ onUnmounted(() => {
     <template v-else>
       <header class="game-header">
         <div class="game-title">
-          <h2>📝 履修登録タイム</h2>
+          <h2> 履修登録タイム</h2>
           <button class="button" @click="finish">
             <div class="bg">
               <div class="shine"></div>
@@ -295,17 +307,27 @@ onUnmounted(() => {
             </div>
           </button>
         </div>
-        <div class="clock" role="timer">
-          <div class="clock-content">
-            <div class="timer-ring-wrap">
-              <svg class="timer-ring" viewBox="0 0 44 44" aria-hidden="true">
-                <circle class="timer-ring-bg" cx="22" cy="22" r="18"/>
-                <circle class="timer-ring-progress"
-                cx="22" cy="22" r="18"
-                :style="{ strokeDashoffset: 113.1 * (1 - timerProgress) }"/>
-              </svg>
-              <strong>{{ remaining }}<small>秒</small></strong>
-            </div>
+        <div class="clock" role="timer" :aria-label="`残り${remaining}秒`">
+          <div class="wall-clock">
+            <svg class="wall-clock-face" viewBox="0 0 100 100" aria-hidden="true" >
+              <!-- 文字盤 -->
+              <circle class="clock-dial" cx="50" cy="50" r="47" />
+              <!-- 60個の目盛り -->
+              <line v-for="tick in 60" :key="tick" class="clock-tick" 
+                :class="{ major: tick % 5 === 0 }" x1="50" y1="5" x2="50" 
+                :y2="tick % 5 === 0 ? 13 : 9" :transform="`rotate(${tick * 6} 50 50)`" />
+              <!-- 数字 -->
+              <text x="50" y="23" class="clock-number">12</text>
+              <text x="77" y="54" class="clock-number">3</text>
+              <text x="50" y="82" class="clock-number">6</text>
+              <text x="23" y="54" class="clock-number">9</text>
+              <!-- 秒針 -->
+              <g :transform="`rotate(${timerRotation} 50 50)`">
+                <line class="clock-second-hand" x1="50" y1="57" x2="50" y2="14" />
+              </g>
+              <!-- 針の中心 -->
+              <circle class="clock-center" cx="50" cy="50" r="3" />
+            </svg>
           </div>
         </div>
         <div class="registration-count">
@@ -454,8 +476,16 @@ onUnmounted(() => {
 .rule-content { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
                 gap: 2rem; align-items: center; min-height: 280px; }
 /* 説明文 */
-.rule-description { display: flex; flex-direction: column; justify-content: center; gap: 0; font-size: 1.1rem; line-height: 30px; color: #454b52; margin: 0; padding-top: 25px;}
+/* 説明文 */
+.rule-description { display: flex; flex-direction: column; justify-content: flex-start; 
+                    /* 上端から表示する */
+                    gap: 0; font-size: 1.1rem; line-height: 30px; color: #454b52; margin: 0;
+                    padding-top: 25px; align-self: stretch; box-sizing: border-box; }
 .rule-description p { margin: 0; padding: 0; }
+/* 赤線・赤枠の文字 */
+.rule-description :deep(.red-highlight) { color: #e53935; font-weight: 800; }
+/* 青線・青枠の文字 */
+.rule-description :deep(.blue-highlight) { color: #1976d2; font-weight: 800; }
 /* 画像・動画の表示枠 */
 .rule-image { display: flex; align-items: center; justify-content: center; min-width: 0; overflow: hidden;
               border: 1px solid rgba(148, 163, 184, 0.25); border-radius: 12px; background: #0b1220; }
@@ -596,15 +626,90 @@ h2 { margin: 0 0 .2rem; font-size: 1.5rem; }
 .registration-value { display: flex; align-items: baseline; gap: 0.25rem; color: #20344a; }
 .registration-value strong { font-size: 1.8rem; line-height: 1; font-weight: 800; color: #20344a; }
 .registration-value span { font-size: 0.9rem; }
-.clock { text-align: center; justify-self: end; transform: translateX(11rem); }
-.clock-content { display: flex; align-items: center; justify-content: center; }
-.timer-ring-wrap { position: relative; width: 70px; height: 70px; }
-.timer-ring { width: 70px; height: 70px; transform: rotate(-90deg); }
-.timer-ring-wrap strong { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; line-height: 1; font-variant-numeric: tabular-nums; }
-.timer-ring-wrap strong small { font-size: .7rem; margin-left: 2px; }
-.timer-ring-bg, .timer-ring-progress { fill: none; stroke-width: 4; }
-.timer-ring-bg { stroke: #d9d9d9; }
-.timer-ring-progress { stroke: #20344a; stroke-linecap: round; stroke-dasharray: 113.1; transition: stroke-dashoffset .15s linear; }
+/* 時計の配置 */
+.clock {
+  text-align: center;
+  justify-self: end;
+  transform: translateX(11rem);
+}
+
+/* 壁掛け時計本体 */
+.wall-clock {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  padding: 3px;
+  box-sizing: border-box;
+  border: 4px solid #6b5540;
+  border-radius: 50%;
+  background: #fffdf5;
+  box-shadow:
+    0 3px 0 #453729,
+    0 5px 8px rgba(0, 0, 0, 0.25),
+    inset 0 0 0 2px #d5c6a6;
+}
+
+/* 文字盤 */
+.wall-clock-face {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.clock-dial {
+  fill: #fffdf5;
+  stroke: #b7a486;
+  stroke-width: 1;
+}
+
+/* 目盛り */
+.clock-tick {
+  stroke: #55504a;
+  stroke-width: 1;
+  stroke-linecap: round;
+}
+
+.clock-tick.major {
+  stroke: #292929;
+  stroke-width: 2;
+}
+
+/* 12・3・6・9の数字 */
+.clock-number {
+  fill: #292929;
+  font-size: 10px;
+  font-weight: bold;
+  text-anchor: middle;
+}
+
+/* 秒針 */
+.clock-second-hand {
+  stroke: #d62828;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+/* 針の中心 */
+.clock-center {
+  fill: #d62828;
+  stroke: #8f1717;
+  stroke-width: 1;
+}
+
+/* 残り時間 */
+.clock-remaining {
+  margin-top: 3px;
+  color: #20344a;
+  font-size: 1rem;
+  font-weight: bold;
+  font-variant-numeric: tabular-nums;
+}
+
+.clock-remaining small {
+  margin-left: 2px;
+  font-size: 0.75rem;
+}
 .goals { display: grid; grid-template-columns: repeat(3, 1fr); gap: .3rem .5rem; }
 .goals > div { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .2rem; border: 3px solid; border-radius: 8px; padding: .4rem .3rem; font-size: .85rem; }
 .goals > div.achieved { background: var(--attribute-color); color: #fff; }
