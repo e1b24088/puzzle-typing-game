@@ -138,22 +138,72 @@ export function canDeselectSubject( slots, selections, slotId, subjects = [], co
   }
   return true
 }
-export function scorePuzzle( slots, selections, subjects, attributes, bonus, consecutiveGroups = [] ) {
-  const attributeScores = Object.fromEntries(attributes.map(item => [item.id, 0]))
-  const normalized = normalizeSelections(slots, selections, consecutiveGroups)
-  const selectedSubjectIds = [...new Set(Object.values(normalized))]
-  // 得点はコマ単位ではなく科目単位で加算するため、連コマでも二重加点しない。
+
+export function scorePuzzle(
+  slots,
+  selections,
+  subjects,
+  attributes,
+  bonus,
+  consecutiveGroups = []
+) {
+  // 分野ごとの得点を初期化（クリア判定用）
+  const attributeScores = Object.fromEntries(
+    attributes.map(item => [item.id, 0])
+  )
+
+  // 登録状況を正規化し、科目IDの重複を除去
+  const normalized = normalizeSelections(
+    slots,
+    selections,
+    consecutiveGroups
+  )
+  const selectedSubjectIds = [
+    ...new Set(Object.values(normalized))
+  ]
+
+  // 科目ごとの点数を分野別に加算（クリア判定用）
   for (const id of selectedSubjectIds) {
     const subject = subjects.find(item => item.id === id)
+
     if (subject && Object.hasOwn(attributeScores, subject.attributeId)) {
       attributeScores[subject.attributeId] += subject.points
     }
   }
-  const cleared = attributes.filter(item => attributeScores[item.id] >= item.clearScore)
-  const allCleared = cleared.length === attributes.length
-  const earnedPoints = Object.values(attributeScores).reduce((sum, points) => sum + points, 0)
-  return { selectedSubjectIds, attributeScores, earnedPoints, bonus: allCleared ? bonus : 0, score: earnedPoints + (allCleared ? bonus : 0), clearedCount: cleared.length, allCleared }
+
+  // 分野ごとのクリア判定
+  const cleared = attributes.filter(
+    item => attributeScores[item.id] >= item.clearScore
+  )
+  const clearedCount = cleared.length
+  const allCleared = clearedCount === attributes.length
+
+  // 登録単位数を集計
+  const earnedPoints = selectedSubjectIds.reduce((sum, id) => {
+    const subject = subjects.find(item => item.id === id)
+    return sum + (subject ? subject.points : 0)
+  }, 0)
+
+  // クリアした分野1つにつき5点
+  const clearBonus = clearedCount * 5
+
+  // 全分野クリア時の追加ボーナス
+  const allAttributesBonus = allCleared ? bonus : 0
+
+  // 最終得点 = 登録単位数 + 分野クリアボーナス + 全分野クリアボーナス
+  const score = earnedPoints + clearBonus + allAttributesBonus
+
+  return {
+    selectedSubjectIds,
+    attributeScores,
+    earnedPoints,
+    bonus: clearBonus + allAttributesBonus,
+    score,
+    clearedCount,
+    allCleared
+  }
 }
+
 export function typingMetrics(score, mistakes, elapsedSeconds) {
   const attempts = score + mistakes
   return { accuracy: attempts ? Math.round(score / attempts * 100) : 0,

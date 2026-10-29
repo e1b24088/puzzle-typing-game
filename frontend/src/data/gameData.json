@@ -759,7 +759,7 @@
       "id": "algorithm-word4",
       "subjectId": "algorithm",
       "text": "条件",
-      "romaji": "zyouken",
+      "romaji": "joukenn",
       "kind": "word",
       "explantion": "処理を実行するかどうかなどを判断するための基準。"
     },
@@ -823,7 +823,7 @@
       "id": "security-word2",
       "subjectId": "security",
       "text": "暗号化",
-      "romaji": "angouka",
+      "romaji": "anngouka",
       "kind": "word",
       "explantion": "データを第三者が簡単に読めない形式に変換すること。"
     },
@@ -839,7 +839,7 @@
       "id": "security-word4",
       "subjectId": "security",
       "text": "脆弱性",
-      "romaji": "zeizyakusei",
+      "romaji": "zeijakusei",
       "kind": "word",
       "explantion": "システムやソフトウェアに存在する、攻撃などに悪用される可能性のある弱点。"
     },
@@ -847,7 +847,7 @@
       "id": "security-word5",
       "subjectId": "security",
       "text": "アクセス権",
-      "romaji": "akusesuken",
+      "romaji": "akusesukenn",
       "kind": "word",
       "explantion": "データや機能を利用できる人や操作を定めた権限。"
     },
@@ -879,7 +879,7 @@
       "id": "operating-systems-word4",
       "subjectId": "operating-systems",
       "text": "プロセス",
-      "romaji": "puroresu",
+      "romaji": "purosesu",
       "kind": "word",
       "explantion": "OS上で実行されているプログラムの単位。"
     },
@@ -903,7 +903,7 @@
       "id": "java-practice-word2",
       "subjectId": "java-practice",
       "text": "オブジェクト",
-      "romaji": "obuzyekuto",
+      "romaji": "obujekuto",
       "kind": "word",
       "explantion": "データと、それを扱う処理をまとめたプログラム上の実体。"
     },
@@ -959,7 +959,7 @@
       "id": "data-structures-word4",
       "subjectId": "data-structures",
       "text": "キュー",
-      "romaji": "kyuu",
+      "romaji": "kyu-",
       "kind": "word",
       "explantion": "最初に追加したデータを最初に取り出す方式のデータ構造。"
     },
@@ -967,7 +967,7 @@
       "id": "data-structures-word5",
       "subjectId": "data-structures",
       "text": "木構造",
-      "romaji": "mokuzou",
+      "romaji": "kikouzou",
       "kind": "word",
       "explantion": "データを親子関係でつないで階層的に表現するデータ構造。"
     },
@@ -983,7 +983,7 @@
       "id": "ui-practice-word2",
       "subjectId": "ui-practice",
       "text": "ボタン",
-      "romaji": "botan",
+      "romaji": "botann",
       "kind": "word",
       "explantion": "クリックなどの操作を受け付ける画面上の部品。"
     },
@@ -991,7 +991,7 @@
       "id": "ui-practice-word3",
       "subjectId": "ui-practice",
       "text": "入力欄",
-      "romaji": "nyuuryokuran",
+      "romaji": "nyuuryokurann",
       "kind": "word",
       "explantion": "文字や数値などの情報を入力するための画面上の領域。"
     },
@@ -999,7 +999,7 @@
       "id": "ui-practice-word4",
       "subjectId": "ui-practice",
       "text": "コンポーネント",
-      "romaji": "konponento",
+      "romaji": "konnpo-nennto",
       "kind": "word",
       "explantion": "画面やプログラムで繰り返し利用できる機能や部品。"
     },
@@ -1007,7 +1007,7 @@
       "id": "ui-practice-word5",
       "subjectId": "ui-practice",
       "text": "イベント",
-      "romaji": "ibento",
+      "romaji": "ibennto",
       "kind": "word",
       "explantion": "クリックや入力など、プログラムの処理を引き起こす出来事。"
     },
@@ -1031,7 +1031,7 @@
       "id": "api-intro-word3",
       "subjectId": "api-intro",
       "text": "レスポンス",
-      "romaji": "resuponsu",
+      "romaji": "resuponnsu",
       "kind": "word",
       "explantion": "要求に対して返される処理結果やデータ。"
     },
@@ -1039,7 +1039,7 @@
       "id": "api-intro-word4",
       "subjectId": "api-intro",
       "text": "エンドポイント",
-      "romaji": "endopointo",
+      "romaji": "enndopoinnto",
       "kind": "word",
       "explantion": "APIなどで処理を呼び出すための接続先。"
     },
@@ -1055,7 +1055,7 @@
       "id": "c-practice-1-word1",
       "subjectId": "c-practice-1",
       "text": "変数",
-      "romaji": "hensuu",
+      "romaji": "hennsuu",
       "kind": "word",
       "explantion": "プログラムで値を入れておくための名前付きの領域。"
     },
@@ -1063,7 +1063,7 @@
       "id": "c-practice-1-word2",
       "subjectId": "c-practice-1",
       "text": "ポインタ",
-      "romaji": "pointa",
+      "romaji": "poinnta",
       "kind": "word",
       "explantion": "メモリ上のデータの場所を示す情報を扱う仕組み。"
     },
@@ -1095,7 +1095,7 @@
       "id": "assembly-word1",
       "subjectId": "assembly",
       "text": "レジスタ",
-      "romaji": "rezisuta",
+      "romaji": "rejisuta",
       "kind": "word",
       "explantion": "CPU内部でデータや命令などを一時的に保持する高速な記憶領域。"
     },
@@ -1127,7 +1127,7 @@
       "id": "assembly-word5",
       "subjectId": "assembly",
       "text": "演算",
-      "romaji": "enzan",
+      "romaji": "ennzann",
       "kind": "word",
       "explantion": "数値やデータに対して計算を行うこと。"
     },
@@ -1143,7 +1143,7 @@
       "id": "linear-algebra-word2",
       "subjectId": "linear-algebra",
       "text": "行列",
-      "romaji": "gyouretsu",
+      "romaji": "gyouretu",
       "kind": "word",
       "explantion": "数値を行と列に並べた数学的な表。"
     },
@@ -1151,7 +1151,7 @@
       "id": "linear-algebra-word3",
       "subjectId": "linear-algebra",
       "text": "スカラー",
-      "romaji": "sukara",
+      "romaji": "sukara-",
       "kind": "word",
       "explantion": "大きさだけを持ち、向きを持たない量。"
     },
@@ -1167,7 +1167,7 @@
       "id": "linear-algebra-word5",
       "subjectId": "linear-algebra",
       "text": "連立方程式",
-      "romaji": "renrituhouteisiki",
+      "romaji": "rennrituhouteisiki",
       "kind": "word",
       "explantion": "複数の一次方程式を同時に満たす解を求める問題。"
     },
@@ -1191,7 +1191,7 @@
       "id": "discrete-math-word3",
       "subjectId": "discrete-math",
       "text": "論理",
-      "romaji": "ronri",
+      "romaji": "ronnri",
       "kind": "word",
       "explantion": "正しい推論を行うための考え方や規則。"
     },
@@ -1199,7 +1199,7 @@
       "id": "discrete-math-word4",
       "subjectId": "discrete-math",
       "text": "グラフ",
-      "romaji": "gurafu",
+      "romaji": "gurahu",
       "kind": "word",
       "explantion": "点と、それらを結ぶ辺で関係を表した構造。"
     },
@@ -1223,7 +1223,7 @@
       "id": "probability-statistics-word2",
       "subjectId": "probability-statistics",
       "text": "平均",
-      "romaji": "heikin",
+      "romaji": "heikinn",
       "kind": "word",
       "explantion": "データの値を合計し、個数で割って求める代表値。"
     },
@@ -1231,7 +1231,7 @@
       "id": "probability-statistics-word3",
       "subjectId": "probability-statistics",
       "text": "分散",
-      "romaji": "bunsan",
+      "romaji": "bunsnann",
       "kind": "word",
       "explantion": "データが平均値の周りにどの程度散らばっているかを示す値。"
     },
@@ -1239,7 +1239,7 @@
       "id": "probability-statistics-word4",
       "subjectId": "probability-statistics",
       "text": "標準偏差",
-      "romaji": "hyouzyunhensa",
+      "romaji": "hyoujunnhennsa",
       "kind": "word",
       "explantion": "データの散らばりの程度を分散の平方根で表した値。"
     },
@@ -1247,7 +1247,7 @@
       "id": "probability-statistics-word5",
       "subjectId": "probability-statistics",
       "text": "相関",
-      "romaji": "soukan",
+      "romaji": "soukann",
       "kind": "word",
       "explantion": "二つのデータの間にどの程度関係があるかを示すこと。"
     },
@@ -1255,7 +1255,7 @@
       "id": "software-engineering-practice-word1",
       "subjectId": "software-engineering-practice",
       "text": "要件",
-      "romaji": "youken",
+      "romaji": "youkenn",
       "kind": "word",
       "explantion": "システムが満たすべき機能や条件。"
     },
@@ -1271,7 +1271,7 @@
       "id": "software-engineering-practice-word3",
       "subjectId": "software-engineering-practice",
       "text": "実装",
-      "romaji": "zissou",
+      "romaji": "jissou",
       "kind": "word",
       "explantion": "設計に基づいてプログラムやシステムを作ること。"
     },
@@ -1295,7 +1295,7 @@
       "id": "information-systems-practice-word1",
       "subjectId": "information-systems-practice",
       "text": "情報システム",
-      "romaji": "zyouhousisutemu",
+      "romaji": "jouhousisutemu",
       "kind": "word",
       "explantion": "情報を収集、処理、保存、提供するための仕組み。"
     },
@@ -1319,7 +1319,7 @@
       "id": "information-systems-practice-word4",
       "subjectId": "information-systems-practice",
       "text": "要件定義",
-      "romaji": "youkenteigi",
+      "romaji": "youkennteigi",
       "kind": "word",
       "explantion": "必要な機能や条件を明確にして文書などにまとめること。"
     },
@@ -1327,7 +1327,7 @@
       "id": "information-systems-practice-word5",
       "subjectId": "information-systems-practice",
       "text": "運用",
-      "romaji": "unyou",
+      "romaji": "unnyou",
       "kind": "word",
       "explantion": "システムやサービスを実際に動かし、管理すること。"
     },
@@ -1343,7 +1343,7 @@
       "id": "c-practice-2-word2",
       "subjectId": "c-practice-2",
       "text": "ポインタ",
-      "romaji": "pointa",
+      "romaji": "poinnta",
       "kind": "word",
       "explantion": "メモリ上のデータの場所を示す情報を扱う仕組み。"
     },
@@ -1351,7 +1351,7 @@
       "id": "c-practice-2-word3",
       "subjectId": "c-practice-2",
       "text": "関数",
-      "romaji": "kansuu",
+      "romaji": "kannsuu",
       "kind": "word",
       "explantion": "特定の処理をまとめ、必要に応じて呼び出せる仕組み。"
     },
@@ -1359,7 +1359,7 @@
       "id": "c-practice-2-word4",
       "subjectId": "c-practice-2",
       "text": "ファイル",
-      "romaji": "fairu",
+      "romaji": "fariu",
       "kind": "word",
       "explantion": "データをひとまとまりとして保存したもの。"
     },
@@ -1375,7 +1375,7 @@
       "id": "applied-systems-word1",
       "subjectId": "applied-systems",
       "text": "要件定義",
-      "romaji": "youkenteigi",
+      "romaji": "youkennteigi",
       "kind": "word",
       "explantion": "必要な機能や条件を明確にして文書などにまとめること。"
     },
@@ -1391,7 +1391,7 @@
       "id": "applied-systems-word3",
       "subjectId": "applied-systems",
       "text": "実装",
-      "romaji": "zissou",
+      "romaji": "jissou",
       "kind": "word",
       "explantion": "設計に基づいてプログラムやシステムを作ること。"
     },
@@ -1407,7 +1407,7 @@
       "id": "applied-systems-word5",
       "subjectId": "applied-systems",
       "text": "動作確認",
-      "romaji": "dousakukakunin",
+      "romaji": "dousakakuninn",
       "kind": "word",
       "explantion": "プログラムやシステムが意図したとおりに動くかを確かめること。"
     },
@@ -1423,7 +1423,7 @@
       "id": "software-engineering-1-word2",
       "subjectId": "software-engineering-1",
       "text": "要件分析",
-      "romaji": "youkenbunseki",
+      "romaji": "youkennbunnseki",
       "kind": "word",
       "explantion": "必要な機能や問題点を調べ、何を実現するかを明確にすること。"
     },
@@ -1431,7 +1431,7 @@
       "id": "software-engineering-1-word3",
       "subjectId": "software-engineering-1",
       "text": "基本設計",
-      "romaji": "kihonsekkei",
+      "romaji": "kihonnsekkei",
       "kind": "word",
       "explantion": "システム全体の構成や主要な機能を決めること。"
     },
@@ -1447,7 +1447,7 @@
       "id": "software-engineering-1-word5",
       "subjectId": "software-engineering-1",
       "text": "実装",
-      "romaji": "zissou",
+      "romaji": "jissou",
       "kind": "word",
       "explantion": "設計に基づいてプログラムやシステムを作ること。"
     },
@@ -1479,7 +1479,7 @@
       "id": "software-engineering-2-word4",
       "subjectId": "software-engineering-2",
       "text": "リファクタリング",
-      "romaji": "rifakutaringu",
+      "romaji": "rifakutarinngu",
       "kind": "word",
       "explantion": "プログラムの構造を改善し、動作を変えずに読みやすさや保守性を高めること。"
     },
@@ -1487,7 +1487,7 @@
       "id": "software-engineering-2-word5",
       "subjectId": "software-engineering-2",
       "text": "品質",
-      "romaji": "hinsitu",
+      "romaji": "hinnsitu",
       "kind": "word",
       "explantion": "製品やサービスが求められる基準をどの程度満たしているかを示す性質。"
     },
@@ -1503,7 +1503,7 @@
       "id": "planning-word2",
       "subjectId": "planning",
       "text": "期限",
-      "romaji": "kigen",
+      "romaji": "kigenn",
       "kind": "word",
       "explantion": "作業や計画を完了させる期限。"
     },
@@ -1519,7 +1519,7 @@
       "id": "planning-word4",
       "subjectId": "planning",
       "text": "優先順位",
-      "romaji": "yuusenzyuni",
+      "romaji": "yuusennjunni",
       "kind": "word",
       "explantion": "重要度などに基づいて取り組む順番を決めること。"
     },
@@ -1527,7 +1527,7 @@
       "id": "planning-word5",
       "subjectId": "planning",
       "text": "進捗",
-      "romaji": "sintyoku",
+      "romaji": "sinntyoku",
       "kind": "word",
       "explantion": "計画に対して作業がどこまで進んでいるかを示す状態。"
     },
@@ -1535,7 +1535,7 @@
       "id": "management-systems-1-word1",
       "subjectId": "management-systems-1",
       "text": "経営資源",
-      "romaji": "keieisigen",
+      "romaji": "keieisigenn",
       "kind": "word",
       "explantion": "経営活動に利用する人材、資金、設備、情報などの資源。"
     },
@@ -1559,7 +1559,7 @@
       "id": "management-systems-1-word4",
       "subjectId": "management-systems-1",
       "text": "情報システム",
-      "romaji": "zyouhousisutemu",
+      "romaji": "jouhousisutemu",
       "kind": "word",
       "explantion": "情報を収集、処理、保存、提供するための仕組み。"
     },
@@ -1575,7 +1575,7 @@
       "id": "management-systems-2-word1",
       "subjectId": "management-systems-2",
       "text": "業務改善",
-      "romaji": "gyoumukaizen",
+      "romaji": "gyoumukaizenn",
       "kind": "word",
       "explantion": "業務の問題点を見つけ、より効率的な方法に改善すること。"
     },
@@ -1583,7 +1583,7 @@
       "id": "management-systems-2-word2",
       "subjectId": "management-systems-2",
       "text": "業務分析",
-      "romaji": "gyoumubunseki",
+      "romaji": "gyoumubunnseki",
       "kind": "word",
       "explantion": "業務の流れや内容を調べ、課題や改善点を明らかにすること。"
     },
@@ -1591,7 +1591,7 @@
       "id": "management-systems-2-word3",
       "subjectId": "management-systems-2",
       "text": "生産性",
-      "romaji": "seisansei",
+      "romaji": "seisannsei",
       "kind": "word",
       "explantion": "投入した資源に対して、どれだけの成果を得られたかを示す度合い。"
     },
@@ -1607,7 +1607,7 @@
       "id": "management-systems-2-word5",
       "subjectId": "management-systems-2",
       "text": "経営情報",
-      "romaji": "keieizyouhou",
+      "romaji": "keieijouhou",
       "kind": "word",
       "explantion": "経営上の判断や活動に役立つ情報。"
     },
@@ -1615,7 +1615,7 @@
       "id": "project-management-word1",
       "subjectId": "project-management",
       "text": "プロジェクト",
-      "romaji": "purozyekuto",
+      "romaji": "purojekuto",
       "kind": "word",
       "explantion": "目標を達成するために、期限や担当者を定めて進める一連の活動。"
     },
@@ -1623,7 +1623,7 @@
       "id": "project-management-word2",
       "subjectId": "project-management",
       "text": "スケジュール",
-      "romaji": "sukezyu-ru",
+      "romaji": "sukeju-ru",
       "kind": "word",
       "explantion": "作業や予定を時間の流れに沿ってまとめた計画。"
     },
@@ -1639,7 +1639,7 @@
       "id": "project-management-word4",
       "subjectId": "project-management",
       "text": "資源",
-      "romaji": "sigen",
+      "romaji": "sigenn",
       "kind": "word",
       "explantion": "目的を達成するために利用できる人材、資金、設備など。"
     },
@@ -1647,7 +1647,7 @@
       "id": "project-management-word5",
       "subjectId": "project-management",
       "text": "進捗管理",
-      "romaji": "sintyokukanri",
+      "romaji": "sinntyokukannri",
       "kind": "word",
       "explantion": "計画に対する作業の進み具合を確認し、必要な調整を行うこと。"
     },
@@ -1655,7 +1655,7 @@
       "id": "quality-management-word1",
       "subjectId": "quality-management",
       "text": "品質",
-      "romaji": "hinsitu",
+      "romaji": "hinnsitu",
       "kind": "word",
       "explantion": "製品やサービスが求められる基準をどの程度満たしているかを示す性質。"
     },
@@ -1663,7 +1663,7 @@
       "id": "quality-management-word2",
       "subjectId": "quality-management",
       "text": "検査",
-      "romaji": "kensa",
+      "romaji": "kennsa",
       "kind": "word",
       "explantion": "製品や作業が基準や条件を満たしているかを調べること。"
     },
@@ -1679,7 +1679,7 @@
       "id": "quality-management-word4",
       "subjectId": "quality-management",
       "text": "標準化",
-      "romaji": "hyouzyunka",
+      "romaji": "hyoujunnka",
       "kind": "word",
       "explantion": "作業や製品の方法や基準を統一すること。"
     },
@@ -1687,7 +1687,7 @@
       "id": "quality-management-word5",
       "subjectId": "quality-management",
       "text": "改善",
-      "romaji": "kaizen",
+      "romaji": "kaizenn",
       "kind": "word",
       "explantion": "問題点を見つけ、よりよい状態に変えること。"
     },
@@ -1711,7 +1711,7 @@
       "id": "organization-theory-word3",
       "subjectId": "organization-theory",
       "text": "権限",
-      "romaji": "kengen",
+      "romaji": "kenngenn",
       "kind": "word",
       "explantion": "物事を決定したり実行したりするために認められた権利。"
     },
@@ -1743,7 +1743,7 @@
       "id": "operations-research-word2",
       "subjectId": "operations-research",
       "text": "線形計画法",
-      "romaji": "senkeikeikakuhou",
+      "romaji": "sennkeikeikakuhou",
       "kind": "word",
       "explantion": "制約条件のもとで、一次式の目的関数を最大化または最小化する方法。"
     },
@@ -1759,7 +1759,7 @@
       "id": "operations-research-word4",
       "subjectId": "operations-research",
       "text": "シミュレーション",
-      "romaji": "simyure-syon",
+      "romaji": "simyure-syonn",
       "kind": "word",
       "explantion": "実際の状況を模したモデルを使って、動きや結果を調べること。"
     },
@@ -1767,7 +1767,7 @@
       "id": "operations-research-word5",
       "subjectId": "operations-research",
       "text": "目的関数",
-      "romaji": "mokutekikansuu",
+      "romaji": "mokutekikannsuu",
       "kind": "word",
       "explantion": "最適化で最大化または最小化したい数式。"
     },
@@ -1783,7 +1783,7 @@
       "id": "project-management-practice-word2",
       "subjectId": "project-management-practice",
       "text": "ガントチャート",
-      "romaji": "gantocha-to",
+      "romaji": "ganntotya-to",
       "kind": "word",
       "explantion": "作業の開始日や終了日を棒状の図で表したスケジュール表。"
     },
@@ -1791,7 +1791,7 @@
       "id": "project-management-practice-word3",
       "subjectId": "project-management-practice",
       "text": "マイルストーン",
-      "romaji": "mairusuto-n",
+      "romaji": "mairusuto-nn",
       "kind": "word",
       "explantion": "プロジェクトの重要な節目や達成点。"
     },
@@ -1799,7 +1799,7 @@
       "id": "project-management-practice-word4",
       "subjectId": "project-management-practice",
       "text": "担当者",
-      "romaji": "tantousya",
+      "romaji": "tanntousa",
       "kind": "word",
       "explantion": "作業や課題を担当する人。"
     },
@@ -1807,7 +1807,7 @@
       "id": "project-management-practice-word5",
       "subjectId": "project-management-practice",
       "text": "課題管理",
-      "romaji": "kadaikanri",
+      "romaji": "kadaikannri",
       "kind": "word",
       "explantion": "プロジェクトで発生した課題を記録し、対応状況を管理すること。"
     },
@@ -1815,7 +1815,7 @@
       "id": "business-strategy-word1",
       "subjectId": "business-strategy",
       "text": "経営戦略",
-      "romaji": "keieisenryaku",
+      "romaji": "keieisennryaku",
       "kind": "word",
       "explantion": "企業が長期的な目標を達成するために定める方針。"
     },
@@ -1823,7 +1823,7 @@
       "id": "business-strategy-word2",
       "subjectId": "business-strategy",
       "text": "競争優位",
-      "romaji": "kyousouyui",
+      "romaji": "kyousouyuui",
       "kind": "word",
       "explantion": "競争相手より有利な立場を築くこと。"
     },
@@ -1831,7 +1831,7 @@
       "id": "business-strategy-word3",
       "subjectId": "business-strategy",
       "text": "市場",
-      "romaji": "sizyou",
+      "romaji": "sijou",
       "kind": "word",
       "explantion": "商品やサービスが取引され、顧客と企業が関わる場。"
     },
@@ -1839,7 +1839,7 @@
       "id": "business-strategy-word4",
       "subjectId": "business-strategy",
       "text": "SWOT分析",
-      "romaji": "swotbunseki",
+      "romaji": "swotbunnseki",
       "kind": "word",
       "explantion": "企業の強み・弱み・機会・脅威を分析する手法。"
     },
@@ -1847,7 +1847,7 @@
       "id": "business-strategy-word5",
       "subjectId": "business-strategy",
       "text": "経営資源",
-      "romaji": "keieisigen",
+      "romaji": "keieisigenn",
       "kind": "word",
       "explantion": "経営活動に利用する人材、資金、設備、情報などの資源。"
     },
@@ -1863,7 +1863,7 @@
       "id": "marketing-word2",
       "subjectId": "marketing",
       "text": "市場調査",
-      "romaji": "sizyoucyousa",
+      "romaji": "sijoutyousa",
       "kind": "word",
       "explantion": "市場の状況や顧客のニーズを調べること。"
     },
@@ -1871,7 +1871,7 @@
       "id": "marketing-word3",
       "subjectId": "marketing",
       "text": "商品",
-      "romaji": "syouhin",
+      "romaji": "syouhinn",
       "kind": "word",
       "explantion": "顧客に提供する品物やサービス。"
     },
@@ -1887,7 +1887,7 @@
       "id": "marketing-word5",
       "subjectId": "marketing",
       "text": "販売促進",
-      "romaji": "hanbaisokusin",
+      "romaji": "hannbaisokusinn",
       "kind": "word",
       "explantion": "商品やサービスの購入を促すために行う広告やキャンペーンなどの活動。"
     },
@@ -1895,7 +1895,7 @@
       "id": "information-society-word1",
       "subjectId": "information-society",
       "text": "情報社会",
-      "romaji": "zyouhousyakai",
+      "romaji": "jouhousyakai",
       "kind": "word",
       "explantion": "情報技術が人々の生活や社会の仕組みに大きく関わる社会。"
     },
@@ -1903,7 +1903,7 @@
       "id": "information-society-word2",
       "subjectId": "information-society",
       "text": "デジタル化",
-      "romaji": "dezitaruka",
+      "romaji": "dejitaruka",
       "kind": "word",
       "explantion": "デジタル技術を活用して情報や業務を変化させること。"
     },
@@ -1911,7 +1911,7 @@
       "id": "information-society-word3",
       "subjectId": "information-society",
       "text": "情報格差",
-      "romaji": "zyouhoukakusa",
+      "romaji": "jouhoukakusa",
       "kind": "word",
       "explantion": "情報を得たり利用したりする機会や能力に生じる格差。"
     },
@@ -1919,7 +1919,7 @@
       "id": "information-society-word4",
       "subjectId": "information-society",
       "text": "個人情報",
-      "romaji": "kozinzyouhou",
+      "romaji": "kojinnjouhou",
       "kind": "word",
       "explantion": "個人を識別できる情報や個人に関する情報。"
     },
@@ -1935,7 +1935,7 @@
       "id": "intro-statistics-word1",
       "subjectId": "intro-statistics",
       "text": "母集団",
-      "romaji": "bosyudan",
+      "romaji": "bosyuudann",
       "kind": "word",
       "explantion": "調査や分析の対象となる全体の集団。"
     },
@@ -1943,7 +1943,7 @@
       "id": "intro-statistics-word2",
       "subjectId": "intro-statistics",
       "text": "標本",
-      "romaji": "hyouhon",
+      "romaji": "hyouhonn",
       "kind": "word",
       "explantion": "母集団から調査のために選び出したデータや対象。"
     },
@@ -1951,7 +1951,7 @@
       "id": "intro-statistics-word3",
       "subjectId": "intro-statistics",
       "text": "平均",
-      "romaji": "heikin",
+      "romaji": "heikinn",
       "kind": "word",
       "explantion": "データの値を合計し、個数で割って求める代表値。"
     },
@@ -1967,7 +1967,7 @@
       "id": "intro-statistics-word5",
       "subjectId": "intro-statistics",
       "text": "分散",
-      "romaji": "bunsan",
+      "romaji": "bunnsann",
       "kind": "word",
       "explantion": "データが平均値の周りにどの程度散らばっているかを示す値。"
     },
@@ -1975,7 +1975,7 @@
       "id": "information-ethics-word1",
       "subjectId": "information-ethics",
       "text": "著作権",
-      "romaji": "tyosakuken",
+      "romaji": "tyosakukenn",
       "kind": "word",
       "explantion": "文章、音楽、画像、プログラムなどの創作物を保護する権利。"
     },
@@ -1983,7 +1983,7 @@
       "id": "information-ethics-word2",
       "subjectId": "information-ethics",
       "text": "個人情報",
-      "romaji": "kozinzyouhou",
+      "romaji": "kojinnjouhou",
       "kind": "word",
       "explantion": "個人を識別できる情報や個人に関する情報。"
     },
@@ -1991,7 +1991,7 @@
       "id": "information-ethics-word3",
       "subjectId": "information-ethics",
       "text": "プライバシー",
-      "romaji": "puraibasii",
+      "romaji": "puraibasi-",
       "kind": "word",
       "explantion": "個人の私生活や個人情報を他人に不必要に知られない権利や考え方。"
     },
@@ -1999,7 +1999,7 @@
       "id": "information-ethics-word4",
       "subjectId": "information-ethics",
       "text": "情報モラル",
-      "romaji": "zyouhoumoraru",
+      "romaji": "jouhoumoraru",
       "kind": "word",
       "explantion": "情報を適切かつ責任を持って扱うための考え方や態度。"
     },
@@ -2007,7 +2007,7 @@
       "id": "information-ethics-word5",
       "subjectId": "information-ethics",
       "text": "ライセンス",
-      "romaji": "raisensu",
+      "romaji": "raisennsu",
       "kind": "word",
       "explantion": "ソフトウェアなどを利用する際に定められた許可や条件。"
     },
@@ -2055,7 +2055,7 @@
       "id": "applied-statistics-word1",
       "subjectId": "applied-statistics",
       "text": "回帰分析",
-      "romaji": "kaikibunseki",
+      "romaji": "kaikibunnseki",
       "kind": "word",
       "explantion": "データの傾向を直線などの数式で表し、関係を分析する方法。"
     },
@@ -2063,7 +2063,7 @@
       "id": "applied-statistics-word2",
       "subjectId": "applied-statistics",
       "text": "相関係数",
-      "romaji": "soukankeisuu",
+      "romaji": "soukannkeisuu",
       "kind": "word",
       "explantion": "二つの変数の間の直線的な関係の強さと向きを示す数値。"
     },
@@ -2071,7 +2071,7 @@
       "id": "applied-statistics-word3",
       "subjectId": "applied-statistics",
       "text": "仮説検定",
-      "romaji": "kasetukentei",
+      "romaji": "kasetukenntei",
       "kind": "word",
       "explantion": "仮説がデータによって支持されるかを統計的に判断する方法。"
     },
@@ -2079,7 +2079,7 @@
       "id": "applied-statistics-word4",
       "subjectId": "applied-statistics",
       "text": "信頼区間",
-      "romaji": "sinraikukan",
+      "romaji": "sinnraikukann",
       "kind": "word",
       "explantion": "母集団の未知の値が含まれると考えられる範囲。"
     },
@@ -2087,7 +2087,7 @@
       "id": "applied-statistics-word5",
       "subjectId": "applied-statistics",
       "text": "確率分布",
-      "romaji": "kakuritubunpu",
+      "romaji": "kakuritubunnpu",
       "kind": "word",
       "explantion": "ある確率に従って値がどのように現れるかを表したもの。"
     },
@@ -2119,7 +2119,7 @@
       "id": "planning-practice-word4",
       "subjectId": "planning-practice",
       "text": "提案",
-      "romaji": "teian",
+      "romaji": "teiann",
       "kind": "word",
       "explantion": "課題を解決するための方法や考えを示すこと。"
     },
@@ -2175,7 +2175,7 @@
       "id": "information-law-word1",
       "subjectId": "information-law",
       "text": "著作権法",
-      "romaji": "tyosakukenhou",
+      "romaji": "ryosakukennhou",
       "kind": "word",
       "explantion": "著作物を作った人などの権利を保護する法律。"
     },
@@ -2183,7 +2183,7 @@
       "id": "information-law-word2",
       "subjectId": "information-law",
       "text": "個人情報保護法",
-      "romaji": "kozinzyouhouhogohou",
+      "romaji": "kojinnjouhouhogohou",
       "kind": "word",
       "explantion": "個人情報の適切な取り扱いと保護について定めた法律。"
     },
@@ -2191,7 +2191,7 @@
       "id": "information-law-word3",
       "subjectId": "information-law",
       "text": "知的財産",
-      "romaji": "titekizaisan",
+      "romaji": "titekizaisann",
       "kind": "word",
       "explantion": "発明、デザイン、著作物など、人間の創造的な活動から生まれた財産的な価値。"
     },
@@ -2207,7 +2207,7 @@
       "id": "information-law-word5",
       "subjectId": "information-law",
       "text": "電子署名",
-      "romaji": "densisyoumei",
+      "romaji": "dennsisyomei",
       "kind": "word",
       "explantion": "電子文書が本人によって作成されたことや改ざんされていないことを確認するための仕組み。"
     },
@@ -2215,7 +2215,7 @@
       "id": "database-word1",
       "subjectId": "database",
       "text": "主キーでデータを識別する",
-      "romaji": "syuki-dede-tawoshikibetsusuru",
+      "romaji": "syuki-dede-tawosikibetusuru",
       "kind": "sentence",
       "explantion": "行ごとに違うデータを見分けるための目印"
     },
@@ -2223,7 +2223,7 @@
       "id": "database-word2",
       "subjectId": "database",
       "text": "テーブルに情報を保存する",
-      "romaji": "te-burunizyouhouwohozonsuru",
+      "romaji": "te-burunijouhouwohozonsuru",
       "kind": "sentence",
       "explantion": "表の中に情報を保存する"
     },
@@ -2231,7 +2231,7 @@
       "id": "database-word3",
       "subjectId": "database",
       "text": "条件に合うデータを検索する",
-      "romaji": "zyoukennianoude-tawokensakusuru",
+      "romaji": "joukenniaude-tawokensakusuru",
       "kind": "sentence",
       "explantion": "決めた条件に合うデータを探す"
     },
@@ -2247,7 +2247,7 @@
       "id": "database-word5",
       "subjectId": "database",
       "text": "データの重複を防ぐ",
-      "romaji": "de-tanozyuuhukuwohusegu",
+      "romaji": "de-tanotyouhukuwohusegu",
       "kind": "sentence",
       "explantion": "同じ情報が何度も入らないようにする"
     },
@@ -2255,7 +2255,7 @@
       "id": "programming-word1",
       "subjectId": "programming",
       "text": "変数に値を代入する",
-      "romaji": "hensuuninewodainyuusuru",
+      "romaji": "hennsuuniataiwodainyuusuru",
       "kind": "sentence",
       "explantion": "変数に数字や文字を入れる"
     },
@@ -2263,7 +2263,7 @@
       "id": "programming-word2",
       "subjectId": "programming",
       "text": "条件に応じて処理を分ける",
-      "romaji": "zyoukenniousizetoriwawakeru",
+      "romaji": "joukennioujitesyoriwowakeru",
       "kind": "sentence",
       "explantion": "条件によって処理の内容を変える"
     },
@@ -2271,7 +2271,7 @@
       "id": "programming-word3",
       "subjectId": "programming",
       "text": "同じ処理を繰り返す",
-      "romaji": "onazisyoriwokurikaesu",
+      "romaji": "onajisyoriwokurikaesu",
       "kind": "sentence",
       "explantion": "同じ処理を何度も行う"
     },
@@ -2287,7 +2287,7 @@
       "id": "programming-word5",
       "subjectId": "programming",
       "text": "入力された値を判定する",
-      "romaji": "nyuuryokusaretanewohanteisuru",
+      "romaji": "nyuuryokusaretaataiwohanteisuru",
       "kind": "sentence",
       "explantion": "入力された数字や文字が条件に合うか調べる"
     },
@@ -2295,7 +2295,7 @@
       "id": "network-word1",
       "subjectId": "network",
       "text": "IPアドレスで機器を識別する",
-      "romaji": "ipadoresudekikiwoshikibetsusuru",
+      "romaji": "ipadoresudekikiwosikibetusuru",
       "kind": "sentence",
       "explantion": "IPアドレスを使って機器を見分ける"
     },
@@ -2303,7 +2303,7 @@
       "id": "network-word2",
       "subjectId": "network",
       "text": "サーバーから情報を受け取る",
-      "romaji": "sa-ba-karazyouhouwouketoru",
+      "romaji": "sa-ba-karajouhouwouketoru",
       "kind": "sentence",
       "explantion": "サーバーから情報を受け取る"
     },
@@ -2319,7 +2319,7 @@
       "id": "network-word4",
       "subjectId": "network",
       "text": "通信のルールを確認する",
-      "romaji": "tuusinnoru-ruwokakuninsuru",
+      "romaji": "tuusinnnoru-ruwokakuninnsuru",
       "kind": "sentence",
       "explantion": "データをやり取りするときのルールを確かめる"
     },
@@ -2327,7 +2327,7 @@
       "id": "network-word5",
       "subjectId": "network",
       "text": "接続先の状態を確認する",
-      "romaji": "setuzokusakinozyoutaiwokakuninsuru",
+      "romaji": "setuzokusakinojoutaiwokakuninnsuru",
       "kind": "sentence",
       "explantion": "つなぎたい相手が正しく動いているか確かめる"
     },
@@ -2335,7 +2335,7 @@
       "id": "algorithm-word1",
       "subjectId": "algorithm",
       "text": "手順を決めて問題を解く",
-      "romaji": "tezyunwokimetemondaiwotoku",
+      "romaji": "tejunnwokimetemonndaiwotoku",
       "kind": "sentence",
       "explantion": "解くための順番を決めて問題を解く"
     },
@@ -2343,7 +2343,7 @@
       "id": "algorithm-word2",
       "subjectId": "algorithm",
       "text": "条件に合うデータを探す",
-      "romaji": "zyoukennianoude-tawosagasu",
+      "romaji": "joukenniaude-tawosagasu",
       "kind": "sentence",
       "explantion": "条件に合うデータを見つける"
     },
@@ -2351,7 +2351,7 @@
       "id": "algorithm-word3",
       "subjectId": "algorithm",
       "text": "数値を小さい順に並べる",
-      "romaji": "suutiwotiisaizyunninaraberu",
+      "romaji": "suutiwotiisaijunnninaraberu",
       "kind": "sentence",
       "explantion": "数字を小さいものから順番に並べる"
     },
@@ -2375,7 +2375,7 @@
       "id": "web-word1",
       "subjectId": "web",
       "text": "HTMLで画面の構造を作る",
-      "romaji": "htmldegamennokouzouwotukuru",
+      "romaji": "htmldegamennnokouzouwotukuru",
       "kind": "sentence",
       "explantion": "HTMLを使ってWebページの骨組みを作る"
     },
@@ -2383,7 +2383,7 @@
       "id": "web-word2",
       "subjectId": "web",
       "text": "CSSで文字や色を整える",
-      "romaji": "cssdemoziyairowototonoeru",
+      "romaji": "cssdemojiyairowototonoeru",
       "kind": "sentence",
       "explantion": "CSSを使って文字や色を整える"
     },
@@ -2399,7 +2399,7 @@
       "id": "web-word4",
       "subjectId": "web",
       "text": "ブラウザでページを表示する",
-      "romaji": "burauzadepe-ziwohyouzisuru",
+      "romaji": "burauzadepe-jiwohyoujisuru",
       "kind": "sentence",
       "explantion": "ブラウザでWebページを開いて見る"
     },
@@ -2407,7 +2407,7 @@
       "id": "web-word5",
       "subjectId": "web",
       "text": "タグで要素を指定する",
-      "romaji": "tagudeyousowoshiteisuru",
+      "romaji": "tagudeyousowositeisuru",
       "kind": "sentence",
       "explantion": "タグを使ってページの部品を指定する"
     },
@@ -2415,7 +2415,7 @@
       "id": "security-word1",
       "subjectId": "security",
       "text": "認証で利用者を確認する",
-      "romaji": "ninsyouderiyousyawokakuninsuru",
+      "romaji": "ninnsyouderiyousyawokakuninnsuru",
       "kind": "sentence",
       "explantion": "使っている人が本人かどうか確かめる"
     },
@@ -2423,7 +2423,7 @@
       "id": "security-word2",
       "subjectId": "security",
       "text": "パスワードを安全に管理する",
-      "romaji": "pasuwa-dowoanzennikanrisuru",
+      "romaji": "pasuwa-dowoannzennnikannrisuru",
       "kind": "sentence",
       "explantion": "パスワードを他人に知られないように管理する"
     },
@@ -2431,7 +2431,7 @@
       "id": "security-word3",
       "subjectId": "security",
       "text": "通信するデータを暗号化する",
-      "romaji": "tuusinsurude-tawoangoukasuru",
+      "romaji": "tuusinnsurude-tawoanngoukasuru",
       "kind": "sentence",
       "explantion": "データを暗号に変えて中身を読まれにくくする"
     },
@@ -2439,7 +2439,7 @@
       "id": "security-word4",
       "subjectId": "security",
       "text": "脆弱性を見つけて修正する",
-      "romaji": "zeizyakuseiwomituketesyuuseisuru",
+      "romaji": "zeijakuseiwomituketesyuuseisuru",
       "kind": "sentence",
       "explantion": "安全上の弱い部分を見つけて直す"
     },
@@ -2447,7 +2447,7 @@
       "id": "security-word5",
       "subjectId": "security",
       "text": "必要なアクセス権を設定する",
-      "romaji": "hituyounaakusesukenwosetteisuru",
+      "romaji": "hituyounaakusesukennwosetteisuru",
       "kind": "sentence",
       "explantion": "誰がどの情報を使えるか決める"
     },
@@ -2455,7 +2455,7 @@
       "id": "operating-systems-word1",
       "subjectId": "operating-systems",
       "text": "OSが機器の動作を管理する",
-      "romaji": "osgakikinodousawokanrisuru",
+      "romaji": "osgakikinodousawokannrisuru",
       "kind": "sentence",
       "explantion": "OSがコンピュータや機器全体の動きを管理する"
     },
@@ -2463,7 +2463,7 @@
       "id": "operating-systems-word2",
       "subjectId": "operating-systems",
       "text": "CPUが命令を実行する",
-      "romaji": "cpugameireiwozikkousuru",
+      "romaji": "cpugameireiwojikkousuru",
       "kind": "sentence",
       "explantion": "CPUがプログラムの指示どおりに動く"
     },
@@ -2471,7 +2471,7 @@
       "id": "operating-systems-word3",
       "subjectId": "operating-systems",
       "text": "メモリにデータを一時保存する",
-      "romaji": "memorinide-tawoitizihozonsuru",
+      "romaji": "memorinide-tawoitijihozonnsuru",
       "kind": "sentence",
       "explantion": "メモリにデータを一時的に置いておく"
     },
@@ -2479,7 +2479,7 @@
       "id": "operating-systems-word4",
       "subjectId": "operating-systems",
       "text": "プロセスの状態を確認する",
-      "romaji": "purosesunozyoutaiwokakuninsuru",
+      "romaji": "purosesunojoutaiwokakuninnsuru",
       "kind": "sentence",
       "explantion": "プログラムが今どんな状態か確かめる"
     },
@@ -2487,7 +2487,7 @@
       "id": "operating-systems-word5",
       "subjectId": "operating-systems",
       "text": "ファイルを整理して保存する",
-      "romaji": "fairuwoseirisitehozonsuru",
+      "romaji": "fairuwoseirisitehozonnsuru",
       "kind": "sentence",
       "explantion": "ファイルを分けて分かりやすく保存する"
     },
@@ -2503,7 +2503,7 @@
       "id": "java-practice-word2",
       "subjectId": "java-practice",
       "text": "オブジェクトを生成する",
-      "romaji": "obuzyekutowoseiseisuru",
+      "romaji": "obujekutowoseiseisuru",
       "kind": "sentence",
       "explantion": "クラスの決まりを使ってオブジェクトを作る"
     },
@@ -2527,7 +2527,7 @@
       "id": "java-practice-word5",
       "subjectId": "java-practice",
       "text": "配列から値を取り出す",
-      "romaji": "hairetsukaranewotoridasu",
+      "romaji": "hairetukarasuutiwotoridasu",
       "kind": "sentence",
       "explantion": "配列の中から必要な値を取り出す"
     },
@@ -2535,7 +2535,7 @@
       "id": "data-structures-word1",
       "subjectId": "data-structures",
       "text": "配列にデータを順番に格納する",
-      "romaji": "hairetsunide-tawozyunbannikakunousuru",
+      "romaji": "hairetunide-tawojunnbannnikakunousuru",
       "kind": "sentence",
       "explantion": "配列の中にデータを順番に入れる"
     },
@@ -2551,7 +2551,7 @@
       "id": "data-structures-word3",
       "subjectId": "data-structures",
       "text": "スタックから最後の値を取り出す",
-      "romaji": "sutakkukarasaigononewotoridasu",
+      "romaji": "sutakkukarasaigonoataiwotoridasu",
       "kind": "sentence",
       "explantion": "スタックに最後に入れた値を取り出す"
     },
@@ -2567,7 +2567,7 @@
       "id": "data-structures-word5",
       "subjectId": "data-structures",
       "text": "木構造でデータを整理する",
-      "romaji": "kikouzoude-tawoseirisuru",
+      "romaji": "kikouzoudede-tawoseirisuru",
       "kind": "sentence",
       "explantion": "木の枝のような形でデータを整理する"
     },
@@ -2575,7 +2575,7 @@
       "id": "ui-practice-word1",
       "subjectId": "ui-practice",
       "text": "要素を並べて画面を作る",
-      "romaji": "yousowonarabetegamenwotukuru",
+      "romaji": "yousowonarabetegamennwotukuru",
       "kind": "sentence",
       "explantion": "部品を並べて画面を作る"
     },
@@ -2583,7 +2583,7 @@
       "id": "ui-practice-word2",
       "subjectId": "ui-practice",
       "text": "ボタンを押して処理を実行する",
-      "romaji": "botanwoositesyoriwozikkousuru",
+      "romaji": "botannwoositesyoriwojikkousuru",
       "kind": "sentence",
       "explantion": "ボタンを押したときに決められた処理を行う"
     },
@@ -2591,7 +2591,7 @@
       "id": "ui-practice-word3",
       "subjectId": "ui-practice",
       "text": "入力欄から文字を受け取る",
-      "romaji": "nyuuryokurankaramoziwouketoru",
+      "romaji": "nyuuryokurannkaramojiwouketoru",
       "kind": "sentence",
       "explantion": "入力欄に書かれた文字を受け取る"
     },
@@ -2599,7 +2599,7 @@
       "id": "ui-practice-word4",
       "subjectId": "ui-practice",
       "text": "部品を分けて画面を作る",
-      "romaji": "buhinwowaketegamenwotukuru",
+      "romaji": "buhinnwowaketegamennwotukuru",
       "kind": "sentence",
       "explantion": "画面を小さな部品に分けて作る"
     },
@@ -2607,7 +2607,7 @@
       "id": "ui-practice-word5",
       "subjectId": "ui-practice",
       "text": "操作に応じて表示を変える",
-      "romaji": "sousaniouzitehyouziwokaeru",
+      "romaji": "sousanioujitehyoujiwokaeru",
       "kind": "sentence",
       "explantion": "操作に合わせて画面に出す内容を変える"
     },
@@ -2631,7 +2631,7 @@
       "id": "api-intro-word3",
       "subjectId": "api-intro",
       "text": "レスポンスから結果を受け取る",
-      "romaji": "resuponsukarakekkawouketoru",
+      "romaji": "resuponnsukarakekkawouketoru",
       "kind": "sentence",
       "explantion": "サーバーから返ってきた結果を受け取る"
     },
@@ -2639,7 +2639,7 @@
       "id": "api-intro-word4",
       "subjectId": "api-intro",
       "text": "エンドポイントを指定する",
-      "romaji": "endopointowoshiteisuru",
+      "romaji": "enndopoinntowositeisuru",
       "kind": "sentence",
       "explantion": "データを受け取る場所や送り先を指定する"
     },
@@ -2655,7 +2655,7 @@
       "id": "c-practice-1-word1",
       "subjectId": "c-practice-1",
       "text": "変数に整数を保存する",
-      "romaji": "hensuuniseisuuwohozonsuru",
+      "romaji": "hennsuuniseisuuwohozonnsuru",
       "kind": "sentence",
       "explantion": "変数に整数を入れる"
     },
@@ -2663,7 +2663,7 @@
       "id": "c-practice-1-word2",
       "subjectId": "c-practice-1",
       "text": "printfで文字を表示する",
-      "romaji": "printfdemoziwohyouzisuru",
+      "romaji": "printfdemojiwohyoujisuru",
       "kind": "sentence",
       "explantion": "printfを使って文字や数字を画面に表示する"
     },
@@ -2679,7 +2679,7 @@
       "id": "c-practice-1-word4",
       "subjectId": "c-practice-1",
       "text": "配列に複数の値を格納する",
-      "romaji": "hairetsunihukusuunonewokakunousuru",
+      "romaji": "hairetunihukusuunoataiwokakunousuru",
       "kind": "sentence",
       "explantion": "配列に複数の値をまとめて入れる"
     },
@@ -2687,7 +2687,7 @@
       "id": "c-practice-1-word5",
       "subjectId": "c-practice-1",
       "text": "ポインタでアドレスを参照する",
-      "romaji": "pointadeadoresuwosansyousuru",
+      "romaji": "pointadeadoresuwosannsyousuru",
       "kind": "sentence",
       "explantion": "ポインタを使ってデータの場所を調べる"
     },
@@ -2695,7 +2695,7 @@
       "id": "assembly-word1",
       "subjectId": "assembly",
       "text": "レジスタに値を格納する",
-      "romaji": "rezisutanewokakunousuru",
+      "romaji": "rejisutaniataiwokakunousuru",
       "kind": "sentence",
       "explantion": "レジスタというCPUの中の場所に値を入れる"
     },
@@ -2703,7 +2703,7 @@
       "id": "assembly-word2",
       "subjectId": "assembly",
       "text": "命令を順番に実行する",
-      "romaji": "meireiwozyunbannizikkousuru",
+      "romaji": "meireiwojunnbannnijikkousuru",
       "kind": "sentence",
       "explantion": "プログラムの命令を順番に実行する"
     },
@@ -2711,7 +2711,7 @@
       "id": "assembly-word3",
       "subjectId": "assembly",
       "text": "メモリから値を読み込む",
-      "romaji": "memorikaranewoyomikomu",
+      "romaji": "memorikaraataiwoyomikomu",
       "kind": "sentence",
       "explantion": "メモリから必要な値を取り出す"
     },
@@ -2719,7 +2719,7 @@
       "id": "assembly-word4",
       "subjectId": "assembly",
       "text": "アドレスを指定して参照する",
-      "romaji": "adoresuwoshiteisitesansyousuru",
+      "romaji": "adoresuwositeisitesannsyousuru",
       "kind": "sentence",
       "explantion": "データがある場所を指定して読み取る"
     },
@@ -2727,7 +2727,7 @@
       "id": "assembly-word5",
       "subjectId": "assembly",
       "text": "命令で計算を行う",
-      "romaji": "meireidekeisanwookonau",
+      "romaji": "meireidekeisannwookonau",
       "kind": "sentence",
       "explantion": "命令に従って計算する"
     },
@@ -2735,7 +2735,7 @@
       "id": "linear-algebra-word1",
       "subjectId": "linear-algebra",
       "text": "ベクトルの成分を計算する",
-      "romaji": "bekutorunoseibunwokeisansuru",
+      "romaji": "bekutorunoseibunnwokeisannsuru",
       "kind": "sentence",
       "explantion": "ベクトルのそれぞれの数字を使って計算する"
     },
@@ -2751,7 +2751,7 @@
       "id": "linear-algebra-word3",
       "subjectId": "linear-algebra",
       "text": "ベクトルの内積を計算する",
-      "romaji": "bekutorunoutisekiwokeisansuru",
+      "romaji": "bekutorunonaisekiwokeisannsuru",
       "kind": "sentence",
       "explantion": "二つのベクトルの数字を使って一つの値を計算する"
     },
@@ -2759,7 +2759,7 @@
       "id": "linear-algebra-word4",
       "subjectId": "linear-algebra",
       "text": "連立方程式を解く",
-      "romaji": "renrituhouteisikiwotoku",
+      "romaji": "rennrituhouteisikiwotoku",
       "kind": "sentence",
       "explantion": "複数の式を使って答えを求める"
     },
@@ -2767,7 +2767,7 @@
       "id": "linear-algebra-word5",
       "subjectId": "linear-algebra",
       "text": "数式を使って関係を表す",
-      "romaji": "suusikiwotukattekankeiwoarawasu",
+      "romaji": "suusikiwotukattekannkeiwoarawasu",
       "kind": "sentence",
       "explantion": "数式を使って数字どうしの関係を表す"
     },
@@ -2775,7 +2775,7 @@
       "id": "discrete-math-word1",
       "subjectId": "discrete-math",
       "text": "集合に含まれる要素を調べる",
-      "romaji": "syuugounihukumareruyosowosiraberu",
+      "romaji": "syuugounihukumareruyousowosiraberu",
       "kind": "sentence",
       "explantion": "あるグループにどんなものが入っているか調べる"
     },
@@ -2783,7 +2783,7 @@
       "id": "discrete-math-word2",
       "subjectId": "discrete-math",
       "text": "命題が正しいかを判定する",
-      "romaji": "meidaigatadasiikawohanteisuru",
+      "romaji": "meidaigatadasiikawohannteisuru",
       "kind": "sentence",
       "explantion": "ある文が正しいかどうかを判断する"
     },
@@ -2791,7 +2791,7 @@
       "id": "discrete-math-word3",
       "subjectId": "discrete-math",
       "text": "論理式の真偽を確認する",
-      "romaji": "ronrisikinosingiwokakuninsuru",
+      "romaji": "ronnrisikinosinngiwokakuninnsuru",
       "kind": "sentence",
       "explantion": "論理の式が正しいか間違っているか確かめる"
     },
@@ -2799,7 +2799,7 @@
       "id": "discrete-math-word4",
       "subjectId": "discrete-math",
       "text": "グラフで頂点と辺を表す",
-      "romaji": "gurahudetyoutentohenwoarawasu",
+      "romaji": "gurahudetyoutenntohennwoarawasu",
       "kind": "sentence",
       "explantion": "グラフを使って点と点のつながりを表す"
     },
@@ -2815,7 +2815,7 @@
       "id": "probability-statistics-word1",
       "subjectId": "probability-statistics",
       "text": "起こる確率を計算する",
-      "romaji": "okorukakurituwokeisansuru",
+      "romaji": "okorukakurituwokeisannsuru",
       "kind": "sentence",
       "explantion": "あることが起こる可能性を数字で表す"
     },
@@ -2823,7 +2823,7 @@
       "id": "probability-statistics-word2",
       "subjectId": "probability-statistics",
       "text": "データの平均を求める",
-      "romaji": "de-tanoheikinwomotomeru",
+      "romaji": "de-tanoheikinnwomotomeru",
       "kind": "sentence",
       "explantion": "すべての値を足して個数で割る"
     },
@@ -2831,7 +2831,7 @@
       "id": "probability-statistics-word3",
       "subjectId": "probability-statistics",
       "text": "値のばらつきを調べる",
-      "romaji": "tinobaratukiwosiraberu",
+      "romaji": "atainobaratukiwosiraberu",
       "kind": "sentence",
       "explantion": "データの値がどれくらい散らばっているか調べる"
     },
@@ -2839,7 +2839,7 @@
       "id": "probability-statistics-word4",
       "subjectId": "probability-statistics",
       "text": "標準偏差を計算する",
-      "romaji": "hyouzyunhensawokeisansuru",
+      "romaji": "hyoujunnhennsawokeisannsuru",
       "kind": "sentence",
       "explantion": "データの散らばり具合を数字で表す"
     },
@@ -2847,7 +2847,7 @@
       "id": "probability-statistics-word5",
       "subjectId": "probability-statistics",
       "text": "二つのデータの相関を調べる",
-      "romaji": "hutatunode-tanosoukanwosiraberu",
+      "romaji": "hutatunode-tanosoukannwosiraberu",
       "kind": "sentence",
       "explantion": "二つのデータにどのような関係があるか調べる"
     },
@@ -2871,7 +2871,7 @@
       "id": "software-engineering-practice-word3",
       "subjectId": "software-engineering-practice",
       "text": "設計に沿って実装する",
-      "romaji": "sekkeinisotte zissousuru",
+      "romaji": "sekkeinisottejissousuru",
       "kind": "sentence",
       "explantion": "設計で決めたとおりにプログラムを作る"
     },
@@ -2879,7 +2879,7 @@
       "id": "software-engineering-practice-word4",
       "subjectId": "software-engineering-practice",
       "text": "テストで動作を確認する",
-      "romaji": "tesutodedousawokakuninsuru",
+      "romaji": "tesutodedousawokakuninnsuru",
       "kind": "sentence",
       "explantion": "テストをして正しく動くか確かめる"
     },
@@ -2895,7 +2895,7 @@
       "id": "information-systems-practice-word1",
       "subjectId": "information-systems-practice",
       "text": "情報をシステムで管理する",
-      "romaji": "zyouhouwosisutemudekanrisuru",
+      "romaji": "jouhouwosisutemudekannrisuru",
       "kind": "sentence",
       "explantion": "情報をコンピュータの仕組みで整理して管理する"
     },
@@ -2911,7 +2911,7 @@
       "id": "information-systems-practice-word3",
       "subjectId": "information-systems-practice",
       "text": "利用者の要望を確認する",
-      "romaji": "riyousyanoyoubouwokakuninsuru",
+      "romaji": "riyousyanoyoubouwokakuninnsuru",
       "kind": "sentence",
       "explantion": "使う人が何を望んでいるか確かめる"
     },
@@ -2927,7 +2927,7 @@
       "id": "information-systems-practice-word5",
       "subjectId": "information-systems-practice",
       "text": "システムの稼働状況を確認する",
-      "romaji": "sisutemunokadouzyoukyouwokakuninsuru",
+      "romaji": "sisutemunokadoujoukyouwokakuninnsuru",
       "kind": "sentence",
       "explantion": "システムがきちんと動いているか確かめる"
     },
@@ -2935,7 +2935,7 @@
       "id": "c-practice-2-word1",
       "subjectId": "c-practice-2",
       "text": "構造体で複数の値をまとめる",
-      "romaji": "kouzoutaidehukusuunonewomatomeru",
+      "romaji": "kouzoutaidehukusuunoataiwomatomeru",
       "kind": "sentence",
       "explantion": "構造体を使って複数の値をひとまとめにする"
     },
@@ -2943,7 +2943,7 @@
       "id": "c-practice-2-word2",
       "subjectId": "c-practice-2",
       "text": "ポインタでデータを参照する",
-      "romaji": "pointadede-tawosansyousuru",
+      "romaji": "pointadede-tawosannsyousuru",
       "kind": "sentence",
       "explantion": "ポインタを使ってデータの場所を参照する"
     },
@@ -2951,7 +2951,7 @@
       "id": "c-practice-2-word3",
       "subjectId": "c-practice-2",
       "text": "関数に値を渡して処理する",
-      "romaji": "kansuuninewowatasitesyorisuru",
+      "romaji": "kannsuuniataiwowatasitesyorisuru",
       "kind": "sentence",
       "explantion": "関数に値を渡して処理してもらう"
     },
@@ -2975,7 +2975,7 @@
       "id": "applied-systems-word1",
       "subjectId": "applied-systems",
       "text": "制作するシステムの要件を決める",
-      "romaji": "seisakusurusisutemunoyoukenwokimeru",
+      "romaji": "seisakusurusisutemunoyoukennwokimeru",
       "kind": "sentence",
       "explantion": "作るシステムに必要な機能や条件を決める"
     },
@@ -2991,7 +2991,7 @@
       "id": "applied-systems-word3",
       "subjectId": "applied-systems",
       "text": "必要な機能を実装する",
-      "romaji": "hituyounakinouwozissousuru",
+      "romaji": "hituyounakinouwojissousuru",
       "kind": "sentence",
       "explantion": "必要な機能をプログラムとして作る"
     },
@@ -3007,7 +3007,7 @@
       "id": "applied-systems-word5",
       "subjectId": "applied-systems",
       "text": "実際に動かして確認する",
-      "romaji": "zissainiugokasitekakuninsuru",
+      "romaji": "jissainiugokasitekakuninnsuru",
       "kind": "sentence",
       "explantion": "実際に動かして正しく動くか確かめる"
     },
@@ -3015,7 +3015,7 @@
       "id": "software-engineering-1-word1",
       "subjectId": "software-engineering-1",
       "text": "開発の手順を整理する",
-      "romaji": "kaihatunotezyunwoseirisuru",
+      "romaji": "kaihatunotejunnwoseirisuru",
       "kind": "sentence",
       "explantion": "開発をどんな順番で進めるか整理する"
     },
@@ -3023,7 +3023,7 @@
       "id": "software-engineering-1-word2",
       "subjectId": "software-engineering-1",
       "text": "利用者の要望を分析する",
-      "romaji": "riyousyanoyoubouwobunsekisuru",
+      "romaji": "riyousyanoyoubouwobunnsekisuru",
       "kind": "sentence",
       "explantion": "使う人の希望や困っていることを調べる"
     },
@@ -3031,7 +3031,7 @@
       "id": "software-engineering-1-word3",
       "subjectId": "software-engineering-1",
       "text": "システム全体の構造を決める",
-      "romaji": "sisutemuzentainokouzouwokimeru",
+      "romaji": "sisutemuzenntainokouzouwokimeru",
       "kind": "sentence",
       "explantion": "システム全体をどんな形にするか決める"
     },
@@ -3063,7 +3063,7 @@
       "id": "software-engineering-2-word2",
       "subjectId": "software-engineering-2",
       "text": "コードを確認して改善する",
-      "romaji": "ko-dowokakuninsitekaizensuru",
+      "romaji": "ko-dowokakuninnsitekaizennsuru",
       "kind": "sentence",
       "explantion": "プログラムを読んで直したほうがよい部分を探す"
     },
@@ -3071,7 +3071,7 @@
       "id": "software-engineering-2-word3",
       "subjectId": "software-engineering-2",
       "text": "ソフトウェアを継続して保守する",
-      "romaji": "sohutowheawokeizokusitehosyusuru",
+      "romaji": "sohutoweawokeizokusitehosyusuru",
       "kind": "sentence",
       "explantion": "ソフトウェアが使えるように、継続して修正や手入れをする"
     },
@@ -3079,7 +3079,7 @@
       "id": "software-engineering-2-word4",
       "subjectId": "software-engineering-2",
       "text": "内部構造を整理して読みやすくする",
-      "romaji": "naibukouzouwoseirisiteyomiyasukusuru",
+      "romaji": "naibukouzouwoseirisiteyomiyasukunaru",
       "kind": "sentence",
       "explantion": "プログラムの中身を整理して読みやすくする"
     },
@@ -3087,7 +3087,7 @@
       "id": "software-engineering-2-word5",
       "subjectId": "software-engineering-2",
       "text": "品質を評価して改善する",
-      "romaji": "hinsituwohyoukasitekaizensuru",
+      "romaji": "hinnsituwohyoukasitekaizennsuru",
       "kind": "sentence",
       "explantion": "ソフトウェアのよさを確かめ、さらによくする"
     },
@@ -3095,7 +3095,7 @@
       "id": "planning-word1",
       "subjectId": "planning",
       "text": "作業の目標を明確にする",
-      "romaji": "sagyounomokuhyouwo meikakunisuru",
+      "romaji": "sagyounomokuhyouwomeikakunisuru",
       "kind": "sentence",
       "explantion": "作業で何を達成するかはっきりさせる"
     },
@@ -3103,7 +3103,7 @@
       "id": "planning-word2",
       "subjectId": "planning",
       "text": "作業ごとの期限を決める",
-      "romaji": "sagyougotonokigenwokimeru",
+      "romaji": "sagyougotonokigennwokimeru",
       "kind": "sentence",
       "explantion": "それぞれの作業をいつまでに終えるか決める"
     },
@@ -3119,7 +3119,7 @@
       "id": "planning-word4",
       "subjectId": "planning",
       "text": "重要な作業から取り組む",
-      "romaji": "zyuuyounasagyoukaratorikumu",
+      "romaji": "juuyounasagyoukaratorikumu",
       "kind": "sentence",
       "explantion": "大切な作業から先に取り組む"
     },
@@ -3127,7 +3127,7 @@
       "id": "planning-word5",
       "subjectId": "planning",
       "text": "計画と進捗を比較する",
-      "romaji": "keikakutosintyokuwohikakusuru",
+      "romaji": "keikakutosinntyokuwohikakusuru",
       "kind": "sentence",
       "explantion": "予定と実際の進み具合を比べる"
     },
@@ -3135,7 +3135,7 @@
       "id": "management-systems-1-word1",
       "subjectId": "management-systems-1",
       "text": "経営資源を有効に活用する",
-      "romaji": "keieisigenwoyuukounikatuyousuru",
+      "romaji": "keieisigennwoyuukounikatuyousuru",
       "kind": "sentence",
       "explantion": "人・お金・道具などをむだなく使う"
     },
@@ -3159,7 +3159,7 @@
       "id": "management-systems-1-word4",
       "subjectId": "management-systems-1",
       "text": "情報システムで業務を支援する",
-      "romaji": "zyouhousisutemudegyoumuwosien suru",
+      "romaji": "jouhousisutemudegyoumuwosiennsuru",
       "kind": "sentence",
       "explantion": "情報システムを使って仕事を助ける"
     },
@@ -3167,7 +3167,7 @@
       "id": "management-systems-1-word5",
       "subjectId": "management-systems-1",
       "text": "情報を基に意思決定を行う",
-      "romaji": "zyouhouwo motoniisiketteiwookonau",
+      "romaji": "jouhouwomotoniisiketteiwookonau",
       "kind": "sentence",
       "explantion": "情報をもとに、どれがよいか決める"
     },
@@ -3175,7 +3175,7 @@
       "id": "management-systems-2-word1",
       "subjectId": "management-systems-2",
       "text": "業務の問題点を見つける",
-      "romaji": "gyoumunomondaitenwomitukeru",
+      "romaji": "gyoumunomonndaitennwomitukeru",
       "kind": "sentence",
       "explantion": "仕事の中で困っていることや問題を見つける"
     },
@@ -3183,7 +3183,7 @@
       "id": "management-systems-2-word2",
       "subjectId": "management-systems-2",
       "text": "作業の流れを分析する",
-      "romaji": "sagyounonagarewobunsekisuru",
+      "romaji": "sagyounonagarewobunnsekisuru",
       "kind": "sentence",
       "explantion": "仕事がどんな順番で進んでいるか調べる"
     },
@@ -3191,7 +3191,7 @@
       "id": "management-systems-2-word3",
       "subjectId": "management-systems-2",
       "text": "生産性を高める方法を考える",
-      "romaji": "seisanseiwotakameruhouhouwokangaeru",
+      "romaji": "seisannseiwotakameruhouhouwokanngaeru",
       "kind": "sentence",
       "explantion": "仕事をより早く、むだなく進める方法を考える"
     },
@@ -3199,7 +3199,7 @@
       "id": "management-systems-2-word4",
       "subjectId": "management-systems-2",
       "text": "資源の使い方を最適化する",
-      "romaji": "sigen notukaikatawosaitekikasuru",
+      "romaji": "sigennnotukaikatawosaitekikasuru",
       "kind": "sentence",
       "explantion": "人やお金、道具などをよりよく使う方法を考える"
     },
@@ -3207,7 +3207,7 @@
       "id": "management-systems-2-word5",
       "subjectId": "management-systems-2",
       "text": "経営情報を判断に活用する",
-      "romaji": "keieizyouhouwohandannikatuyousuru",
+      "romaji": "keieijouhouwohanndannnikatuyousuru",
       "kind": "sentence",
       "explantion": "会社の情報を使って、よい判断をする"
     },
@@ -3215,7 +3215,7 @@
       "id": "project-management-word1",
       "subjectId": "project-management",
       "text": "プロジェクトの目標を決める",
-      "romaji": "purozyekutonomokuhyouwokimeru",
+      "romaji": "purojekutonomokuhyouwokimeru",
       "kind": "sentence",
       "explantion": "プロジェクトで何を達成するか決める"
     },
@@ -3239,7 +3239,7 @@
       "id": "project-management-word4",
       "subjectId": "project-management",
       "text": "必要な人員と資源を確保する",
-      "romaji": "hituyounazinintosigenwokakuhosuru",
+      "romaji": "hituyounajinninntosigennwokakuhosuru",
       "kind": "sentence",
       "explantion": "作業に必要な人や道具などを用意する"
     },
@@ -3247,7 +3247,7 @@
       "id": "project-management-word5",
       "subjectId": "project-management",
       "text": "進捗を確認して計画を調整する",
-      "romaji": "sintyokuwokakuninsitekeikakuwotyouseisuru",
+      "romaji": "sinntyokuwokakuninnsitekeikakuwotyouseisuru",
       "kind": "sentence",
       "explantion": "進み具合を確かめて、必要なら予定を変える"
     },
@@ -3255,7 +3255,7 @@
       "id": "quality-management-word1",
       "subjectId": "quality-management",
       "text": "製品の品質を確認する",
-      "romaji": "seihinn ohinsituwokakuninsuru",
+      "romaji": "seihinnnohinnsituwokakuninnsuru",
       "kind": "sentence",
       "explantion": "製品が決められた基準を満たしているか確かめる"
     },
@@ -3263,7 +3263,7 @@
       "id": "quality-management-word2",
       "subjectId": "quality-management",
       "text": "検査で不良を見つける",
-      "romaji": "kensadehuryouwomitukeru",
+      "romaji": "kennsadehuryouwomitukeru",
       "kind": "sentence",
       "explantion": "検査をして、よくない製品を見つける"
     },
@@ -3271,7 +3271,7 @@
       "id": "quality-management-word3",
       "subjectId": "quality-management",
       "text": "不良が発生した原因を調べる",
-      "romaji": "huryougahassesitageninwosiraberu",
+      "romaji": "huryougahasseisitagenninnwosiraberu",
       "kind": "sentence",
       "explantion": "問題が起きた理由を調べる"
     },
@@ -3279,7 +3279,7 @@
       "id": "quality-management-word4",
       "subjectId": "quality-management",
       "text": "作業の手順を標準化する",
-      "romaji": "sagyounotezyunwohyouzyunkasuru",
+      "romaji": "sagyounotejunnwohyoujunnkasuru",
       "kind": "sentence",
       "explantion": "誰が作業しても同じように進められる手順を決める"
     },
@@ -3287,7 +3287,7 @@
       "id": "quality-management-word5",
       "subjectId": "quality-management",
       "text": "結果を基に改善を進める",
-      "romaji": "kekkawomotonikaizenwosusumeru",
+      "romaji": "kekkawomotonikaizennwosusumeru",
       "kind": "sentence",
       "explantion": "結果を見ながら、もっとよくなるように直す"
     },
@@ -3303,7 +3303,7 @@
       "id": "organization-theory-word2",
       "subjectId": "organization-theory",
       "text": "メンバーの役割を決める",
-      "romaji": "menba-noyakuwariwokimeru",
+      "romaji": "mennba-noyakuwariwokimeru",
       "kind": "sentence",
       "explantion": "メンバーがそれぞれ何をするか決める"
     },
@@ -3311,7 +3311,7 @@
       "id": "organization-theory-word3",
       "subjectId": "organization-theory",
       "text": "役割に応じて権限を与える",
-      "romaji": "yakuwariniozitekengenwoataeru",
+      "romaji": "yakuwarinioujitekenngennwoataeru",
       "kind": "sentence",
       "explantion": "担当する仕事に合わせて、できることや権限を決める"
     },
@@ -3319,7 +3319,7 @@
       "id": "organization-theory-word4",
       "subjectId": "organization-theory",
       "text": "メンバー同士で協力する",
-      "romaji": "menba-dousidekyouryokusuru",
+      "romaji": "mennba-dousidekyouryokusuru",
       "kind": "sentence",
       "explantion": "メンバー同士で助け合いながら作業する"
     },
@@ -3335,7 +3335,7 @@
       "id": "operations-research-word1",
       "subjectId": "operations-research",
       "text": "条件に合う最適な解を求める",
-      "romaji": "zyoukennianusaitekinakaiwomotomeru",
+      "romaji": "joukennniausaitekinakaiwomotomeru",
       "kind": "sentence",
       "explantion": "条件に合う中で最もよい答えを探す"
     },
@@ -3343,7 +3343,7 @@
       "id": "operations-research-word2",
       "subjectId": "operations-research",
       "text": "資源の配分を計算する",
-      "romaji": "sigennohaibunwokeisansuru",
+      "romaji": "sigennnohaibunnwokeisannsuru",
       "kind": "sentence",
       "explantion": "使える人やお金などをどこにどれだけ使うか計算する"
     },
@@ -3351,7 +3351,7 @@
       "id": "operations-research-word3",
       "subjectId": "operations-research",
       "text": "待ち時間と混雑を分析する",
-      "romaji": "matizikantokonzatuwobunsekisuru",
+      "romaji": "matijikanntokonnzatuwobunnsekisuru",
       "kind": "sentence",
       "explantion": "待つ時間や混み具合を調べる"
     },
@@ -3367,7 +3367,7 @@
       "id": "operations-research-word5",
       "subjectId": "operations-research",
       "text": "目的関数の値を最小化する",
-      "romaji": "mokutekikansuunowosa isyoukasuru",
+      "romaji": "mokutekikannsuunoataiwosaisyoukasuru",
       "kind": "sentence",
       "explantion": "決めた目的に関係する数字をできるだけ小さくする"
     },
@@ -3375,7 +3375,7 @@
       "id": "project-management-practice-word1",
       "subjectId": "project-management-practice",
       "text": "作業を細かい単位に分ける",
-      "romaji": "sagyouwokomakaitaniniwakeru",
+      "romaji": "sagyouwokomakaitanniniwakeru",
       "kind": "sentence",
       "explantion": "大きな作業を小さな作業に分ける"
     },
@@ -3383,7 +3383,7 @@
       "id": "project-management-practice-word2",
       "subjectId": "project-management-practice",
       "text": "ガントチャートで予定を示す",
-      "romaji": "gantotya-todeyoteiwosimesu",
+      "romaji": "ganntotya-todeyoteiwosimesu",
       "kind": "sentence",
       "explantion": "ガントチャートで作業の予定と期間を表す"
     },
@@ -3391,7 +3391,7 @@
       "id": "project-management-practice-word3",
       "subjectId": "project-management-practice",
       "text": "重要な節目を設定する",
-      "romaji": "zyuuyounahusimewosetteisuru",
+      "romaji": "juuyounahusimewosetteisuru",
       "kind": "sentence",
       "explantion": "大切な作業の区切りや目標の日を決める"
     },
@@ -3399,7 +3399,7 @@
       "id": "project-management-practice-word4",
       "subjectId": "project-management-practice",
       "text": "作業ごとに担当者を決める",
-      "romaji": "sagyougotonitantous",
+      "romaji": "sagyougotonitanntousyawokimeru",
       "kind": "sentence",
       "explantion": "それぞれの作業を誰が担当するか決める"
     },
@@ -3407,7 +3407,7 @@
       "id": "project-management-practice-word5",
       "subjectId": "project-management-practice",
       "text": "課題の状況を記録して管理する",
-      "romaji": "kadanojoukyouwokirokushitekanrisuru",
+      "romaji": "kadainojoukyouwokirokusitekannrisuru",
       "kind": "sentence",
       "explantion": "課題がどこまで進んでいるか記録して管理する"
     },
@@ -3415,7 +3415,7 @@
       "id": "business-strategy-word1",
       "subjectId": "business-strategy",
       "text": "経営の目標と方針を決める",
-      "romaji": "keieinomokuhyoutohoushinwokimeru",
+      "romaji": "keieinomokuhyoutohousinnwokimeru",
       "kind": "sentence",
       "explantion": "会社が目指すことと、そのための進め方を決める"
     },
@@ -3423,7 +3423,7 @@
       "id": "business-strategy-word2",
       "subjectId": "business-strategy",
       "text": "自社の強みを活用する",
-      "romaji": "jishanotsuyomiwokatsuyousuru",
+      "romaji": "jisyanotuyomiwokatuyousuru",
       "kind": "sentence",
       "explantion": "自分たちの会社が得意なことを役立てる"
     },
@@ -3431,7 +3431,7 @@
       "id": "business-strategy-word3",
       "subjectId": "business-strategy",
       "text": "市場の変化を分析する",
-      "romaji": "shijounohenkawobunsekisuru",
+      "romaji": "sijounohennkawobunnsekisuru",
       "kind": "sentence",
       "explantion": "世の中やお客さんの変化を調べる"
     },
@@ -3439,7 +3439,7 @@
       "id": "business-strategy-word4",
       "subjectId": "business-strategy",
       "text": "強みと弱みを整理する",
-      "romaji": "tsuyomitoyowamiwoseirisuru",
+      "romaji": "tuyomitoyowamiwoseirisuru",
       "kind": "sentence",
       "explantion": "得意なことと苦手なことを整理する"
     },
@@ -3447,7 +3447,7 @@
       "id": "business-strategy-word5",
       "subjectId": "business-strategy",
       "text": "経営資源を戦略的に配分する",
-      "romaji": "keieishigenwosenryakutekinihaibunsuru",
+      "romaji": "keieisigennwosennryakutekinihaibunnsuru",
       "kind": "sentence",
       "explantion": "人やお金などを目標に合わせて計画的に使う"
     },
@@ -3455,7 +3455,7 @@
       "id": "marketing-word1",
       "subjectId": "marketing",
       "text": "顧客のニーズを調べる",
-      "romaji": "kokyakunoni-zuwoshiraberu",
+      "romaji": "kokyakunoni-zuwosiraberu",
       "kind": "sentence",
       "explantion": "お客さんが何を必要としているか調べる"
     },
@@ -3463,7 +3463,7 @@
       "id": "marketing-word2",
       "subjectId": "marketing",
       "text": "市場の動向を分析する",
-      "romaji": "shijounodoukouwobunsekisuru",
+      "romaji": "sijounodoukouwobunnsekisuru",
       "kind": "sentence",
       "explantion": "市場で何が売れ、何が求められているか調べる"
     },
@@ -3471,7 +3471,7 @@
       "id": "marketing-word3",
       "subjectId": "marketing",
       "text": "顧客に合う商品を考える",
-      "romaji": "kokyakuniaushouhinwokangaeru",
+      "romaji": "kokyakuniausyouhinnwokanngaeru",
       "kind": "sentence",
       "explantion": "お客さんが喜びそうな商品を考える"
     },
@@ -3479,7 +3479,7 @@
       "id": "marketing-word4",
       "subjectId": "marketing",
       "text": "商品の価格を設定する",
-      "romaji": "shouhinnokakakuwosetteisuru",
+      "romaji": "syouhinnnokakakuwosetteisuru",
       "kind": "sentence",
       "explantion": "商品をいくらで売るか決める"
     },
@@ -3487,7 +3487,7 @@
       "id": "marketing-word5",
       "subjectId": "marketing",
       "text": "商品の魅力を伝えて販売する",
-      "romaji": "shouhinnomiryokuwotsutaetehanbaisuru",
+      "romaji": "syouhinnnomiryokuwotutaetehannbaisuru",
       "kind": "sentence",
       "explantion": "商品のよいところを伝えて買ってもらう"
     },
@@ -3495,7 +3495,7 @@
       "id": "information-society-word1",
       "subjectId": "information-society",
       "text": "情報技術が社会を変える",
-      "romaji": "jouhougijutsugashakaiwokaeru",
+      "romaji": "jouhougijutugasyakaiwokaeru",
       "kind": "sentence",
       "explantion": "情報技術によって社会や生活が変わる"
     },
@@ -3503,7 +3503,7 @@
       "id": "information-society-word2",
       "subjectId": "information-society",
       "text": "デジタル化で業務を効率化する",
-      "romaji": "dejitarukadegyoumuwokouritsukasuru",
+      "romaji": "dejitarukadegyoumuwokouritukasuru",
       "kind": "sentence",
       "explantion": "デジタル技術を使って仕事をより早く進める"
     },
@@ -3511,7 +3511,7 @@
       "id": "information-society-word3",
       "subjectId": "information-society",
       "text": "情報格差の課題を考える",
-      "romaji": "jouhoukakusannokadaiwokangaeru",
+      "romaji": "jouhoukakusanokadaiwokanngaeru",
       "kind": "sentence",
       "explantion": "情報を使える人と使えない人の差について考える"
     },
@@ -3519,7 +3519,7 @@
       "id": "information-society-word4",
       "subjectId": "information-society",
       "text": "個人情報を適切に扱う",
-      "romaji": "kojinjouhouwotekisetsuniatsukau",
+      "romaji": "kojinnjouhouwotekisetuniatukau",
       "kind": "sentence",
       "explantion": "名前や住所などの個人情報を正しく扱う"
     },
@@ -3527,7 +3527,7 @@
       "id": "information-society-word5",
       "subjectId": "information-society",
       "text": "AIの活用方法を検討する",
-      "romaji": "ainokatsuyouhouhouwokentousuru",
+      "romaji": "ainokatuyouhouhouwokenntousuru",
       "kind": "sentence",
       "explantion": "AIをどんな場面で役立てられるか考える"
     },
@@ -3535,7 +3535,7 @@
       "id": "intro-statistics-word1",
       "subjectId": "intro-statistics",
       "text": "母集団から標本を抽出する",
-      "romaji": "botaigunkarasanpyouwotyuusyutsusuru",
+      "romaji": "bosyuudannkarahyouhonnwotyuusyutusuru",
       "kind": "sentence",
       "explantion": "全体の中から一部のデータを選ぶ"
     },
@@ -3543,7 +3543,7 @@
       "id": "intro-statistics-word2",
       "subjectId": "intro-statistics",
       "text": "データの平均値を求める",
-      "romaji": "deetanoheikinchiwomotomeru",
+      "romaji": "de-tanoheikinntiwomotomeru",
       "kind": "sentence",
       "explantion": "データを全部足して個数で割る"
     },
@@ -3551,7 +3551,7 @@
       "id": "intro-statistics-word3",
       "subjectId": "intro-statistics",
       "text": "中央値でデータを比較する",
-      "romaji": "chuouchideetawohikakusuru",
+      "romaji": "tyuuoutidede-tawohikakusuru",
       "kind": "sentence",
       "explantion": "データを小さい順に並べたとき、真ん中にくる値を調べる"
     },
@@ -3559,7 +3559,7 @@
       "id": "intro-statistics-word4",
       "subjectId": "intro-statistics",
       "text": "データのばらつきを調べる",
-      "romaji": "deetanobaratsukiwoshiraberu",
+      "romaji": "de-tanobaratukiwosiraberu",
       "kind": "sentence",
       "explantion": "データの値がどれくらい散らばっているか調べる"
     },
@@ -3567,7 +3567,7 @@
       "id": "intro-statistics-word5",
       "subjectId": "intro-statistics",
       "text": "統計量を使って特徴を把握する",
-      "romaji": "toukeiryouwotsukattetokuchouwohaakusuru",
+      "romaji": "toukeiryouwotukattetokutyouwohaakusuru",
       "kind": "sentence",
       "explantion": "数字を使ってデータの特徴をつかむ"
     },
@@ -3575,7 +3575,7 @@
       "id": "information-ethics-word1",
       "subjectId": "information-ethics",
       "text": "著作権を守って素材を利用する",
-      "romaji": "chosakukenwomamottesozaiworiyousuru",
+      "romaji": "tyosakukennwomamottesozaiworiyousuru",
       "kind": "sentence",
       "explantion": "他の人が作った作品をルールに従って使う"
     },
@@ -3583,7 +3583,7 @@
       "id": "information-ethics-word2",
       "subjectId": "information-ethics",
       "text": "個人情報を適切に管理する",
-      "romaji": "kojinjouhouwotekisetsunikanrisuru",
+      "romaji": "kojinnjouhouwotekisetunikannrisuru",
       "kind": "sentence",
       "explantion": "個人情報が他人に知られないように管理する"
     },
@@ -3591,7 +3591,7 @@
       "id": "information-ethics-word3",
       "subjectId": "information-ethics",
       "text": "他人のプライバシーを尊重する",
-      "romaji": "taninopuraibashiwosonchousuru",
+      "romaji": "taninnnopuraibasi-wosonntyousuru",
       "kind": "sentence",
       "explantion": "他人の私生活や秘密を大切にする"
     },
@@ -3599,7 +3599,7 @@
       "id": "information-ethics-word4",
       "subjectId": "information-ethics",
       "text": "情報を発信する前に確認する",
-      "romaji": "jouhouwohassinsurumaenikakuninsuru",
+      "romaji": "jouhouwohassinnsurumaenikakuninnsuru",
       "kind": "sentence",
       "explantion": "情報を発信する前に、間違いや問題がないか確かめる"
     },
@@ -3607,7 +3607,7 @@
       "id": "information-ethics-word5",
       "subjectId": "information-ethics",
       "text": "ライセンスの条件を守る",
-      "romaji": "raisensunojoukenwomamoru",
+      "romaji": "raisennsunojoukennwomamoru",
       "kind": "sentence",
       "explantion": "素材を使うときに決められたルールを守る"
     },
@@ -3631,7 +3631,7 @@
       "id": "it-english-word3",
       "subjectId": "it-english",
       "text": "A database stores information.",
-      "romaji": "adatabasestoresinformation",
+      "romaji": "adatabasestoresinformationn",
       "kind": "sentence",
       "explantion": "データベースは情報を保存して、探しやすく整理する"
     },
@@ -3655,7 +3655,7 @@
       "id": "applied-statistics-word1",
       "subjectId": "applied-statistics",
       "text": "回帰分析で関係を推定する",
-      "romaji": "kaikibunsekidekankeiwosuiteisuru",
+      "romaji": "kaikibunnsekidekannkeiwosuiteisuru",
       "kind": "sentence",
       "explantion": "データの関係を調べて、どのようにつながっているか予想する"
     },
@@ -3663,7 +3663,7 @@
       "id": "applied-statistics-word2",
       "subjectId": "applied-statistics",
       "text": "相関係数で関連の強さを調べる",
-      "romaji": "soukankeisuudekannrennotsuyosawoshiraberu",
+      "romaji": "soukannkeisuudekannrennnotuyosawosiraberu",
       "kind": "sentence",
       "explantion": "二つのデータがどれくらい関係しているか数字で調べる"
     },
@@ -3671,7 +3671,7 @@
       "id": "applied-statistics-word3",
       "subjectId": "applied-statistics",
       "text": "仮説検定で差を確認する",
-      "romaji": "kasetsukenteidesashiwokakuninsuru",
+      "romaji": "kasetukennteidesawokakuninnsuru",
       "kind": "sentence",
       "explantion": "二つのグループに違いがあるか、データを使って確かめる"
     },
@@ -3679,7 +3679,7 @@
       "id": "applied-statistics-word4",
       "subjectId": "applied-statistics",
       "text": "信頼区間で推定の幅を示す",
-      "romaji": "shinraikandesuiteinohabawoshimesu",
+      "romaji": "sinnraikukanndesuiteinohabawosimesu",
       "kind": "sentence",
       "explantion": "本当の値がどのくらいの範囲にありそうか示す"
     },
@@ -3687,7 +3687,7 @@
       "id": "applied-statistics-word5",
       "subjectId": "applied-statistics",
       "text": "確率分布から確率を求める",
-      "romaji": "kakuritsubunpukarakakuritsuwomotomeru",
+      "romaji": "kakuritubunnpukarakakurituwomotomeru",
       "kind": "sentence",
       "explantion": "起こる可能性を表した表や決まりを使って確率を求める"
     },
@@ -3695,7 +3695,7 @@
       "id": "planning-practice-word1",
       "subjectId": "planning-practice",
       "text": "解決したい課題を整理する",
-      "romaji": "kaiketsushitaikadaiwoseirisuru",
+      "romaji": "kaiketusitaikadaiwoseirisuru",
       "kind": "sentence",
       "explantion": "解決したい問題が何かを整理する"
     },
@@ -3711,7 +3711,7 @@
       "id": "planning-practice-word3",
       "subjectId": "planning-practice",
       "text": "実現する方法を考える",
-      "romaji": "jitsugensuruhouhouwokangaeru",
+      "romaji": "jitugennsuruhouhouwokanngaeru",
       "kind": "sentence",
       "explantion": "目的をかなえるための方法を考える"
     },
@@ -3719,7 +3719,7 @@
       "id": "planning-practice-word4",
       "subjectId": "planning-practice",
       "text": "提案の内容を分かりやすく伝える",
-      "romaji": "teiannonaiyouwowakariyasukutsutaeru",
+      "romaji": "teiannnonaiyouwowakariyasukututaeru",
       "kind": "sentence",
       "explantion": "提案の内容を相手に伝わるように説明する"
     },
@@ -3727,7 +3727,7 @@
       "id": "planning-practice-word5",
       "subjectId": "planning-practice",
       "text": "実施後に結果を評価する",
-      "romaji": "jisshigonikekkawohyoukasuru",
+      "romaji": "jissigonikekkawohyoukasuru",
       "kind": "sentence",
       "explantion": "実施したあと、うまくいったかどうかを確かめる"
     },
@@ -3735,7 +3735,7 @@
       "id": "web-service-word1",
       "subjectId": "web-service",
       "text": "Webサービスで機能を提供する",
-      "romaji": "Websa-bisudekinouwoteikyousuru",
+      "romaji": "websa-bisudekinouwoteikyousuru",
       "kind": "sentence",
       "explantion": "Webサービスを使って、便利な機能を利用できるようにする"
     },
@@ -3743,7 +3743,7 @@
       "id": "web-service-word2",
       "subjectId": "web-service",
       "text": "ユーザーの要望を把握する",
-      "romaji": "yu-zaanoyoubouwohaakusuru",
+      "romaji": "yu-zanoyoubouwohaakusuru",
       "kind": "sentence",
       "explantion": "使う人が何を求めているか知る"
     },
@@ -3751,7 +3751,7 @@
       "id": "web-service-word3",
       "subjectId": "web-service",
       "text": "APIを通じてデータを連携する",
-      "romaji": "apiwotooshitedeetaworenkeisuru",
+      "romaji": "apiwotuujitede-taworennkeisuru",
       "kind": "sentence",
       "explantion": "APIを使って別々のプログラムの間でデータをやり取りする"
     },
@@ -3759,7 +3759,7 @@
       "id": "web-service-word4",
       "subjectId": "web-service",
       "text": "クラウド上でサービスを運用する",
-      "romaji": "kuraudojoudensa-bisuwounyousuru",
+      "romaji": "kuraudojoudesa-bisuwounnyousuru",
       "kind": "sentence",
       "explantion": "インターネット上のサーバーなどを使ってサービスを動かす"
     },
@@ -3767,7 +3767,7 @@
       "id": "web-service-word5",
       "subjectId": "web-service",
       "text": "利用規約を確認してサービスを使う",
-      "romaji": "riyoukiyakuwokakuninshitesa-bisuwotsukau",
+      "romaji": "riyoukiyakuwokakuninnsitesa-bisuwotukau",
       "kind": "sentence",
       "explantion": "サービスを使うときの決まりを読んで守る"
     },
@@ -3775,7 +3775,7 @@
       "id": "information-law-word1",
       "subjectId": "information-law",
       "text": "著作権法で創作物を保護する",
-      "romaji": "chosakukenhoudesousakubutsuwohogosuru",
+      "romaji": "tyosakukennhoudesousakubutuwohogosuru",
       "kind": "sentence",
       "explantion": "著作権法は、人が作った文章や絵などの作品を守るための法律"
     },
@@ -3783,7 +3783,7 @@
       "id": "information-law-word2",
       "subjectId": "information-law",
       "text": "個人情報保護法を理解する",
-      "romaji": "kojinjouhouhogohouworikaisuru",
+      "romaji": "kojinnjouhouhogohouworikaisuru",
       "kind": "sentence",
       "explantion": "個人情報を守るための法律について学ぶ"
     },
@@ -3791,7 +3791,7 @@
       "id": "information-law-word3",
       "subjectId": "information-law",
       "text": "知的財産の権利を確認する",
-      "romaji": "chitekizaisannokenriwokakuninsuru",
+      "romaji": "titekizaisannnokennriwokakuninnsuru",
       "kind": "sentence",
       "explantion": "発明や作品などに関する権利を確かめる"
     },
@@ -3799,7 +3799,7 @@
       "id": "information-law-word4",
       "subjectId": "information-law",
       "text": "契約の内容を確認して合意する",
-      "romaji": "keiyakunonaiyouwokakuninshitegouisuru",
+      "romaji": "keiyakunonaiyouwokakuninnsitegouisuru",
       "kind": "sentence",
       "explantion": "契約に書かれた内容を確認し、お互いに納得して約束する"
     },
@@ -3807,7 +3807,7 @@
       "id": "information-law-word5",
       "subjectId": "information-law",
       "text": "電子署名で文書の真正性を確認する",
-      "romaji": "denshishomeidebunshonoseijouseiwokakuninsuru",
+      "romaji": "dennsisyomeidebunnsyonosinnseiseiwokakuninnsuru",
       "kind": "sentence",
       "explantion": "電子署名を使って、文書が本物かどうか確かめる"
     }
