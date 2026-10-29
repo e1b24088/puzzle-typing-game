@@ -17,7 +17,11 @@ services:
     volumes:
       - ./backend:/app
       - maven_cache:/root/.m2
+      - ranking_data:/data
+    environment:
+      RANKING_DATABASE_URL: jdbc:h2:file:/data/results;DB_CLOSE_ON_EXIT=FALSE
 
 volumes:
   frontend_node_modules:
   maven_cache:
+  ranking_data:

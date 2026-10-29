@@ -7,3 +7,7 @@ frontend/dist/
 backend/target/
 .env
 .env.*
+
+backend/ranking-data/
+*.mv.db
+*.trace.db

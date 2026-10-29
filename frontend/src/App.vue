@@ -1,4 +1,7 @@
 <script setup>
+import RankingView from './views/RankingView.vue'
+import RankingEntryForm from './components/RankingEntryForm.vue'
+import { createPlayId } from './utils/rankingApi.js'
 import TypingResultView from './views/TypingResultView.vue'
 import { computed, nextTick, onMounted, ref, watch, onUnmounted } from 'vue'
 import TitleView from './views/TitleView.vue'
@@ -6,6 +9,17 @@ import CourseGameView from './views/CourseGameView.vue'
 import TypingGameView from './views/TypingGameView.vue'
 import { pickLearningTip } from './utils/gameLogic.js'
 import data from './data/gameData.json'
+const playerName = ref('')
+const playId = ref(createPlayId())
+const ownEntries = ref({})
+const rankingMode = ref('course')
+const rankingReturn = ref('title')
+function openRanking(nextMode = rankingMode.value) {
+  rankingReturn.value = screen.value
+  rankingMode.value = nextMode
+  show('rankings')
+}
+function rememberEntry(record) { ownEntries.value = { ...ownEntries.value, [record.mode]: record.id } }
 const screen = ref('title')
 const mode = ref('sequential')
 const backendStatus = ref('確認中')
@@ -33,6 +47,9 @@ function show(nextScreen) {
   nextTick(() => window.scrollTo({ top: 0, behavior: 'instant' }))
 }
 function begin(nextMode, firstGame) {
+  playerName.value = ''
+  playId.value = createPlayId()
+  ownEntries.value = {}
   mode.value = nextMode
   courseResult.value = null
   typingResult.value = null
@@ -129,9 +146,10 @@ onUnmounted(clearStarTimers)
 <template>
   <main class="container" :class="{ 'title-container': screen === 'title', playing: screen === 'puzzle' || screen === 'typing' }">
     
-    <TitleView v-if="screen === 'title'" @start="begin" />
+    <TitleView v-if="screen === 'title'" @start="begin" @rankings="openRanking()" />
     <CourseGameView v-else-if="screen === 'puzzle'" @finish="finishCourse" @cancel="show('title')" />
     <section v-else-if="screen === 'puzzle-result'" class="result-view">
+      <div class="result-ranking-header"><span>履修登録 成績表</span><RankingEntryForm v-model="playerName" :play-id="playId" mode="course" :course-score="courseResult.score" :can-register="mode !== 'sequential'" @registered="rememberEntry" @open="openRanking" /></div>
       <div class="result-top">
         <div class="result-banner" :class="{ cleared: courseResult.allCleared }">
           <div class="result-stars">
@@ -177,8 +195,9 @@ onUnmounted(clearStarTimers)
       </div>
     </section>
     <TypingGameView v-else-if="screen === 'typing'" :mode="mode" :selected-subject-ids="courseResult?.selectedSubjectIds ?? []" @finish="finishTyping" @cancel="show('title')" />
-    <TypingResultView v-else-if="screen === 'typing-result'" :result="typingResult" :course-score="courseResult?.score ?? null" :mode="mode" :learning-tip="learningTip" @back="show('title')"  />
+    <TypingResultView v-else-if="screen === 'typing-result'" :result="typingResult" :course-score="courseResult?.score ?? null" :mode="mode" :learning-tip="learningTip" v-model:player-name="playerName" :play-id="playId" @registered="rememberEntry" @rankings="openRanking" @back="show('title')" />
     
+    <RankingView v-else-if="screen === 'rankings'" :initial-mode="rankingMode" :own-entries="ownEntries" @tab="rankingMode = $event" @back="show(rankingReturn)" />
   </main>
 </template>
 
@@ -256,4 +275,7 @@ details { margin: 1rem 0; } li { line-height: 1.7; }
 .triangle-value { fill: rgba(255, 105, 180, 0.3); stroke: #eb557d; stroke-width: 3; }
 .triangle-chart text { font-size: 12px; fill: #fff;}
 
+.result-view { height: auto; min-height: 630px; }
+.result-ranking-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 14px; }
+@media (max-width: 700px) { .result-ranking-header { flex-wrap: wrap; } }
 </style>
