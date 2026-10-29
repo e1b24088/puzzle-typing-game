@@ -1,5 +1,5 @@
 <script setup>
-const emit = defineEmits(['start'])
+const emit = defineEmits(['start', 'rankings'])
 
 const buttons = [
   {
@@ -111,6 +111,7 @@ const filters = [
         </filter>
       </defs>
     </svg>
+    <button type="button" class="ranking-link" @click="emit('rankings')">成績発表を見る →</button>
   </section>
 </template>
 <style scoped>
@@ -350,4 +351,5 @@ const filters = [
     stroke-dashoffset: 1000;
   }
 }
+.ranking-link { margin: 18px auto 0; padding: 10px 24px; color: #234435; background: #fffdf0; border: 2px solid #547460; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; }
 </style>

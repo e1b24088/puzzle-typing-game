@@ -1,9 +1,10 @@
 <script setup>
 import { computed, ref } from 'vue'
+import RankingEntryForm from '../components/RankingEntryForm.vue'
 import NotebookScene from '../components/NotebookScene.vue'
 import data from '../data/gameData.json'
-const props = defineProps({ result: { type: Object, required: true }, courseScore: { type: Number, default: null }, mode: String, learningTip: Object })
-const emit = defineEmits(['back'])
+const props = defineProps({ result: { type: Object, required: true }, courseScore: { type: Number, default: null }, mode: String, learningTip: Object, playerName: String, playId: String })
+const emit = defineEmits(['back', 'rankings', 'registered', 'update:playerName'])
 const page = ref(0)
 const tab = ref('summary')
 const reviews = computed(() => [...new Map((props.result.history ?? []).map(item => [item.id, { ...item, subject: data.subjects.find(s => s.id === item.subjectId) }])).values()])
@@ -13,7 +14,7 @@ const visible = computed(() => reviews.value.slice(page.value * 4, page.value * 
 <template>
   <NotebookScene aria-label="タイピングの学習記録">
     <div class="record">
-      <header><div><small>CAMPUS NOTE / 学習記録</small><h2>授業チャレンジの結果</h2></div></header>
+      <header><div><small>CAMPUS NOTE / 学習記録</small><h2>授業チャレンジの結果</h2></div><RankingEntryForm :model-value="playerName" @update:model-value="emit('update:playerName', $event)" :play-id="playId" :mode="mode === 'sequential' ? 'sequential' : 'typing'" :course-score="courseScore" :typing-score="result.score" @registered="emit('registered', $event)" @open="emit('rankings', $event)" /></header>
       <nav class="record-tabs" aria-label="結果の表示を選ぶ"><button :aria-pressed="tab === 'summary'" @click="tab = 'summary'">成績を見る</button><button :aria-pressed="tab === 'review'" @click="tab = 'review'">言葉の復習（{{ reviews.length }}種類）</button></nav>
       <template v-if="tab === 'summary'">
       <div class="summary"><div><small>スコア</small><strong>{{ result.score }}<span>点</span></strong></div><div><small>正確率</small><strong>{{ result.accuracy }}<span>%</span></strong></div><div><small>完了した問題</small><strong>{{ result.completed }}<span>問</span></strong></div><div><small>入力の速さ</small><strong>{{ result.cpm }}<span>文字/分</span></strong></div></div>
@@ -48,4 +49,5 @@ article p { font-size: 14px; line-height: 1.45; margin: 5px 0; }
 .return-title { min-height: 44px; padding: 10px 24px; color: #fff; font-size: 17px; font-weight: bold; box-shadow: 0 3px 8px #203a2930; }
 @media (max-height: 700px) { .record { gap: 6px; } h2 { font-size: 22px; margin: 2px 0 0; } .reviews { gap: 6px; } article { padding: 6px 9px; } article p { font-size: 13px; margin: 3px 0; line-height: 1.35; } article h3 { font-size: 17px; } }
 
+@media (max-width: 700px) { header { flex-wrap: wrap; } }
 </style>
