@@ -2,7 +2,7 @@
 import { computed, nextTick, onUnmounted, ref, watch} from 'vue'
 import data from '../data/gameData.json'
 import { canSelectSubject, canDeselectSubject, makeSlots, scorePuzzle } from '../utils/gameLogic.js'
-const emit = defineEmits(['finish', 'cancel'])
+const emit = defineEmits(['finish', 'cancel', 'start'])
 const slots = makeSlots( data.subjects, data.slots, data.consecutiveGroups )
 const selections = ref({})
 const activeSlot = ref(null)
@@ -198,6 +198,7 @@ function choose(item) {
 }
 function start() {
   started.value = true
+  emit('start')
   playSound('game-start')
   deadline = Date.now() + data.settings.puzzleSeconds * 1000
   timer = setInterval(() => {

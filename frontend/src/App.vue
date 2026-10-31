@@ -76,6 +76,78 @@ async function returnToTitle() {
 }
 const screen = ref('title')
 const mode = ref('sequential')
+// BGMの再生状態
+const courseStarted = ref(false)
+const typingStarted = ref(false)
+const bgmVolume = ref(0.3)
+const bgmMuted = ref(false)
+const bgm = new Audio()
+bgm.loop = true
+bgm.volume = bgmVolume.value
+let currentBgmPath = ''
+// 現在の画面・ゲームの進行状況からBGMを決定
+const currentBgm = computed(() => {
+  if (screen.value === 'title') return '/sounds/title-bgm.mp3'
+
+  if (screen.value === 'puzzle') {
+    return courseStarted.value
+      ? '/sounds/course-bgm.mp3'
+      : '/sounds/rule-bgm.mp3'
+  }
+  if (screen.value === 'typing') {
+    return typingStarted.value
+      ? '/sounds/typing-bgm.mp3'
+      : '/sounds/rule-bgm.mp3'
+  }
+  if (
+    screen.value === 'puzzle-result' ||
+    screen.value === 'typing-result'
+  ) {
+    return '/sounds/result-bgm.mp3'
+  }
+  if (screen.value === 'rankings') return '/sounds/ranking-bgm.mp3'
+  return null
+})
+// BGMを切り替える
+function playBgm(path) {
+  if (path === currentBgmPath) return
+  bgm.pause()
+  currentBgmPath = path ?? ''
+  if (!path) return
+  bgm.src = path
+  bgm.currentTime = 0
+  bgm.loop = true
+  bgm.volume = bgmMuted.value ? 0 : bgmVolume.value
+  bgm.play().catch(() => {
+    // ブラウザの自動再生制限などで再生できない場合
+  })
+}
+// 画面に応じてBGMを切り替える
+watch(currentBgm, playBgm, {
+  immediate: true,
+  flush: 'sync'
+})
+// 音量・ミュート状態を反映
+watch([bgmVolume, bgmMuted], () => {
+  bgm.volume = bgmMuted.value ? 0 : bgmVolume.value
+})
+// BGMの再生を再開する
+function resumeBgm() {
+  if (bgmMuted.value) {
+    bgmMuted.value = false
+  }
+  if (currentBgmPath) {
+    bgm.play().catch(() => {})
+  }
+}
+// ミュートの切り替え
+function toggleBgmMute() {
+  bgmMuted.value = !bgmMuted.value
+
+  if (!bgmMuted.value && currentBgmPath) {
+    bgm.play().catch(() => {})
+  }
+}
 const backendStatus = ref('確認中')
 const courseResult = ref(null)
 const typingResult = ref(null)
@@ -85,6 +157,31 @@ const courseAdvice = computed(() => {
   if (!courseResult.value) return ''
   const missing = data.attributes.filter(item => courseResult.value.attributeScores[item.id] < item.clearScore)
   return missing.length ? missing.map(item => `${item.name}はあと${item.clearScore - courseResult.value.attributeScores[item.id]}単位`).join('、') + '。次はこの分野を選べる時間を先に確保しよう！' : '3分野の目標をすべて達成！ 次は目標を超えて、さらに単位を伸ばそう。'
+})
+// 履修登録ゲームの結果メッセージ
+const courseResultMessage = computed(() => {
+  const messages = [
+    {
+      title: '惜しい！ここから挑戦！',
+      sub: 'まずは得意な分野から取り組んでみよう！'
+    },
+    {
+      title: 'よく頑張りました！',
+      sub: '1分野クリア！次の分野にも挑戦してみよう！'
+    },
+    {
+      title: 'あと一歩！',
+      sub: '2分野クリア！残りの分野も目指してみよう！'
+    },
+    {
+      title: 'よくできました！',
+      sub: '全分野クリア！バランスよく単位を獲得できたね！'
+    }
+  ]
+  const count = Math.min(
+    Math.max(courseResult.value?.clearedCount ?? 0, 0), 3
+  )
+  return messages[count]
 })
 const reviewItems = computed(() => [...new Map((typingResult.value?.history ?? []).map(item => [item.id, { ...item, subject: data.subjects.find(subject => subject.id === item.subjectId) }])).values()])
 let previousTipId = ''
@@ -97,6 +194,8 @@ onMounted(async () => {
   } catch { backendStatus.value = '未接続' }
 })
 function show(nextScreen) {
+  if (nextScreen === 'puzzle') courseStarted.value = false
+  if (nextScreen === 'typing') typingStarted.value = false
   screen.value = nextScreen
   nextTick(() => window.scrollTo({ top: 0, behavior: 'instant' }))
 }
@@ -202,8 +301,8 @@ onUnmounted(clearStarTimers)
   <main class="container"
     :class="{ 'title-container': screen === 'title', playing: screen === 'puzzle' || screen === 'typing' }">
 
-    <TitleView v-if="screen === 'title'" @start="begin" @rankings="openRanking()" />
-    <CourseGameView v-else-if="screen === 'puzzle'" @finish="finishCourse" @cancel="show('title')" />
+    <TitleView v-if="screen === 'title'" :bgm-volume="bgmVolume" :bgm-muted="bgmMuted" @start="begin" @rankings="openRanking()" @toggle-bgm-mute="toggleBgmMute" @change-bgm-volume="bgmVolume = $event" />
+    <CourseGameView v-else-if="screen === 'puzzle'" @finish="finishCourse" @cancel="show('title')" @start="courseStarted = true"/>
     <section v-else-if="screen === 'puzzle-result'" class="result-layout">
       <div class="result-view">
         <div class="result-top">
@@ -217,10 +316,9 @@ onUnmounted(clearStarTimers)
               </svg>
             </div>
             <small>履修登録 成績表</small>
-            <h2>{{ courseResult.allCleared ? '全分野クリア！' : 'あと一歩、次の作戦へ！' }}</h2>
+            <h2>{{ courseResultMessage.title }}</h2>
+            <p class="result-message">{{ courseResultMessage.sub }}</p>
             <p class="score">{{ courseResult.score }}<small> 点</small></p>
-            <p>{{ courseResult.selectedSubjectIds.length }}科目登録 {{ courseResult.clearedCount }} / {{
-              data.attributes.length }}分野達成</p>
             <div class="score-breakdown">
               <span>獲得単位 {{ courseResult.earnedPoints }}</span>
               <span>＋ ボーナス {{ courseResult.bonus }}点</span>
@@ -267,8 +365,7 @@ onUnmounted(clearStarTimers)
         </div>
       </div>
     </section>
-    <TypingGameView v-else-if="screen === 'typing'" :mode="mode"
-      :selected-subject-ids="courseResult?.selectedSubjectIds ?? []" @finish="finishTyping" @cancel="show('title')" />
+    <TypingGameView v-else-if="screen === 'typing'" :mode="mode" :selected-subject-ids="courseResult?.selectedSubjectIds ?? []" @finish="finishTyping" @cancel="show('title')" @start="typingStarted = true" />
     <TypingResultView v-else-if="screen === 'typing-result'" :result="typingResult"
       :course-score="courseResult?.score ?? null" :mode="mode" :learning-tip="learningTip"
       v-model:player-name="playerName" :play-id="playId" @registered="rememberEntry" @rankings="openRanking"
@@ -368,4 +465,17 @@ li { line-height: 1.7;}
 .triangle-chart text { font-size: 12px; fill: #fff;}
 .result-ranking-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 14px;}
 @media (max-width: 700px) { .result-ranking-header {flex-wrap: wrap;}}
+.bgm-controls { position: fixed; top: 12px; right: 16px; z-index: 1000; display: flex; align-items: center; 
+  gap: 8px; padding: 8px 12px; background: rgba(255, 255, 255, 0.9); border: 1px solid #ccc; border-radius: 10px; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15); font-size: 0.85rem; }
+.bgm-controls button { padding: 5px 9px; border: 1px solid #aaa; border-radius: 6px; background: #fff; color: #333; cursor: pointer; }
+.bgm-controls button:hover { background: #eee; }
+.bgm-controls label { display: flex; align-items: center; gap: 5px; }
+.bgm-controls input { width: 80px; }
+.slider { --slider-bg: rgb(82, 82, 82); --level-color: #fff; position: relative; display: flex;
+  align-items: center; width: 220px; height: 44px; background: var(--slider-bg); border-radius: 9px; padding: 0 12px; }
+.slider .volume { width: 30px; height: 30px; flex-shrink: 0; border: none; background: transparent;
+  color: white; font-size: 22px; cursor: pointer; padding: 0; z-index: 1; }
+.slider .level { flex: 1; min-width: 0; margin-left: 10px; appearance: none; height: 5px; border-radius: 5px; background: #999; cursor: pointer; }
+.slider .level::-webkit-slider-thumb { appearance: none; width: 13px; height: 13px; border-radius: 50%; background: white; }
+.slider .level::-moz-range-thumb { width: 13px; height: 13px; border: none; border-radius: 50%; background: white; }
 </style>

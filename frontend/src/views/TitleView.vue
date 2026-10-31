@@ -1,6 +1,4 @@
 <script setup>
-const emit = defineEmits(['start', 'rankings'])
-
 const buttons = [
   {
     label: '通しプレイ',
@@ -32,6 +30,23 @@ const filters = [
   { id: 'handDrawnNoiset', scale: 6, seed: 0 },
   { id: 'handDrawnNoiset2', scale: 6, seed: 1010 }
 ]
+const props = defineProps({
+  bgmVolume: {
+    type: Number,
+    default: 0.3
+  },
+  bgmMuted: {
+    type: Boolean,
+    default: false
+  }
+})
+
+const emit = defineEmits([
+  'start',
+  'rankings',
+  'toggle-bgm-mute',
+  'change-bgm-volume'
+])
 </script>
 
 <template>
@@ -71,6 +86,16 @@ const filters = [
       </button>
     </div>
 
+    <!-- サウンド設定 -->
+    <div class="bgm-controls">
+      <div class="slider">
+        <button type="button" class="volume" @click="emit('toggle-bgm-mute')" :aria-label="bgmMuted ? 'ミュート解除' : 'ミュート'" >
+          {{ bgmMuted ? '🔇' : '🔊' }}
+        </button>
+        <input class="level" type="range" min="0" max="1" step="0.01" :value="bgmVolume" @input="emit('change-bgm-volume', Number($event.target.value))" />
+      </div>
+      <p class="bgm-credit">BGM：魔王魂</p>
+    </div>
     <!-- フィルターは3つのボタンで共有する -->
     <svg class="filter-definitions" height="0" width="0" aria-hidden="true">
       <defs>
@@ -87,6 +112,7 @@ const filters = [
 /* From Uiverse.io by AatreyuShau */
 
 .title-view {
+  position: relative;
   height: 90vh;
   box-sizing: border-box;
   justify-content: center;
@@ -340,5 +366,70 @@ const filters = [
 }
 .title-view .ranking-link:hover {
   animation: hover 2.5s infinite ease-in-out;
+}
+.bgm-controls {
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+  z-index: 10;
+}
+
+.bgm-credit {
+  margin: 0;
+  font-size: 12px;
+  color: #fff;
+}
+
+.slider {
+  display: flex;
+  align-items: center;
+  width: 220px;
+  height: 44px;
+  padding: 0 12px;
+  background: rgb(82, 82, 82);
+  border-radius: 9px;
+}
+
+.slider .volume {
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  border: none;
+  background: transparent;
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+  padding: 0;
+}
+
+.slider .level {
+  flex: 1;
+  min-width: 0;
+  margin-left: 10px;
+  appearance: none;
+  height: 5px;
+  border-radius: 5px;
+  background: #999;
+  cursor: pointer;
+}
+
+.slider .level::-webkit-slider-thumb {
+  appearance: none;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: white;
+}
+
+.slider .level::-moz-range-thumb {
+  width: 13px;
+  height: 13px;
+  border: none;
+  border-radius: 50%;
+  background: white;
 }
 </style>
