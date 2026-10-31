@@ -45,3 +45,18 @@ export function fetchRanking(mode, selfId, signal) {
   if (selfId) params.set('selfId', selfId)
   return request(`/api/rankings?${params}`, { signal })
 }
+export function isValidRankingName(name) {
+  if (typeof name !== 'string') return false
+
+  const trimmedName = name.trim()
+  const length = [...trimmedName].length
+
+  if (length < 1 || length > 12) return false
+
+  // 制御文字が含まれていたら登録不可
+  if (/[\u0000-\u001F\u007F-\u009F]/u.test(trimmedName)) {
+    return false
+  }
+
+  return true
+}

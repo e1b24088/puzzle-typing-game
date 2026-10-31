@@ -1,0 +1,48 @@
+データベースを動かす手順と使用するコマンド一覧です
+powershellのプロンプトでコマンドを打つことで実行できます
+環境によって異なる可能性があります
+※本来は簡単なコマンドを用意するべきですが、設定を変更する必要があるため危険だと判断し断念しました
+
+大まかな手順は次の通りです
+1.バックエンドを停止する
+2.使用したいコマンドを実行する(基本的なコマンドは下に記載してます)
+3.バックエンドを再起動する
+
+バックエンドを停止するコマンド
+docker compose stop backend
+
+バックエンドを再起動するコマンド
+docker compose start backend
+
+保存されているデータの一覧の確認
+docker compose run --rm --no-deps --entrypoint java backend -cp /root/.m2/repository/com/h2database/h2/2.3.232/h2-2.3.232.jar org.h2.tools.Shell --% -url "jdbc:h2:file:/data/results;DB_CLOSE_ON_EXIT=FALSE" -user sa -password "" -sql "SELECT mode, name, score, created_at FROM ranking_entries ORDER BY mode, score DESC, created_at ASC"
+
+保存されているデータの件数の確認
+docker compose run --rm --no-deps --entrypoint java backend -cp /root/.m2/repository/com/h2database/h2/2.3.232/h2-2.3.232.jar org.h2.tools.Shell --% -url "jdbc:h2:file:/data/results;DB_CLOSE_ON_EXIT=FALSE" -user sa -password "" -sql "SELECT mode, COUNT(*) AS entries FROM ranking_entries GROUP BY mode"
+
+プレイヤーAさんのデータの確認(Aさんの個所を書き換えることで他のプレイヤーでも可能)
+docker compose run --rm --no-deps --entrypoint java backend -cp /root/.m2/repository/com/h2database/h2/2.3.232/h2-2.3.232.jar org.h2.tools.Shell --% -url "jdbc:h2:file:/data/results;DB_CLOSE_ON_EXIT=FALSE" -user sa -password "" -sql "SELECT play_id, mode, name, score, course_score, typing_score, created_at FROM ranking_entries WHERE name = 'Aさん' ORDER BY created_at DESC, mode"
+
+履修登録ランキングの全削除
+docker compose run --rm --no-deps --entrypoint java backend -cp /root/.m2/repository/com/h2database/h2/2.3.232/h2-2.3.232.jar org.h2.tools.Shell --% -url "jdbc:h2:file:/data/results;DB_CLOSE_ON_EXIT=FALSE" -user sa -password "" -sql "DELETE FROM ranking_entries WHERE mode = 'course'"
+
+プレイヤーAさんの履修登録ランキングの全削除(Aさんの個所を書き換えることで他のプレイヤーでも可能)
+docker compose run --rm --no-deps --entrypoint java backend -cp /root/.m2/repository/com/h2database/h2/2.3.232/h2-2.3.232.jar org.h2.tools.Shell --% -url "jdbc:h2:file:/data/results;DB_CLOSE_ON_EXIT=FALSE" -user sa -password "" -sql "DELETE FROM ranking_entries WHERE name = 'Aさん' AND mode = 'course'"
+
+タイピングランキングの全削除
+docker compose run --rm --no-deps --entrypoint java backend -cp /root/.m2/repository/com/h2database/h2/2.3.232/h2-2.3.232.jar org.h2.tools.Shell --% -url "jdbc:h2:file:/data/results;DB_CLOSE_ON_EXIT=FALSE" -user sa -password "" -sql "DELETE FROM ranking_entries WHERE mode = 'typing'"
+
+プレイヤーAさんのタイピングランキングの全削除(Aさんの個所を書き換えることで他のプレイヤーでも可能)
+docker compose run --rm --no-deps --entrypoint java backend -cp /root/.m2/repository/com/h2database/h2/2.3.232/h2-2.3.232.jar org.h2.tools.Shell --% -url "jdbc:h2:file:/data/results;DB_CLOSE_ON_EXIT=FALSE" -user sa -password "" -sql "DELETE FROM ranking_entries WHERE name = 'Aさん' AND mode = 'typing'"
+
+通しランキングの全削除
+docker compose run --rm --no-deps --entrypoint java backend -cp /root/.m2/repository/com/h2database/h2/2.3.232/h2-2.3.232.jar org.h2.tools.Shell --% -url "jdbc:h2:file:/data/results;DB_CLOSE_ON_EXIT=FALSE" -user sa -password "" -sql "DELETE FROM ranking_entries WHERE mode = 'sequential'"
+
+プレイヤーAさんの通しランキングの全削除(Aさんの個所を書き換えることで他のプレイヤーでも可能)
+docker compose run --rm --no-deps --entrypoint java backend -cp /root/.m2/repository/com/h2database/h2/2.3.232/h2-2.3.232.jar org.h2.tools.Shell --% -url "jdbc:h2:file:/data/results;DB_CLOSE_ON_EXIT=FALSE" -user sa -password "" -sql "DELETE FROM ranking_entries WHERE name = 'Aさん' AND mode = 'sequential'"
+
+全ランキングの全削除
+docker compose run --rm --no-deps --entrypoint java backend -cp /root/.m2/repository/com/h2database/h2/2.3.232/h2-2.3.232.jar org.h2.tools.Shell --% -url "jdbc:h2:file:/data/results;DB_CLOSE_ON_EXIT=FALSE" -user sa -password "" -sql "DELETE FROM ranking_entries"
+
+プレイヤーAさんの全ランキングの全削除(Aさんの個所を書き換えることで他のプレイヤーでも可能)
+docker compose run --rm --no-deps --entrypoint java backend -cp /root/.m2/repository/com/h2database/h2/2.3.232/h2-2.3.232.jar org.h2.tools.Shell --% -url "jdbc:h2:file:/data/results;DB_CLOSE_ON_EXIT=FALSE" -user sa -password "" -sql "DELETE FROM ranking_entries WHERE name = 'Aさん'"

@@ -8,7 +8,7 @@ import { checkTypingInput, makeTypingTokens } from '../utils/romajiInput.js'
 import { createPageTurn } from '../utils/pageTurn.js'
 import { createGameClock } from '../utils/gameClock.js'
 const props = defineProps({ mode: String, selectedSubjectIds: { type: Array, default: () => [] } })
-const emit = defineEmits(['finish', 'cancel'])
+const emit = defineEmits(['finish', 'cancel', 'start'])
 const pool = computed(() => selectQuestions(data.questions, props.mode, props.selectedSubjectIds))
 const current = ref(null)
 const currentSubject = computed(() => data.subjects.find(item => item.id === current.value?.subjectId))
@@ -83,6 +83,7 @@ function handleDebugPause(event) {
 async function start() {
   if (!pool.value.length) return
   started.value = true
+  emit('start')
   nextQuestion()
   clock.start()
   await nextTick()
