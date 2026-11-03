@@ -19,6 +19,10 @@ const displayRomaji = ref('')
 let typingTokens = []
 const score = ref(0)
 const mistakes = ref(0)
+const correctSound = new Audio('/sounds/typing-correct.mp3')
+const missSound = new Audio('/sounds/typing-miss.mp3')
+correctSound.volume = 0.5
+missSound.volume = 0.5
 const completed = ref(0)
 const streak = ref(0)
 const sentencesUnlocked = ref(false)
@@ -108,12 +112,16 @@ function type(event) {
   const checked = checkTypingInput(typingTokens, typedInput.value, event.key)
   wrong.value = !checked.correct
   if (!checked.correct) {
+    missSound.currentTime = 0
+    missSound.play().catch(() => {})
     shakeVersion.value++
     mistakes.value++
     streak.value = 0
     questionHadMistake = true
     return
   }
+  correctSound.currentTime = 0
+  correctSound.play().catch(() => {})
   score.value++
   typedInput.value = checked.input
   displayRomaji.value = checked.displayRomaji
