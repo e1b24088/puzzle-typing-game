@@ -54,7 +54,7 @@ const emit = defineEmits([
     <div class="title-text">
       <h2>大学生活を体験しよう！</h2>
       <p>履修登録とタイピングに挑戦</p>
-      <p>通しプレイの体験時間：約3分</p>
+      <p>通しプレイの体験時間：2分</p>
     </div>
 
     <div class="title-buttons">
