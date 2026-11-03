@@ -94,7 +94,7 @@ const emit = defineEmits([
         </button>
         <input class="level" type="range" min="0" max="1" step="0.01" :value="bgmVolume" @input="emit('change-bgm-volume', Number($event.target.value))" />
       </div>
-      <p class="bgm-credit">BGM：魔王魂</p>
+      <p class="bgm-credit">BGM：魔王魂・OtoLogic</p>
     </div>
     <!-- フィルターは3つのボタンで共有する -->
     <svg class="filter-definitions" height="0" width="0" aria-hidden="true">
